@@ -1,4 +1,10 @@
 import type { Metadata } from "next";
+import { Ubuntu } from "next/font/google";
+
+const ubuntu = Ubuntu({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Vicsmall",
@@ -12,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={ubuntu.className}>{children}</body>
     </html>
   );
 }
