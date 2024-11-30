@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+Your darkest text should be gray-800
+Lighter text should use gray-50 to gray-700 depending on the design
+*/
+
+body {
+  @apply text-gray-600;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-semibold tracking-tight text-gray-800;
+}
+
+h2 {
+  @apply text-4xl lg:text-5xl;
+}
+
+h3 {
+  @apply text-2xl lg:text-3xl;
+}
