@@ -10,13 +10,11 @@ export default {
     extend: {
       colors: {
         neutral: {
-          bg: {
-            light: {
-              gray: "#F0F2F5",
-            },
-            dark: {
-              blue: "#010135",
-            },
+          light: {
+            gray: "#F0F2F5",
+          },
+          dark: {
+            blue: "#010135",
           },
         },
         accent: {
