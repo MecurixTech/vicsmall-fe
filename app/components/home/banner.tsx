@@ -60,7 +60,10 @@ const Banner = () => {
     <section className="relative mx-auto flex h-auto w-full max-w-screen-xl flex-col items-center justify-between overflow-hidden rounded-[23px] bg-[#FF8C48] px-4 py-8 sm:flex-row sm:px-8 lg:px-16 lg:py-12">
       <div
         className="absolute inset-0 bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/path-to-image.png')" }}
+        style={{
+          backgroundImage:
+            "url('https://utfs.io/f/wLDjZbdcJHpRZf4TaQuIU7aODg2yt0HSxWFBNfqTKvI59cYP')",
+        }}
       ></div>
 
       <div className="z-10 mb-8 flex w-full max-w-full flex-col items-center text-center text-white sm:mb-0 sm:w-[50%] sm:items-start sm:text-left">

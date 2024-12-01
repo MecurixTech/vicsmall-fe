@@ -8,7 +8,7 @@ export const products = [
     isShippedFromAbroad: true,
     colorVariants: ["bg-black", "bg-red-500", "bg-orange-500", "bg-gray-500"],
     imgSrc:
-      "https://www.lamenojewelry.com/cdn/shop/products/IMG_6925.jpg?v=1664671552",
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
   },
   {
     id: 1,
@@ -18,7 +18,7 @@ export const products = [
     isShippedFromAbroad: true,
     colorVariants: ["bg-black", "bg-red-500", "bg-orange-500", "bg-gray-500"],
     imgSrc:
-      "https://www.lamenojewelry.com/cdn/shop/products/IMG_6925.jpg?v=1664671552",
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ export const products = [
     isShippedFromAbroad: true,
     colorVariants: ["bg-black", "bg-red-500", "bg-orange-500", "bg-gray-500"],
     imgSrc:
-      "https://www.lamenojewelry.com/cdn/shop/products/IMG_6925.jpg?v=1664671552",
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ export const products = [
     isShippedFromAbroad: true,
     colorVariants: ["bg-black", "bg-red-500", "bg-orange-500", "bg-gray-500"],
     imgSrc:
-      "https://www.lamenojewelry.com/cdn/shop/products/IMG_6925.jpg?v=1664671552",
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ export const products = [
     isShippedFromAbroad: true,
     colorVariants: ["bg-black", "bg-red-500", "bg-orange-500", "bg-gray-500"],
     imgSrc:
-      "https://www.lamenojewelry.com/cdn/shop/products/IMG_6925.jpg?v=1664671552",
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
   },
 ];
 
@@ -59,7 +59,7 @@ export const categories = [
     name: "Accessories",
     numberOfProducts: "50,000",
     imgSrc:
-      "https://www.lamenojewelry.com/cdn/shop/products/IMG_6925.jpg?v=1664671552",
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
     imgAlt: "Accessories",
   },
   {
@@ -67,7 +67,7 @@ export const categories = [
     name: "Games and Consoles",
     numberOfProducts: "50,000",
     imgSrc:
-      "https://www.lamenojewelry.com/cdn/shop/products/IMG_6925.jpg?v=1664671552",
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
     imgAlt: "Games and Consoles",
   },
   {
@@ -75,7 +75,7 @@ export const categories = [
     name: "Gym",
     numberOfProducts: "50,000",
     imgSrc:
-      "https://www.lamenojewelry.com/cdn/shop/products/IMG_6925.jpg?v=1664671552",
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
     imgAlt: "Gym",
   },
   {
@@ -83,7 +83,7 @@ export const categories = [
     name: "Men's Clothing",
     numberOfProducts: "50,000",
     imgSrc:
-      "https://www.lamenojewelry.com/cdn/shop/products/IMG_6925.jpg?v=1664671552",
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
     imgAlt: "Men's Clothing",
   },
 ];
