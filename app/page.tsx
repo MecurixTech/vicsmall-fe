@@ -1,18 +1,21 @@
-import { productData } from "@/dummyData";
+import CategoryCard from "./components/home/category-card";
 import ProductCard from "./components/product-card";
+import { categories, products } from "./data/dummyData";
 
 export default function Home() {
   return (
-    <main className="grid grid-cols-3 gap-4 p-4">
-      <ProductCard {...productData} />
-      <ProductCard {...productData} />
-      <ProductCard {...productData} />
-      <ProductCard {...productData} />
-      <ProductCard {...productData} />
-      <ProductCard {...productData} />
-      <ProductCard {...productData} />
-      <ProductCard {...productData} />
-      <ProductCard {...productData} />
+    <main className="p-4">
+      <section className="grid grid-cols-5 gap-4">
+        {products.map((product) => (
+          <ProductCard key={product.id} {...product} />
+        ))}
+      </section>
+
+      <section className="grid grid-cols-4 gap-4">
+        {categories.map((category) => (
+          <CategoryCard key={category.id} {...category} />
+        ))}
+      </section>
     </main>
   );
 }

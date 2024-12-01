@@ -1,6 +1,6 @@
 "use client";
 
-import { productData } from "@/dummyTypes";
+import { productData } from "@/app/data/dummyTypes";
 import {
   AddShoppingCartOutlined,
   FlightTakeoffOutlined,
@@ -21,16 +21,16 @@ const ProductCard = (data: productData) => {
         />
         <button
           title="Add to cart"
-          className="absolute right-2 top-2 grid h-9 w-9 place-content-center rounded-full bg-neutral-light-gray"
+          className="absolute right-2 top-2 grid h-12 w-12 place-content-center rounded-full bg-white text-gray-800 shadow-lg"
         >
-          <AddShoppingCartOutlined fontSize="inherit" className="mt-[1px]" />
+          <AddShoppingCartOutlined fontSize="small" className="mt-[1px]" />
         </button>
         {data.colorVariants.length !== 0 && (
           <div className="absolute bottom-2 right-2 flex gap-1 rounded-full bg-neutral-light-gray p-1">
-            <button className={`h-4 w-4 rounded-full bg-gray-600`} />
-            <button className={`h-4 w-4 rounded-full bg-gray-600`} />
-            <button className={`h-4 w-4 rounded-full bg-gray-600`} />
-            <button className={`h-4 w-4 rounded-full bg-gray-600`} />
+            <button className={`h-4 w-4 rounded-full bg-gray-800`} />
+            <button className={`h-4 w-4 rounded-full bg-gray-800`} />
+            <button className={`h-4 w-4 rounded-full bg-gray-800`} />
+            <button className={`h-4 w-4 rounded-full bg-gray-800`} />
           </div>
         )}
       </div>
@@ -41,7 +41,7 @@ const ProductCard = (data: productData) => {
           {data.isShippedFromAbroad && (
             <div className="relative">
               <FlightTakeoffOutlined className="peer" fontSize="inherit" />
-              <div className="absolute left-[200%] top-0 hidden w-32 rounded-lg bg-gray-800 p-2 text-xs text-neutral-light-gray peer-hover:block">
+              <div className="absolute bottom-[120%] right-0 hidden w-32 rounded-lg bg-gray-800 p-2 text-xs text-neutral-light-gray peer-hover:block">
                 <InfoOutlined fontSize="small" className="mb-1" />
                 <p>This item is shipped from abroad</p>
               </div>
