@@ -10,23 +10,23 @@ import Image from "next/image";
 
 const ProductCard = (data: productData) => {
   return (
-    <div className="bg-white rounded-xl p-2 col-span-1">
+    <div className="col-span-1 rounded-xl bg-white p-2">
       <div className="relative w-full">
         <Image
           src={data.imgSrc}
           alt="Butterfly on my necklace"
           height={120}
           width={120}
-          className="rounded-xl w-full mb-4"
+          className="mb-4 w-full rounded-xl"
         />
         <button
           title="Add to cart"
-          className="absolute top-2 right-2 bg-neutral-light-gray grid rounded-full place-content-center h-9 w-9"
+          className="absolute right-2 top-2 grid h-9 w-9 place-content-center rounded-full bg-neutral-light-gray"
         >
           <AddShoppingCartOutlined fontSize="inherit" className="mt-[1px]" />
         </button>
         {data.colorVariants.length !== 0 && (
-          <div className="flex bg-neutral-light-gray absolute bottom-2 right-2 rounded-full p-1 gap-1">
+          <div className="absolute bottom-2 right-2 flex gap-1 rounded-full bg-neutral-light-gray p-1">
             <button className={`h-4 w-4 rounded-full bg-gray-600`} />
             <button className={`h-4 w-4 rounded-full bg-gray-600`} />
             <button className={`h-4 w-4 rounded-full bg-gray-600`} />
@@ -36,12 +36,12 @@ const ProductCard = (data: productData) => {
       </div>
 
       <div className="px-2">
-        <div className="flex items-center justify-between mb-2 gap-4">
-          <p className="text-sm truncate">{data.name}</p>
+        <div className="mb-2 flex items-center justify-between gap-4">
+          <p className="truncate text-sm">{data.name}</p>
           {data.isShippedFromAbroad && (
             <div className="relative">
               <FlightTakeoffOutlined className="peer" fontSize="inherit" />
-              <div className="absolute top-0 left-[200%] p-2 rounded-lg hidden peer-hover:block text-xs w-32 bg-gray-800 text-neutral-light-gray">
+              <div className="absolute left-[200%] top-0 hidden w-32 rounded-lg bg-gray-800 p-2 text-xs text-neutral-light-gray peer-hover:block">
                 <InfoOutlined fontSize="small" className="mb-1" />
                 <p>This item is shipped from abroad</p>
               </div>

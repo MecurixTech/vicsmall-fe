@@ -3,7 +3,7 @@ import ProductCard from "./components/product-card";
 
 export default function Home() {
   return (
-    <main className="grid gap-4 p-4 grid-cols-3">
+    <main className="grid grid-cols-3 gap-4 p-4">
       <ProductCard {...productData} />
       <ProductCard {...productData} />
       <ProductCard {...productData} />
