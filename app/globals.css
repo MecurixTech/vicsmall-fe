@@ -27,3 +27,27 @@ h2 {
 h3 {
   @apply text-2xl lg:text-3xl;
 }
+
+input {
+  @apply block rounded-xl bg-neutral-light-gray p-2 placeholder:text-gray-400;
+}
+
+label {
+  @apply block text-sm font-medium text-gray-600;
+}
+
+.button {
+  @apply rounded-xl font-medium;
+}
+
+.button-accent {
+  @apply bg-accent-900;
+}
+
+.button-primary {
+  @apply bg-neutral-dark-blue;
+}
+
+.button-secondary {
+  @apply border border-neutral-dark-blue text-neutral-dark-blue;
+}

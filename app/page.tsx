@@ -23,6 +23,18 @@ export default function Home() {
         ))}
       </section>
       <Footer />
+
+      <form className="w-1/3 rounded-xl bg-white p-8 shadow-lg">
+        <label htmlFor="first_name" className="mb-1">
+          First name
+        </label>
+        <input
+          type="text"
+          name="first_name"
+          id="first_name"
+          placeholder="E.g. John"
+        />
+      </form>
     </main>
   );
 }
