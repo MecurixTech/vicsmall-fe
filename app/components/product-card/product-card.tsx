@@ -14,7 +14,7 @@ const ProductCard = ({ product }: { product: productData }) => {
       <div className="relative w-full">
         <Image
           src={product.imgSrc}
-          alt="Butterfly on my necklace"
+          alt={product.name}
           height={120}
           width={120}
           className="mb-4 w-full rounded-xl"
@@ -25,9 +25,9 @@ const ProductCard = ({ product }: { product: productData }) => {
         >
           <AddShoppingCartOutlined fontSize="small" className="mt-[1px]" />
         </button>
-        {product.colorVariants.length !== 0 && (
+        {product.colorVariants && product.colorVariants.length !== 0 && (
           <div className="absolute bottom-2 right-2 flex items-center gap-1 rounded-full bg-neutral-light-gray/80 p-1">
-            {product.colorVariants.map((colorVariant, index) => (
+            {product.colorVariants?.map((colorVariant, index) => (
               <div
                 key={index}
                 className={`h-4 w-4 rounded-full bg-${colorVariant}`}

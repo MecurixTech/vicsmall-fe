@@ -12,43 +12,42 @@ export const products = [
   },
   {
     id: 1,
-    name: "Nike Mikey",
+    name: "Nike Shox Rider",
     originalPrice: "110,200",
     currentPrice: "32,000",
     isShippedFromAbroad: true,
     colorVariants: ["black", "red-500", "orange-500", "gray-500"],
     imgSrc:
-      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+      "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
   },
   {
     id: 2,
-    name: "Nike Mikey",
+    name: "Nike Air Force 1 Low",
     originalPrice: "232,300",
     currentPrice: "9,500",
     isShippedFromAbroad: true,
-    colorVariants: ["black", "red-500", "orange-500", "gray-500"],
     imgSrc:
-      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+      "https://utfs.io/f/wLDjZbdcJHpRxgNC5D8dYVwu9JvF5km2ElbzTQKC0BsMGigA",
   },
   {
     id: 3,
-    name: "Nike Whitey",
+    name: "3-in-1 Women's Handbag",
     originalPrice: "40,000",
     currentPrice: "23,500",
     isShippedFromAbroad: true,
     colorVariants: ["black", "red-500", "orange-500", "gray-500"],
     imgSrc:
-      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+      "https://utfs.io/f/wLDjZbdcJHpRZ8GvjdIU7aODg2yt0HSxWFBNfqTKvI59cYPh",
   },
   {
     id: 4,
-    name: "Nike Noicey",
+    name: "Coach City Tote Women's Bag",
     originalPrice: "12,300",
     currentPrice: "10,000",
     isShippedFromAbroad: true,
     colorVariants: ["black", "red-500", "orange-500", "gray-500"],
     imgSrc:
-      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+      "https://utfs.io/f/wLDjZbdcJHpRoki5D1i4gjP2ZxK0UVnc8t5aqFdYEuWh947M",
   },
 ];
 

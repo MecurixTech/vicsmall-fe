@@ -4,7 +4,7 @@ export type productData = {
   originalPrice: string;
   currentPrice: string;
   isShippedFromAbroad: boolean;
-  colorVariants: string[];
+  colorVariants?: string[];
   imgSrc: string;
 };
 
