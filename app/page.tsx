@@ -4,10 +4,12 @@ import Banner from "./components/home/banner";
 
 import { categories, products } from "./data/dummyData";
 import Footer from "./components/footer";
+import CountdownTimer from "./components/home/countdown-timer";
 
 export default function Home() {
   return (
     <main className="p-4">
+      <CountdownTimer hours={3} minutes={36} seconds={14} />
       <Banner />
       <section className="grid grid-cols-5 gap-4">
         {products.map((product) => (
