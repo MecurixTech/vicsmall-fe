@@ -15,3 +15,11 @@ export type categoryData = {
   imgSrc: string;
   imgAlt: string;
 };
+
+export type cartItem = {
+  id: number;
+  name: string;
+  price: string;
+  quantity: number;
+  imgSrc: string;
+};

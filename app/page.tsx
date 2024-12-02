@@ -2,9 +2,10 @@ import CategoryCard from "./components/home/category-card";
 import ProductCard from "./components/product-card/product-card";
 import Banner from "./components/home/banner";
 
-import { categories, products } from "./data/dummyData";
+import { cartItems, categories, products } from "./data/dummyData";
 import Footer from "./components/footer";
 import CountdownTimer from "./components/home/countdown-timer";
+import CartItem from "./components/cart-to-checkout/cart-item";
 
 export default function Home() {
   return (
@@ -35,6 +36,10 @@ export default function Home() {
           placeholder="E.g. John"
         />
       </form>
+
+      {cartItems.map((item) => (
+        <CartItem key={item.id} cartItemData={item} />
+      ))}
     </main>
   );
 }

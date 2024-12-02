@@ -86,3 +86,15 @@ export const categories = [
     imgAlt: "Men's Clothing",
   },
 ];
+
+// Dummy cart data
+export const cartItems = [
+  {
+    id: 0,
+    name: "Nike Air Force 1 Low",
+    price: "25,000",
+    quantity: 1,
+    imgSrc:
+      "https://utfs.io/f/wLDjZbdcJHpRxgNC5D8dYVwu9JvF5km2ElbzTQKC0BsMGigA",
+  },
+];
