@@ -2,9 +2,9 @@ import { categoryData } from "@/app/data/dummyTypes";
 import { ArrowForwardOutlined } from "@mui/icons-material";
 import Link from "next/link";
 
-const CategoryCard = (data: categoryData) => {
+const CategoryCard = ({ category }: { category: categoryData }) => {
   const cardStyle = {
-    backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 100)), url(${data.imgSrc})`,
+    backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 100)), url(${category.imgSrc})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
@@ -16,9 +16,9 @@ const CategoryCard = (data: categoryData) => {
     >
       <div className="px-6 py-4">
         <p className="mb-2 max-w-[80%] text-2xl font-bold leading-tight">
-          {data.name}
+          {category.name}
         </p>
-        <p>{data.numberOfProducts}+ products</p>
+        <p>{category.numberOfProducts}+ products</p>
       </div>
 
       <div className="absolute -bottom-2 -right-2 grid h-16 w-16 place-content-center rounded-full bg-neutral-light-gray text-gray-800">

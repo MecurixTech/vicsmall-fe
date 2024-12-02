@@ -6,7 +6,7 @@ export const products = [
     originalPrice: "770,000",
     currentPrice: "2,500",
     isShippedFromAbroad: true,
-    colorVariants: ["bg-black", "bg-red-500", "bg-orange-500", "bg-gray-500"],
+    colorVariants: ["black", "red-500", "orange-500", "gray-500"],
     imgSrc:
       "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
   },
@@ -16,7 +16,7 @@ export const products = [
     originalPrice: "110,200",
     currentPrice: "32,000",
     isShippedFromAbroad: true,
-    colorVariants: ["bg-black", "bg-red-500", "bg-orange-500", "bg-gray-500"],
+    colorVariants: ["black", "red-500", "orange-500", "gray-500"],
     imgSrc:
       "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
   },
@@ -26,7 +26,7 @@ export const products = [
     originalPrice: "232,300",
     currentPrice: "9,500",
     isShippedFromAbroad: true,
-    colorVariants: ["bg-black", "bg-red-500", "bg-orange-500", "bg-gray-500"],
+    colorVariants: ["black", "red-500", "orange-500", "gray-500"],
     imgSrc:
       "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
   },
@@ -36,7 +36,7 @@ export const products = [
     originalPrice: "40,000",
     currentPrice: "23,500",
     isShippedFromAbroad: true,
-    colorVariants: ["bg-black", "bg-red-500", "bg-orange-500", "bg-gray-500"],
+    colorVariants: ["black", "red-500", "orange-500", "gray-500"],
     imgSrc:
       "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
   },
@@ -46,7 +46,7 @@ export const products = [
     originalPrice: "12,300",
     currentPrice: "10,000",
     isShippedFromAbroad: true,
-    colorVariants: ["bg-black", "bg-red-500", "bg-orange-500", "bg-gray-500"],
+    colorVariants: ["black", "red-500", "orange-500", "gray-500"],
     imgSrc:
       "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
   },
