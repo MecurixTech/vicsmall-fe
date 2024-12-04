@@ -36,6 +36,12 @@ label {
   @apply block text-sm font-medium text-gray-600;
 }
 
+table,
+th,
+td {
+  @apply border border-gray-400 py-2;
+}
+
 .button {
   @apply rounded-xl font-medium;
 }
@@ -49,5 +55,5 @@ label {
 }
 
 .button-secondary {
-  @apply border border-neutral-dark-blue text-neutral-dark-blue;
+  @apply border-2 border-neutral-dark-blue text-neutral-dark-blue;
 }

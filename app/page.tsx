@@ -6,10 +6,11 @@ import { cartItems, categories, products } from "./data/dummyData";
 import Footer from "./components/footer";
 import CountdownTimer from "./components/home/countdown-timer";
 import CartItem from "./components/cart-to-checkout/cart-item";
+import InfoTabs from "./components/product-page/info-tabs-container";
 
 export default function Home() {
   return (
-    <main className="p-4">
+    <main className="mb-24 p-4">
       <CountdownTimer hours={3} minutes={36} seconds={14} />
       <Banner />
       <section className="grid grid-cols-5 gap-4">
@@ -40,6 +41,8 @@ export default function Home() {
       {cartItems.map((item) => (
         <CartItem key={item.id} cartItemData={item} />
       ))}
+
+      <InfoTabs />
     </main>
   );
 }

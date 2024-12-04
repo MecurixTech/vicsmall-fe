@@ -6,7 +6,7 @@ export const products = [
     originalPrice: "770,000",
     currentPrice: "2,500",
     isShippedFromAbroad: true,
-    colorVariants: ["black", "red-500", "orange-500", "gray-500"],
+    colorVariants: ["bg-black", "bg-red-500", "bg-orange-500", "bg-gray-500"],
     imgSrc:
       "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
   },
@@ -16,7 +16,7 @@ export const products = [
     originalPrice: "110,200",
     currentPrice: "32,000",
     isShippedFromAbroad: true,
-    colorVariants: ["black", "red-500", "orange-500", "gray-500"],
+    colorVariants: ["bg-black", "bg-red-500", "bg-orange-500", "bg-gray-500"],
     imgSrc:
       "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
   },
@@ -35,7 +35,7 @@ export const products = [
     originalPrice: "40,000",
     currentPrice: "23,500",
     isShippedFromAbroad: true,
-    colorVariants: ["black", "red-500", "orange-500", "gray-500"],
+    colorVariants: ["bg-black", "bg-red-500", "bg-orange-500", "bg-gray-500"],
     imgSrc:
       "https://utfs.io/f/wLDjZbdcJHpRZ8GvjdIU7aODg2yt0HSxWFBNfqTKvI59cYPh",
   },
@@ -45,7 +45,7 @@ export const products = [
     originalPrice: "12,300",
     currentPrice: "10,000",
     isShippedFromAbroad: true,
-    colorVariants: ["black", "red-500", "orange-500", "gray-500"],
+    colorVariants: ["bg-black", "bg-red-500", "bg-orange-500", "bg-gray-500"],
     imgSrc:
       "https://utfs.io/f/wLDjZbdcJHpRoki5D1i4gjP2ZxK0UVnc8t5aqFdYEuWh947M",
   },
@@ -98,3 +98,87 @@ export const cartItems = [
       "https://utfs.io/f/wLDjZbdcJHpRxgNC5D8dYVwu9JvF5km2ElbzTQKC0BsMGigA",
   },
 ];
+
+// Dummy reviews
+export const reviews = [
+  {
+    id: 0,
+    user: {
+      avatar:
+        "https://utfs.io/f/wLDjZbdcJHpRxgNC5D8dYVwu9JvF5km2ElbzTQKC0BsMGigA",
+      fullName: "Alex Paxwel",
+    },
+    rating: 4.0,
+    date: "4th March 2023",
+    message:
+      "This product was awesome. Could have taken a little less time to arrive, but I love it anyway!",
+  },
+  {
+    id: 1,
+    user: {
+      avatar:
+        "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+      fullName: "Barry Tuple",
+    },
+    rating: 4.0,
+    date: "5th April 2023",
+    message: "",
+  },
+  {
+    id: 2,
+    user: {
+      avatar:
+        "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
+      fullName: "Matthew Teew",
+    },
+    rating: 5.0,
+    date: "23rd April 2023",
+    message:
+      "This product was awesome. Could have taken a little less time to arrive, but I love it anyway!",
+    images: [
+      {
+        id: 0,
+        imgSrc:
+          "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+        alt: "Image 1",
+      },
+      {
+        id: 1,
+        imgSrc:
+          "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+        alt: "Image 2",
+      },
+      {
+        id: 2,
+        imgSrc:
+          "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+        alt: "Image 3",
+      },
+      {
+        id: 3,
+        imgSrc:
+          "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+        alt: "Image 4",
+      },
+    ],
+  },
+];
+
+// const productData = {
+//     id: 0,
+//     name: "Butterfly on My Necklace",
+//     originalPrice: "770,000",
+//     currentPrice: "2,500",
+//     isShippedFromAbroad: true,
+//     colorVariants: ["bg-black", "bg-red-500", "bg-orange-500", "bg-gray-500"],
+//     img: {
+//       src: "",
+//       alt: "",
+//     }
+//     shippingDetails: {
+//       ...
+//     },
+//     packagingDetails: {
+//       ...
+//     },
+// }
