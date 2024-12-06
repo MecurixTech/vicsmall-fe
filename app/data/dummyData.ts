@@ -108,7 +108,7 @@ export const reviews = [
         "https://utfs.io/f/wLDjZbdcJHpRxgNC5D8dYVwu9JvF5km2ElbzTQKC0BsMGigA",
       fullName: "Alex Paxwel",
     },
-    rating: 4.0,
+    rating: "4.0",
     date: "4th March 2023",
     message:
       "This product was awesome. Could have taken a little less time to arrive, but I love it anyway!",
@@ -120,9 +120,9 @@ export const reviews = [
         "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
       fullName: "Barry Tuple",
     },
-    rating: 4.0,
+    rating: "4.0",
     date: "5th April 2023",
-    message: "",
+    message: "This is awesome",
   },
   {
     id: 2,
@@ -131,7 +131,7 @@ export const reviews = [
         "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
       fullName: "Matthew Teew",
     },
-    rating: 5.0,
+    rating: "5.0",
     date: "23rd April 2023",
     message:
       "This product was awesome. Could have taken a little less time to arrive, but I love it anyway!",

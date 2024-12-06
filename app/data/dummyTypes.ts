@@ -24,15 +24,22 @@ export type cartItem = {
   imgSrc: string;
 };
 
+type reviewImage = {
+  id: number;
+  imgSrc: string;
+  alt: string;
+};
+
 export type review = {
   id: number;
   user: {
     avatar: string;
     fullName: string;
   };
-  rating: number;
+  rating: string;
   date: string;
   message: string;
+  images?: reviewImage[];
 };
 
 type reviewDistributionItem = {

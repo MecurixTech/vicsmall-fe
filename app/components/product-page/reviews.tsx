@@ -1,6 +1,7 @@
 import { vendorDetails } from "@/app/data/dummyData";
 import { review } from "@/app/data/dummyTypes";
-import { Star } from "@mui/icons-material";
+import { ArrowDownwardOutlined, Star } from "@mui/icons-material";
+import ReviewList from "./review-list";
 
 const Reviews = ({ reviews }: { reviews: review[] }) => {
   const stars = 4;
@@ -44,6 +45,13 @@ const Reviews = ({ reviews }: { reviews: review[] }) => {
       </section>
 
       <hr className="my-8" />
+
+      <ReviewList />
+
+      <button className="button button-secondary mx-auto flex items-center gap-2 px-4 py-2">
+        <span>View more</span>
+        <ArrowDownwardOutlined fontSize="inherit" />
+      </button>
     </>
   );
 };
