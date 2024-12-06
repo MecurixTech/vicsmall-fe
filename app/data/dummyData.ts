@@ -164,6 +164,37 @@ export const reviews = [
   },
 ];
 
+export const vendorDetails = {
+  name: "Hactor Hozier",
+  numberOfProducts: 40,
+  reviews: {
+    numberOfReviews: 2000,
+    averageRating: "4.0",
+    reviewDistribution: [
+      {
+        id: 0,
+        amount: 0,
+      },
+      {
+        id: 1,
+        amount: 200,
+      },
+      {
+        id: 2,
+        amount: 500,
+      },
+      {
+        id: 3,
+        amount: 100,
+      },
+      {
+        id: 4,
+        amount: 1200,
+      },
+    ],
+  },
+};
+
 // const productData = {
 //     id: 0,
 //     name: "Butterfly on My Necklace",

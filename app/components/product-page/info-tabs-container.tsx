@@ -5,11 +5,12 @@ import Overview from "./overview";
 import Reviews from "./reviews";
 import Vendor from "./vendor";
 import Shipping from "./shipping";
+import { reviews, vendorDetails } from "@/app/data/dummyData";
 
 const InfoTabs = () => {
   const [activeTab, setActiveTab] = useState<string>("overview");
   return (
-    <section className="rounded-xl bg-white px-4 py-2 shadow-lg">
+    <section className="rounded-xl bg-white p-2 shadow-lg">
       <div className="mb-4 flex items-center rounded-lg text-gray-400">
         <button
           onClick={() => setActiveTab("overview")}
@@ -21,7 +22,7 @@ const InfoTabs = () => {
           onClick={() => setActiveTab("reviews")}
           className={`${activeTab === "reviews" ? "bg-white font-medium text-gray-600" : "bg-neutral-light-gray text-gray-400"} border px-4 py-2`}
         >
-          Reviews
+          Reviews ({reviews.length})
         </button>
         <button
           onClick={() => setActiveTab("vendor")}
@@ -37,10 +38,12 @@ const InfoTabs = () => {
         </button>
       </div>
 
-      {activeTab === "overview" && <Overview />}
-      {activeTab === "reviews" && <Reviews />}
-      {activeTab === "vendor" && <Vendor />}
-      {activeTab === "shipping" && <Shipping />}
+      <div className="px-4">
+        {activeTab === "overview" && <Overview />}
+        {activeTab === "reviews" && <Reviews reviews={reviews} />}
+        {activeTab === "vendor" && <Vendor vendor={vendorDetails} />}
+        {activeTab === "shipping" && <Shipping />}
+      </div>
     </section>
   );
 };

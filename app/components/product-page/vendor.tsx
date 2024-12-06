@@ -1,9 +1,11 @@
 import { products } from "@/app/data/dummyData";
+import { vendor } from "@/app/data/dummyTypes";
 import Image from "next/image";
 import Link from "next/link";
 import ProductCardV2 from "../product-card/product-card-v2";
+import { Star } from "@mui/icons-material";
 
-const Vendor = () => {
+const Vendor = ({ vendor }: { vendor: vendor }) => {
   return (
     <>
       <section className="flex items-center justify-between">
@@ -16,12 +18,27 @@ const Vendor = () => {
             className="rounded-full"
           />
           <div>
-            <p className="font-medium text-gray-800">Hozier Hactor</p>
-            <p>40 products posted</p>
+            <p className="font-medium text-gray-800">{vendor.name}</p>
+            <p>{vendor.numberOfProducts} products posted</p>
             <div className="flex items-center gap-2">
-              <span>stars</span>
+              <div>
+                {[...Array(5)].map((star, index) => {
+                  const currentRating = index + 1;
+                  return (
+                    <Star
+                      fontSize="inherit"
+                      key={index}
+                      className={
+                        currentRating > Number(vendor.reviews.averageRating)
+                          ? "text-gray-300"
+                          : "text-accent-900"
+                      }
+                    />
+                  );
+                })}
+              </div>
               <span>•</span>
-              <span>4.0 overall rating</span>
+              <span>{vendor.reviews.averageRating} overall rating</span>
             </div>
           </div>
         </div>

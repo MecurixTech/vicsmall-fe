@@ -23,3 +23,29 @@ export type cartItem = {
   quantity: number;
   imgSrc: string;
 };
+
+export type review = {
+  id: number;
+  user: {
+    avatar: string;
+    fullName: string;
+  };
+  rating: number;
+  date: string;
+  message: string;
+};
+
+type reviewDistributionItem = {
+  id: number;
+  amount: number;
+};
+
+export type vendor = {
+  name: string;
+  numberOfProducts: number;
+  reviews: {
+    numberOfReviews: number;
+    averageRating: string;
+    reviewDistribution: reviewDistributionItem[];
+  };
+};
