@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Overview from "./overview";
-import Reviews from "./reviews";
+import Reviews from "./reviews-tab/reviews";
 import Vendor from "./vendor";
 import Shipping from "./shipping";
 import { reviews, vendorDetails } from "@/app/data/dummyData";
