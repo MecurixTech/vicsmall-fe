@@ -7,6 +7,8 @@ import Footer from "./components/footer";
 import CountdownTimer from "./components/home/countdown-timer";
 import CartItem from "./components/cart-to-checkout/cart-item";
 import InfoTabs from "./components/product-page/info-tabs-container";
+import ProductSettings from "./components/product-page/product-settings";
+import ProductGallery from "./components/product-page/product-gallery";
 
 export default function Home() {
   return (
@@ -43,6 +45,13 @@ export default function Home() {
       ))}
 
       <InfoTabs />
+
+      <hr className="mb-8" />
+
+      <div className="flex items-start justify-between gap-4">
+        <ProductGallery />
+        <ProductSettings />
+      </div>
     </main>
   );
 }
