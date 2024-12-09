@@ -8,7 +8,7 @@ import {
 import ProductCard from "../product-card/product-card";
 import { products } from "@/app/data/dummyData";
 
-const MensShoesSlider = () => {
+const Slider = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
@@ -56,4 +56,4 @@ const MensShoesSlider = () => {
   );
 };
 
-export default MensShoesSlider;
+export default Slider;

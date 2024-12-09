@@ -14,7 +14,15 @@ import { useEffect, useState } from "react";
 
 // export default CountdownTimer;
 
-const CountdownTimer = ({hours, minutes, seconds}: {hours:number, minutes:number, seconds:number}) => {    
+const CountdownTimer = ({
+  hours,
+  minutes,
+  seconds,
+}: {
+  hours: number;
+  minutes: number;
+  seconds: number;
+}) => {
   const [timeLeft, setTimeLeft] = useState({
     hours,
     minutes,
@@ -43,11 +51,11 @@ const CountdownTimer = ({hours, minutes, seconds}: {hours:number, minutes:number
 
   const formatTime = (value: number) => String(value).padStart(2, "0");
   return (
-    <div className="mt-6 lg:mt-0 text-[20px] lg:text-[22px] font-medium text-shadow-sm flex justify-end items-end">
-          {formatTime(timeLeft.hours)}H : {formatTime(timeLeft.minutes)}M :{" "}
-          {formatTime(timeLeft.seconds)}S Left
-        </div>
-  )
-}
+    <div className="text-shadow-sm mt-6 flex items-end justify-end text-[20px] font-medium text-neutral-light-gray lg:mt-0 lg:text-[22px]">
+      {formatTime(timeLeft.hours)}H : {formatTime(timeLeft.minutes)}M :{" "}
+      {formatTime(timeLeft.seconds)}S Left
+    </div>
+  );
+};
 
-export default CountdownTimer
+export default CountdownTimer;

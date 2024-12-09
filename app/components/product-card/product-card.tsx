@@ -10,7 +10,7 @@ import Image from "next/image";
 
 const ProductCard = ({ product }: { product: productData }) => {
   return (
-    <div className="col-span-1 min-w-64 rounded-xl bg-white p-2">
+    <div className="col-span-1 min-w-60 rounded-xl bg-white p-2">
       <div className="relative w-full">
         <Image
           src={product.imgSrc}

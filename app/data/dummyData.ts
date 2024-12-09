@@ -100,6 +100,70 @@ export const categories = [
       "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
     imgAlt: "Men's Clothing",
   },
+  {
+    id: 4,
+    name: "Men's Clothing",
+    numberOfProducts: "50,000",
+    imgSrc:
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+    imgAlt: "Men's Clothing",
+  },
+  {
+    id: 5,
+    name: "Men's Clothing",
+    numberOfProducts: "50,000",
+    imgSrc:
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+    imgAlt: "Men's Clothing",
+  },
+  {
+    id: 6,
+    name: "Watches",
+    numberOfProducts: "50,000",
+    imgSrc:
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+    imgAlt: "Watches",
+  },
+  {
+    id: 7,
+    name: "Hoodies",
+    numberOfProducts: "50,000",
+    imgSrc:
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+    imgAlt: "Hoodies",
+  },
+  {
+    id: 8,
+    name: "Phones",
+    numberOfProducts: "50,000",
+    imgSrc:
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+    imgAlt: "Phones",
+  },
+  {
+    id: 9,
+    name: "T Shirts",
+    numberOfProducts: "50,000",
+    imgSrc:
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+    imgAlt: "T Shirts",
+  },
+  {
+    id: 10,
+    name: "Men Shoes",
+    numberOfProducts: "50,000",
+    imgSrc:
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+    imgAlt: "Men Shoes",
+  },
+  {
+    id: 11,
+    name: "Female",
+    numberOfProducts: "50,000",
+    imgSrc:
+      "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+    imgAlt: "Female",
+  },
 ];
 
 // Dummy cart data
