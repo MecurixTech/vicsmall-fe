@@ -1,3 +1,18 @@
+export const navLinks = [
+  "Accessories",
+  "All Hoodies",
+  "Beanies",
+  "Boots",
+  "Games & Consoles",
+  "Gym",
+  "Head Wears",
+  "Jerseys",
+  "Jumpsuits",
+  "Men's Clothing",
+  "Hoodies",
+  "Other Categories",
+];
+
 // Dummy product data
 export const products = [
   {
