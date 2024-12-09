@@ -10,7 +10,7 @@ import Image from "next/image";
 
 const ProductCard = ({ product }: { product: productData }) => {
   return (
-    <div className="col-span-1 rounded-xl bg-white p-2">
+    <div className="col-span-1 min-w-64 rounded-xl bg-white p-2">
       <div className="relative w-full">
         <Image
           src={product.imgSrc}
@@ -21,7 +21,8 @@ const ProductCard = ({ product }: { product: productData }) => {
         />
         <button
           title="Add to cart"
-          className="absolute right-2 top-2 grid h-12 w-12 place-content-center rounded-full bg-white text-gray-800 shadow-lg"
+          aria-label="Add to cart"
+          className="absolute right-2 top-2 grid h-12 w-12 place-content-center rounded-full bg-white text-gray-800 shadow-lg hover:bg-neutral-light-gray"
         >
           <AddShoppingCartOutlined fontSize="small" className="mt-[1px]" />
         </button>

@@ -57,7 +57,7 @@ const Banner = () => {
   }, []);
 
   return (
-    <section className="relative mx-auto flex h-auto w-4/5 max-w-screen-xl flex-col items-center justify-between overflow-hidden rounded-[23px] px-4 py-8 sm:flex-row sm:px-8 lg:px-16 lg:py-12">
+    <section className="relative mx-auto flex h-auto w-[90%] max-w-screen-xl flex-col items-center justify-between overflow-hidden rounded-[23px] px-4 py-8 sm:flex-row sm:px-8 lg:px-16 lg:py-12">
       <div
         className="absolute inset-0 bg-center bg-no-repeat"
         style={{
