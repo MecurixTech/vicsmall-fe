@@ -1,17 +1,25 @@
+"use client"
+
 import { vendorDetails } from "@/app/data/dummyData";
 import { review } from "@/app/data/dummyTypes";
-import { ArrowDownwardOutlined, Star } from "@mui/icons-material";
-import ReviewList from "./review-list";
-import Link from "next/link";
+import { ArrowBackOutlined, ArrowDownwardOutlined, Star } from "@mui/icons-material";
+import ReviewList from "../components/product-page/reviews-tab/review-list";
 
 const Reviews = ({ reviews }: { reviews: review[] }) => {
   const stars = 4;
+
   return (
     <>
+      {/* Back Button and Title */}
+      <div className="flex items-center gap-2 mb-4">
+        <ArrowBackOutlined fontSize="large" className="text-gray-800 cursor-pointer" />
+        <h1 className="text-2xl sm:text-3xl font-semibold text-gray-800">Reviews</h1>
+      </div>
+
       {/* Overall Review Section */}
-      <section className="flex flex-col md:flex-row items-center justify-between gap-8">
+      <section className="flex flex-col sm:flex-row items-center justify-between gap-8">
         {/* Left Section - Overall Rating */}
-        <div className="text-gray-800 flex flex-col items-center md:items-start text-center md:text-left">
+        <div className="text-gray-800 flex flex-col items-center sm:items-start text-center sm:text-left mb-8 sm:mb-0">
           <div className="mb-4 flex items-center gap-4">
             <span className="text-6xl sm:text-7xl md:text-8xl font-bold">4.0</span>
             <div className="flex">
@@ -35,7 +43,7 @@ const Reviews = ({ reviews }: { reviews: review[] }) => {
         </div>
 
         {/* Right Section - Review Distribution */}
-        <div className="w-full md:w-1/2">
+        <div className="w-full sm:w-1/2">
           {vendorDetails[0].reviews.reviewDistribution.map((review, index) => (
             <div
               key={review.id}
@@ -61,15 +69,6 @@ const Reviews = ({ reviews }: { reviews: review[] }) => {
 
       {/* Review List Section */}
       <ReviewList />
-
-      {/* View More Button */}
-      <Link href="#">
-      <button className="button button-secondary mx-auto flex items-center gap-2 px-4 py-2">
-        <span>View more</span>
-        <ArrowDownwardOutlined fontSize="inherit" />
-      </button>
-      </Link>
-      
     </>
   );
 };

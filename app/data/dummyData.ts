@@ -243,52 +243,165 @@ export const reviews = [
   },
 ];
 
-export const vendorDetails = {
-  name: "Hactor Hozier",
-  numberOfProducts: 40,
-  reviews: {
-    numberOfReviews: 2000,
-    averageRating: "4.0",
-    reviewDistribution: [
-      {
-        id: 0,
-        amount: 0,
-      },
-      {
-        id: 1,
-        amount: 200,
-      },
-      {
-        id: 2,
-        amount: 500,
-      },
-      {
-        id: 3,
-        amount: 100,
-      },
-      {
-        id: 4,
-        amount: 1200,
-      },
-    ],
+export const vendorDetails = [
+  {
+    name: "Hactor Hozier",
+    numberOfProducts: 40,
+    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    reviews: {
+      numberOfReviews: 2000,
+      averageRating: "4.0",
+      reviewDistribution: [
+        { id: 0, amount: 0 },
+        { id: 1, amount: 200 },
+        { id: 2, amount: 500 },
+        { id: 3, amount: 100 },
+        { id: 4, amount: 1200 },
+      ],
+    },
   },
-};
-
-// const productData = {
-//     id: 0,
-//     name: "Butterfly on My Necklace",
-//     originalPrice: "770,000",
-//     currentPrice: "2,500",
-//     isShippedFromAbroad: true,
-//     colorVariants: ["bg-black", "bg-red-500", "bg-orange-500", "bg-gray-500"],
-//     img: {
-//       src: "",
-//       alt: "",
-//     }
-//     shippingDetails: {
-//       ...
-//     },
-//     packagingDetails: {
-//       ...
-//     },
-// }
+  {
+    name: "rick",
+    numberOfProducts: 30,
+    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    reviews: {
+      numberOfReviews: 1500,
+      averageRating: "3.8",
+      reviewDistribution: [
+        { id: 0, amount: 100 },
+        { id: 1, amount: 300 },
+        { id: 2, amount: 400 },
+        { id: 3, amount: 500 },
+        { id: 4, amount: 200 },
+      ],
+    },
+  },
+  {
+    name: "edd",
+    numberOfProducts: 25,
+    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    reviews: {
+      numberOfReviews: 1200,
+      averageRating: "4.2",
+      reviewDistribution: [
+        { id: 0, amount: 50 },
+        { id: 1, amount: 150 },
+        { id: 2, amount: 300 },
+        { id: 3, amount: 400 },
+        { id: 4, amount: 300 },
+      ],
+    },
+  },
+  {
+    name: "moonpie",
+    numberOfProducts: 50,
+    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    reviews: {
+      numberOfReviews: 1800,
+      averageRating: "3.9",
+      reviewDistribution: [
+        { id: 0, amount: 200 },
+        { id: 1, amount: 400 },
+        { id: 2, amount: 600 },
+        { id: 3, amount: 300 },
+        { id: 4, amount: 300 },
+      ],
+    },
+  },
+  {
+    name: "bob",
+    numberOfProducts: 15,
+    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    reviews: {
+      numberOfReviews: 800,
+      averageRating: "4.5",
+      reviewDistribution: [
+        { id: 0, amount: 20 },
+        { id: 1, amount: 80 },
+        { id: 2, amount: 300 },
+        { id: 3, amount: 200 },
+        { id: 4, amount: 200 },
+      ],
+    },
+  },
+  {
+    name: "young money",
+    numberOfProducts: 60,
+    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    reviews: {
+      numberOfReviews: 3000,
+      averageRating: "4.7",
+      reviewDistribution: [
+        { id: 0, amount: 50 },
+        { id: 1, amount: 200 },
+        { id: 2, amount: 700 },
+        { id: 3, amount: 1000 },
+        { id: 4, amount: 1050 },
+      ],
+    },
+  },
+  {
+    name: "tim",
+    numberOfProducts: 35,
+    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    reviews: {
+      numberOfReviews: 1700,
+      averageRating: "3.6",
+      reviewDistribution: [
+        { id: 0, amount: 150 },
+        { id: 1, amount: 350 },
+        { id: 2, amount: 500 },
+        { id: 3, amount: 400 },
+        { id: 4, amount: 300 },
+      ],
+    },
+  },
+  {
+    name: "guy",
+    numberOfProducts: 20,
+    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    reviews: {
+      numberOfReviews: 900,
+      averageRating: "4.3",
+      reviewDistribution: [
+        { id: 0, amount: 30 },
+        { id: 1, amount: 120 },
+        { id: 2, amount: 250 },
+        { id: 3, amount: 300 },
+        { id: 4, amount: 200 },
+      ],
+    },
+  },
+  {
+    name: "zayn",
+    numberOfProducts: 45,
+    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    reviews: {
+      numberOfReviews: 2100,
+      averageRating: "4.1",
+      reviewDistribution: [
+        { id: 0, amount: 100 },
+        { id: 1, amount: 250 },
+        { id: 2, amount: 600 },
+        { id: 3, amount: 700 },
+        { id: 4, amount: 450 },
+      ],
+    },
+  },
+  {
+    name: "gait",
+    numberOfProducts: 10,
+    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    reviews: {
+      numberOfReviews: 400,
+      averageRating: "3.5",
+      reviewDistribution: [
+        { id: 0, amount: 50 },
+        { id: 1, amount: 100 },
+        { id: 2, amount: 150 },
+        { id: 3, amount: 50 },
+        { id: 4, amount: 50 },
+      ],
+    },
+  },
+];

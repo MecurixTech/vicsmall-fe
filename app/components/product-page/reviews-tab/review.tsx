@@ -5,20 +5,24 @@ import Image from "next/image";
 const Review = ({ review }: { review: review }) => {
   return (
     <>
-      <div className="flex items-start gap-4">
+      {/* Review Container */}
+      <div className="flex flex-col sm:flex-row items-start gap-4">
+        {/* User Avatar */}
         <Image
           src={review.user.avatar}
           alt={review.user.fullName}
           height={56}
           width={56}
-          className="rounded-full"
+          className="rounded-full w-16 h-16 sm:w-14 sm:h-14"
         />
 
-        <div>
+        {/* Review Content */}
+        <div className="flex-1">
+          {/* User Name and Rating */}
           <p className="font-medium text-gray-800">{review.user.fullName}</p>
-          <div className="mb-2 flex items-center gap-2">
-            <div>
-              {[...Array(5)].map((star, index) => {
+          <div className="mb-2 flex items-center gap-2 text-sm">
+            <div className="flex">
+              {[...Array(5)].map((_, index) => {
                 const currentRating = index + 1;
                 return (
                   <Star
@@ -39,17 +43,19 @@ const Review = ({ review }: { review: review }) => {
             <span>{review.date}</span>
           </div>
 
-          <p>{review.message}</p>
+          {/* Review Message */}
+          <p className="text-sm sm:text-base">{review.message}</p>
 
-          <div className="mt-4 flex flex-wrap gap-4">
+          {/* Images */}
+          <div className="mt-4 flex flex-wrap gap-2 sm:gap-4">
             {review.images?.map((image) => (
               <Image
                 key={image.id}
                 src={image.imgSrc}
                 alt={image.alt}
-                height={240}
-                width={240}
-                className="rounded-xl"
+                height={120}
+                width={120}
+                className="rounded-lg w-20 h-20 sm:w-32 sm:h-32 object-cover"
               />
             ))}
           </div>

@@ -1,5 +1,4 @@
 import React from 'react'
-import ProductGallery from './product-gallery'
 import ProductSettings from './product-settings'
 import InfoTabs from './info-tabs-container'
 import CartItem from '../cart-to-checkout/cart-item'
@@ -12,7 +11,7 @@ const page = () => {
     <div>
         
         <div className="flex items-start justify-between gap-4">
-        <ProductGallery />
+      
         <ProductSettings />
       </div>
      
