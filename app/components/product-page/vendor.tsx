@@ -1,11 +1,11 @@
 import { products } from "@/app/data/dummyData";
-import { vendorData } from "@/app/data/dummyTypes";
+import { vendor } from "@/app/data/dummyTypes";
 import Image from "next/image";
 import Link from "next/link";
 import ProductCardV2 from "../product-card/product-card-v2";
 import { Star } from "@mui/icons-material";
 
-const Vendor = ({ vendor }: { vendor: vendorData }) => {
+const Vendor = ({ vendor }: { vendor: vendor }) => {
   return (
     <>
       <section className="flex items-center justify-between">

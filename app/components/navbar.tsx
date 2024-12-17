@@ -21,20 +21,20 @@ const Navbar = () => {
     name: string;
     currency: string;
   }[] = [
-      { code: "NG", name: "NGN", currency: "NGN" },
-      { code: "GB", name: "UK", currency: "GBP" },
-      { code: "US", name: "USA", currency: "USD" },
-      { code: "FR", name: "FR", currency: "FR" },
-    ];
+    { code: "NG", name: "NGN", currency: "NGN" },
+    { code: "GB", name: "UK", currency: "GBP" },
+    { code: "US", name: "USA", currency: "USD" },
+    { code: "FR", name: "FR", currency: "FR" },
+  ];
 
   const mobileCountries: {
     code: FlagIconCode;
     name: string;
     currency: string;
   }[] = [
-      { code: "NG", name: "Nigerian Naira", currency: "NGN" },
-      { code: "GB", name: "Pound Sterling", currency: "GBP" },
-    ];
+    { code: "NG", name: "Nigerian Naira", currency: "NGN" },
+    { code: "GB", name: "Pound Sterling", currency: "GBP" },
+  ];
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -47,7 +47,6 @@ const Navbar = () => {
   }, []);
 
   return (
-
     <nav className="fixed top-0 z-50 w-full">
       <div className="bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -86,24 +85,17 @@ const Navbar = () => {
                 <span className="sm:hidden">VICSMALL</span>
               </Link>
             </div>
-            <div className="block">
-              <div className="mx-4 hidden flex-1 justify-center md:flex">
-                <div className="relative flex w-full max-w-md">
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    className="w-full rounded-lg border py-2 pl-10 pr-4 focus:border-black focus:outline-none focus:ring"
-                  />
-                  <SearchOutlined className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform" />
-                </div>
+
+            <div className="mx-4 hidden flex-1 justify-center md:flex">
+              <div className="relative flex w-full max-w-md">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="w-full rounded-lg border py-2 pl-10 pr-4 focus:border-black focus:outline-none focus:ring"
+                />
+                <SearchOutlined className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform" />
               </div>
-
-
-
-
             </div>
-
-
 
             <div className="flex items-center space-x-4">
               <div className="relative hidden gap-4 sm:flex">
@@ -189,30 +181,9 @@ const Navbar = () => {
                   </div>
                 </button>
               </div>
-
             </div>
           </div>
         </div>
-        <div className="mx-4 block flex-1 justify-center sm:hidden">
-          <div className="relative flex w-full max-w-md">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="w-full rounded-lg border py-2 pl-10 pr-4 focus:border-black focus:outline-none focus:ring"
-            />
-            <SearchOutlined className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 transform" />
-          </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
 
         {isMenuOpen && (
           <div
@@ -261,10 +232,11 @@ const Navbar = () => {
                         setMobileSelectedCountry(country.code);
                         setIsMenuOpen(false);
                       }}
-                      className={`flex w-full items-center gap-4 rounded-md px-6 py-3 ${mobileSelectedCountry === country.code
+                      className={`flex w-full items-center gap-4 rounded-md px-6 py-3 ${
+                        mobileSelectedCountry === country.code
                           ? "bg-[#FF8C48] text-white"
                           : "bg-[#F9F9F9] text-gray-900"
-                        } whitespace-nowrap`}
+                      } whitespace-nowrap`}
                     >
                       <div className="flex h-9 items-center">
                         <FlagIcon code={country.code} />
@@ -331,14 +303,13 @@ const Navbar = () => {
         )}
       </div>
 
-      <div className="flex items-center justify-start lg:justify-center gap-6 bg-black px-4 py-2 text-sm text-neutral-light-gray overflow-x-auto whitespace-nowrap scrollbar-hide ">
+      <div className="flex items-center justify-center gap-6 bg-black px-4 py-2 text-sm text-neutral-light-gray">
         {navLinks.map((link, index) => (
           <Link key={index} href="/components">
             {link}
           </Link>
         ))}
       </div>
-
     </nav>
   );
 };
