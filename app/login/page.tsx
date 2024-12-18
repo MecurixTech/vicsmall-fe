@@ -1,10 +1,18 @@
 "use client";
 
-import { Facebook, Google } from "@mui/icons-material";
+import {
+  Facebook,
+  Google,
+  RemoveRedEyeOutlined,
+  VisibilityOffOutlined,
+} from "@mui/icons-material";
 import { Formik, Form, Field } from "formik";
 import Link from "next/link";
+import { useState } from "react";
 
 const LoginPage = () => {
+  const [isShowingPassword, setIsShowingPassword] = useState<boolean>(false);
+
   const handleSubmit = () => {
     // TODO: Authenticate user
     console.log("Form submitted");
@@ -36,12 +44,24 @@ const LoginPage = () => {
             <label htmlFor="password" className="mb-2">
               Password
             </label>
-            <Field
-              type="text"
-              id="password"
-              name="password"
-              className="w-full"
-            />
+            <div className="relative">
+              <Field
+                type={isShowingPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                className="w-full"
+              />
+              <button
+                onClick={() => setIsShowingPassword((prev) => !prev)}
+                className="absolute right-4 top-1/2 -translate-y-1/2"
+              >
+                {isShowingPassword ? (
+                  <RemoveRedEyeOutlined />
+                ) : (
+                  <VisibilityOffOutlined />
+                )}
+              </button>
+            </div>
           </div>
           <button className="button button-accent w-full py-3">Login</button>
         </Form>
@@ -53,7 +73,7 @@ const LoginPage = () => {
         <span className="flex-grow border border-gray-200" />
       </div>
 
-      <div className="flex gap-2">
+      <div className="mb-8 flex gap-2">
         <Link
           href="https://google.com"
           className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-gray-500 py-3 hover:bg-gray-100"
@@ -69,6 +89,13 @@ const LoginPage = () => {
           <span className="font-medium">Facebook</span>
         </Link>
       </div>
+
+      <p className="text-center">
+        Don&apos;t have an account?{" "}
+        <Link href="/signup" className="font-bold text-blue-800">
+          Sign up
+        </Link>
+      </p>
     </main>
   );
 };
