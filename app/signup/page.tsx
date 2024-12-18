@@ -1,17 +1,21 @@
 "use client";
 
+import { useState } from "react";
+
+import "react-phone-number-input/style.css";
+import PhoneInput, { Value } from "react-phone-number-input";
 import {
   RemoveRedEyeOutlined,
   VisibilityOffOutlined,
 } from "@mui/icons-material";
 import { Formik, Form, Field } from "formik";
 import Link from "next/link";
-import { useState } from "react";
 
 const SignupPage = () => {
   const [isShowingPassword, setIsShowingPassword] = useState<boolean>(false);
   const [isShowingConfirmPassword, setIsShowingConfirmPassword] =
     useState<boolean>(false);
+  const [phoneNumber, setPhoneNumber] = useState<Value>();
 
   const handleSubmit = () => {
     // TODO: Authenticate user
@@ -66,6 +70,7 @@ const SignupPage = () => {
                 placeholder="e.g. John"
               />
             </div>
+
             <div className="flex-1">
               <div className="mb-2 mr-2 flex items-center justify-between">
                 <label htmlFor="last_name">Last name</label>
@@ -83,32 +88,18 @@ const SignupPage = () => {
             </div>
           </div>
 
-          <div className="mb-4 flex gap-2">
-            <div className="flex-1">
-              <label htmlFor="country_code" className="mb-2">
-                Country code
-              </label>
-              <Field
-                type="text"
-                id="country_code"
-                name="country_code"
-                className="w-full"
-              />
+          <div className="mb-4">
+            <div className="mb-2 mr-2 flex items-center justify-between">
+              <label htmlFor="phone_number">Phone number</label>
+              <span className="text-xl font-bold leading-none text-red-500">
+                *
+              </span>
             </div>
-            <div className="flex-1">
-              <div className="mb-2 mr-2 flex items-center justify-between">
-                <label htmlFor="phone_number">Phone number</label>
-                <span className="text-xl font-bold leading-none text-red-500">
-                  *
-                </span>
-              </div>
-              <Field
-                type="text"
-                id="phone_number"
-                name="phone_number"
-                className="w-full"
-              />
-            </div>
+            <PhoneInput
+              placeholder="Enter phone number"
+              value={phoneNumber}
+              onChange={setPhoneNumber}
+            />
           </div>
 
           <div className="mb-4">
