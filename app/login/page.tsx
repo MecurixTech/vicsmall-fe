@@ -16,7 +16,7 @@ const LoginPage = () => {
   };
 
   return (
-    <main className="mx-auto w-2/5 rounded-xl bg-white p-8 shadow-lg">
+    <main className="mx-auto mb-12 w-[95%] rounded-xl bg-white p-8 shadow-lg sm:w-3/5 lg:w-2/5">
       <h1 className="mb-8 text-center text-2xl">Welcome back to Vicsmall</h1>
 
       <Formik onSubmit={handleSubmit} initialValues={initialValues}>
@@ -56,17 +56,17 @@ const LoginPage = () => {
       <div className="flex gap-2">
         <Link
           href="https://google.com"
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-gray-500 py-3"
+          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-gray-500 py-3 hover:bg-gray-100"
         >
           <Google />
-          <span>Google</span>
+          <span className="font-medium">Google</span>
         </Link>
         <Link
           href="https://facebook.com"
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-gray-500 py-3"
+          className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-gray-500 py-3 hover:bg-gray-100"
         >
           <Facebook />
-          <span>Facebook</span>
+          <span className="font-medium">Facebook</span>
         </Link>
       </div>
     </main>
