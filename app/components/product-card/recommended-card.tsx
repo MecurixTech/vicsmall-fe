@@ -1,11 +1,6 @@
 "use client";
 
 import { productData } from "@/app/data/dummyTypes";
-// import {
-//   AddShoppingCartOutlined,
-//   FlightTakeoffOutlined,
-//   InfoOutlined,
-// } from "@mui/icons-material";
 import Image from "next/image";
 
 const RecommendSection = ({ product }: { product: productData }) => {

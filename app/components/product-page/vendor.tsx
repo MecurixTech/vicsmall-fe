@@ -8,8 +8,7 @@ import { Star } from "@mui/icons-material";
 const Vendor = ({ vendor }: { vendor: vendorData }) => {
   return (
     <>
-      {/* Vendor Info Section */}
-      <section className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8">
+      <section className="flex flex-col items-center justify-between gap-4 md:flex-row md:gap-8">
         <div className="flex items-center gap-4 py-4">
           <Image
             src="https://utfs.io/f/wLDjZbdcJHpRwUxnbJdcJHpRXbA30unyQodDaS1eNV2Cxwmk"
@@ -19,13 +18,13 @@ const Vendor = ({ vendor }: { vendor: vendorData }) => {
             className="rounded-full"
           />
           <div>
-            <p className="font-medium text-gray-800 text-center md:text-left">
+            <p className="text-center font-medium text-gray-800 md:text-left">
               {vendor.name}
             </p>
             <p className="text-center md:text-left">
               {vendor.numberOfProducts} products posted
             </p>
-            <div className="flex items-center justify-center md:justify-start gap-2">
+            <div className="flex items-center justify-center gap-2 md:justify-start">
               <div>
                 {[...Array(5)].map((star, index) => {
                   const currentRating = index + 1;
@@ -48,10 +47,9 @@ const Vendor = ({ vendor }: { vendor: vendorData }) => {
           </div>
         </div>
 
-        {/* Website Link */}
         <Link
           href="https://google.com"
-          className="button button-secondary px-4 py-2 w-full md:w-auto text-center"
+          className="button button-secondary w-full px-4 py-2 text-center md:w-auto"
         >
           Visit website
         </Link>
@@ -59,14 +57,12 @@ const Vendor = ({ vendor }: { vendor: vendorData }) => {
 
       <hr className="mb-4" />
 
-      {/* Product Grid Section */}
       <section>
-        <p className="mb-4 font-medium text-gray-800 text-center md:text-left">
+        <p className="mb-4 text-center font-medium text-gray-800 md:text-left">
           Products listed
         </p>
 
-        {/* Responsive Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {products.map((product) => (
             <ProductCardV2 key={product.id} productData={product} />
           ))}

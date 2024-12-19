@@ -12,8 +12,7 @@ const InfoTabs = () => {
 
   return (
     <section className="rounded-xl bg-white p-2 shadow-lg">
-      {/* Tabs Section */}
-      <div className="mb-4 flex flex-wrap gap-2 justify-start rounded-lg text-gray-400">
+      <div className="mb-4 flex flex-wrap justify-start gap-2 rounded-lg text-gray-400">
         <button
           onClick={() => setActiveTab("overview")}
           className={`${
@@ -56,7 +55,6 @@ const InfoTabs = () => {
         </button>
       </div>
 
-      {/* Content Section */}
       <div className="px-4">
         {activeTab === "overview" && <Overview />}
         {activeTab === "reviews" && <Reviews reviews={reviews} />}

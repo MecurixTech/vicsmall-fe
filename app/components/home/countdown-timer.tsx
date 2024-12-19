@@ -2,18 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-// import Countdown from "react-countdown";
-
-// const CountdownTimer = ({ date }: { date: number }) => {
-//   return (
-//     <p className="font-medium">
-//       <span>Time left:</span> <Countdown date={date} />
-//     </p>
-//   );
-// };
-
-// export default CountdownTimer;
-
 const CountdownTimer = ({
   hours,
   minutes,

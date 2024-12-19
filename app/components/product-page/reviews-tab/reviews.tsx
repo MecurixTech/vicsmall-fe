@@ -8,12 +8,12 @@ const Reviews = ({ reviews }: { reviews: review[] }) => {
   const stars = 4;
   return (
     <>
-      {/* Overall Review Section */}
-      <section className="flex flex-col md:flex-row items-center justify-between gap-8">
-        {/* Left Section - Overall Rating */}
-        <div className="text-gray-800 flex flex-col items-center md:items-start text-center md:text-left">
+      <section className="flex flex-col items-center justify-between gap-8 md:flex-row">
+        <div className="flex flex-col items-center text-center text-gray-800 md:items-start md:text-left">
           <div className="mb-4 flex items-center gap-4">
-            <span className="text-6xl sm:text-7xl md:text-8xl font-bold">4.0</span>
+            <span className="text-6xl font-bold sm:text-7xl md:text-8xl">
+              4.0
+            </span>
             <div className="flex">
               {[...Array(5)].map((star, index) => {
                 const currentRating = index + 1;
@@ -22,7 +22,9 @@ const Reviews = ({ reviews }: { reviews: review[] }) => {
                     fontSize="inherit"
                     key={index}
                     className={`${
-                      currentRating > stars ? "text-gray-300" : "text-accent-900"
+                      currentRating > stars
+                        ? "text-gray-300"
+                        : "text-accent-900"
                     } text-4xl sm:text-5xl`}
                   />
                 );
@@ -34,15 +36,16 @@ const Reviews = ({ reviews }: { reviews: review[] }) => {
           </p>
         </div>
 
-        {/* Right Section - Review Distribution */}
         <div className="w-full md:w-1/2">
           {vendorDetails[0].reviews.reviewDistribution.map((review, index) => (
             <div
               key={review.id}
               className="mb-4 flex items-center gap-2 text-sm sm:text-base"
             >
-              <span className="font-medium text-gray-800">{index + 1} star</span>
-              <span className="relative h-3 w-full sm:w-64 md:w-72 rounded-full bg-gray-100">
+              <span className="font-medium text-gray-800">
+                {index + 1} star
+              </span>
+              <span className="relative h-3 w-full rounded-full bg-gray-100 sm:w-64 md:w-72">
                 <span
                   className="absolute left-0 top-0 h-full rounded-full bg-accent-900"
                   style={{
@@ -56,20 +59,16 @@ const Reviews = ({ reviews }: { reviews: review[] }) => {
         </div>
       </section>
 
-      {/* Divider */}
       <hr className="my-8" />
 
-      {/* Review List Section */}
       <ReviewList />
 
-      {/* View More Button */}
       <Link href="#">
-      <button className="button button-secondary mx-auto flex items-center gap-2 px-4 py-2">
-        <span>View more</span>
-        <ArrowDownwardOutlined fontSize="inherit" />
-      </button>
+        <button className="button button-secondary mx-auto flex items-center gap-2 px-4 py-2">
+          <span>View more</span>
+          <ArrowDownwardOutlined fontSize="inherit" />
+        </button>
       </Link>
-      
     </>
   );
 };
