@@ -274,6 +274,57 @@ export const vendorDetails = {
   },
 };
 
+export const interests = [
+  {
+    id: 0,
+    value: "Hoodies",
+  },
+  {
+    id: 1,
+    value: "T-shirts",
+  },
+  {
+    id: 2,
+    value: "Trousers",
+  },
+  {
+    id: 3,
+    value: "Male wears",
+  },
+  {
+    id: 4,
+    value: "Suits",
+  },
+  {
+    id: 5,
+    value: "Female wears",
+  },
+  {
+    id: 6,
+    value: "Watches",
+  },
+  {
+    id: 7,
+    value: "Accessories",
+  },
+  {
+    id: 8,
+    value: "Bangles",
+  },
+  {
+    id: 9,
+    value: "Earrings",
+  },
+  {
+    id: 10,
+    value: "Shoes",
+  },
+  {
+    id: 11,
+    value: "Caps",
+  },
+];
+
 // const productData = {
 //     id: 0,
 //     name: "Butterfly on My Necklace",
