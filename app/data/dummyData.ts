@@ -380,6 +380,43 @@ export const userAccountSidebarLinks = [
   },
 ];
 
+export const orders = [
+  {
+    id: 0,
+    productDetails: {
+      imgSrc:
+        "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+      productName: "Nike Air Force 1 Low",
+      price: "25,000",
+    },
+    status: "delivered",
+    paymentMade: "15,000",
+  },
+  {
+    id: 1,
+    productDetails: {
+      imgSrc:
+        "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+      productName:
+        "Fashion Front Classic Men Leather Multilayer Bracelet  Brown",
+      price: "25,000",
+    },
+    status: "in transit",
+    paymentMade: "25,000",
+  },
+  {
+    id: 2,
+    productDetails: {
+      imgSrc:
+        "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+      productName: "Nike Jordan 1",
+      price: "25,000",
+    },
+    status: "cancelled",
+    paymentMade: "15,000",
+  },
+];
+
 // const productData = {
 //     id: 0,
 //     name: "Butterfly on My Necklace",

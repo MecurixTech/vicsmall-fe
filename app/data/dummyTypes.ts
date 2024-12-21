@@ -56,3 +56,14 @@ export type vendor = {
     reviewDistribution: reviewDistributionItem[];
   };
 };
+
+export type order = {
+  id: number;
+  productDetails: {
+    imgSrc: string;
+    productName: string;
+    price: string;
+  };
+  status: string;
+  paymentMade: string;
+};
