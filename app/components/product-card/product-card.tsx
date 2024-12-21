@@ -12,7 +12,7 @@ import Link from "next/link";
 const ProductCard = ({ product }: { product: productData }) => {
   return (
     <div className="col-span-1 min-w-60 rounded-xl bg-white p-2 z-0">
-      <Link href="/productpage">
+      <Link href="/product-page">
       <div className="relative w-full">
         <Image
           src={product.imgSrc}
