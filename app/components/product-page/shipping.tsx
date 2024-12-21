@@ -60,7 +60,7 @@ const Shipping = () => {
         </div>
 
         <Image
-          src="/woman-with-boxes.jpg"
+          src="https://utfs.io/f/wLDjZbdcJHpROdJwKYhJGvZCKhNsX5DTR0yukSmjMFE2Aezw"
           alt="Woman with boxes"
           height={320}
           width={320}

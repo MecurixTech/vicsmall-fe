@@ -76,3 +76,13 @@ export type address = {
   state: string;
   phoneNumber: string;
 };
+
+export type card = {
+  id: number;
+  nameOnCard: string;
+  cardNumber: string;
+  cardType: {
+    name: string;
+    imgSrc: string;
+  };
+};

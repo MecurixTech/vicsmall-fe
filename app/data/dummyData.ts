@@ -368,8 +368,8 @@ export const userAccountSidebarLinks = [
   },
   {
     id: 5,
-    label: "Payment method",
-    href: "/account/payment-method",
+    label: "Payment methods",
+    href: "/account/payment-methods",
     icon: WalletOutlined,
   },
   {
@@ -441,6 +441,29 @@ export const addresses = [
     address: "No. 40 Placeholder Street Uyo",
     state: "Akwa-Ibom",
     phoneNumber: "0814 333 8983",
+  },
+];
+
+export const paymentMethods = [
+  {
+    id: 0,
+    nameOnCard: "John Placeholder Doe",
+    cardNumber: "7748 4948 2293 2200",
+    cardType: {
+      name: "Visa",
+      imgSrc:
+        "https://utfs.io/f/wLDjZbdcJHpRPX4PXilmjskbuFOfhd9rRGH0xBp2yi3evQ71",
+    },
+  },
+  {
+    id: 1,
+    nameOnCard: "John Placeholder Doe",
+    cardNumber: "8899 8890 0029 8839",
+    cardType: {
+      name: "Mastercard",
+      imgSrc:
+        "https://utfs.io/f/wLDjZbdcJHpRmvvpNoyR3IeQOKw86LrAaEsNXpnHzPq75WUR",
+    },
   },
 ];
 
