@@ -13,8 +13,10 @@ export default function AccountLayout({
 }>) {
   return (
     <div className="px-8">
-      <p className="mb-4 text-3xl font-bold text-gray-800">Account</p>
-      <div className="flex items-start gap-6">
+      <p className="mb-4 hidden text-3xl font-bold text-gray-800 md:block">
+        Account
+      </p>
+      <div className="flex flex-col items-start gap-6 md:flex-row">
         <Sidebar />
         <div className="flex-[9] rounded-xl bg-white p-4 shadow-sm">
           {children}
