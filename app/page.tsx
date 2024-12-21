@@ -12,7 +12,6 @@ import Footer from "./components/footer";
 const Home = () => {
   return (
     <>
-      <Navbar />
       <Banner />
 
       <section className="mx-auto my-14 w-[95%]">

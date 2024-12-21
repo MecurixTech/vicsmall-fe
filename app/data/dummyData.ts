@@ -1,3 +1,13 @@
+import {
+  DashboardOutlined,
+  LogoutOutlined,
+  PaymentsOutlined,
+  PersonOutlined,
+  PlaceOutlined,
+  ShoppingBagOutlined,
+  WalletOutlined,
+} from "@mui/icons-material";
+
 export const navLinks = [
   "Accessories",
   "All Hoodies",
@@ -322,6 +332,51 @@ export const interests = [
   {
     id: 11,
     value: "Caps",
+  },
+];
+
+export const userAccountSidebarLinks = [
+  {
+    id: 0,
+    label: "Profile",
+    href: "/account/profile",
+    icon: PersonOutlined,
+  },
+  {
+    id: 1,
+    label: "Dashboard",
+    href: "/account/dashboard",
+    icon: DashboardOutlined,
+  },
+  {
+    id: 2,
+    label: "Orders",
+    href: "/account/orders",
+    icon: ShoppingBagOutlined,
+  },
+  {
+    id: 3,
+    label: "Part payments",
+    href: "/account/part-payments",
+    icon: PaymentsOutlined,
+  },
+  {
+    id: 4,
+    label: "Addresses",
+    href: "/account/addresses",
+    icon: PlaceOutlined,
+  },
+  {
+    id: 5,
+    label: "Payment method",
+    href: "/account/payment-method",
+    icon: WalletOutlined,
+  },
+  {
+    id: 6,
+    label: "Logout",
+    href: "/account/logout",
+    icon: LogoutOutlined,
   },
 ];
 
