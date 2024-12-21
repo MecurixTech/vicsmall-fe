@@ -18,7 +18,7 @@ export default function AccountLayout({
       </p>
       <div className="flex flex-col items-start gap-6 md:flex-row">
         <Sidebar />
-        <div className="flex-[9] rounded-xl bg-white p-4 shadow-sm">
+        <div className="flex-[9] rounded-xl bg-white p-8 shadow-sm">
           {children}
         </div>
       </div>

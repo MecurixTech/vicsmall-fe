@@ -420,6 +420,30 @@ export const orders = [
   },
 ];
 
+export const addresses = [
+  {
+    id: 0,
+    fullName: "John Placeholder Doe",
+    address: "No. 35 Plaza Road Uyo",
+    state: "Akwa-Ibom",
+    phoneNumber: "0814 333 8983",
+  },
+  {
+    id: 1,
+    fullName: "John Placeholder Doe",
+    address: "No. 12 Dummy Street, Fake Estate Uyo",
+    state: "Akwa-Ibom",
+    phoneNumber: "0814 333 8983",
+  },
+  {
+    id: 2,
+    fullName: "John Placeholder Doe",
+    address: "No. 40 Placeholder Street Uyo",
+    state: "Akwa-Ibom",
+    phoneNumber: "0814 333 8983",
+  },
+];
+
 // const productData = {
 //     id: 0,
 //     name: "Butterfly on My Necklace",

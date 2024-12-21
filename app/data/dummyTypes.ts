@@ -68,3 +68,11 @@ export type order = {
   paymentMade: string;
   balance: string;
 };
+
+export type address = {
+  id: number;
+  fullName: string;
+  address: string;
+  state: string;
+  phoneNumber: string;
+};
