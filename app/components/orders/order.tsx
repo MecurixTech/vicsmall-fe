@@ -1,16 +1,16 @@
+import { order } from "@/app/data/dummyTypes";
 import Image from "next/image";
-import { order } from "../data/dummyTypes";
 
 const Order = ({ order }: { order: order }) => {
   return (
     <>
-      <div className="flex gap-4">
+      <div className="flex items-start gap-4">
         <Image
           src={order.productDetails.imgSrc}
           alt={order.productDetails.productName}
-          height={64}
-          width={64}
-          className="h-auto w-32 rounded-xl"
+          height={128}
+          width={128}
+          className="rounded-xl"
         />
 
         <div className="w-full">

@@ -391,6 +391,7 @@ export const orders = [
     },
     status: "delivered",
     paymentMade: "15,000",
+    balance: "10,000",
   },
   {
     id: 1,
@@ -403,6 +404,7 @@ export const orders = [
     },
     status: "in transit",
     paymentMade: "25,000",
+    balance: "0",
   },
   {
     id: 2,
@@ -413,7 +415,8 @@ export const orders = [
       price: "25,000",
     },
     status: "cancelled",
-    paymentMade: "15,000",
+    paymentMade: "20,000",
+    balance: "5,000",
   },
 ];
 

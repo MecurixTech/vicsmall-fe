@@ -66,4 +66,5 @@ export type order = {
   };
   status: string;
   paymentMade: string;
+  balance: string;
 };

@@ -1,4 +1,4 @@
-import Order from "@/app/components/order";
+import Order from "@/app/components/orders/order";
 import { orders } from "@/app/data/dummyData";
 import { SearchOutlined, TuneOutlined } from "@mui/icons-material";
 
