@@ -63,7 +63,7 @@ const Reviews = ({ reviews }: { reviews: review[] }) => {
 
       <ReviewList />
 
-      <Link href="#">
+      <Link href="/reviews">
         <button className="button button-secondary mx-auto flex items-center gap-2 px-4 py-2">
           <span>View more</span>
           <ArrowDownwardOutlined fontSize="inherit" />
