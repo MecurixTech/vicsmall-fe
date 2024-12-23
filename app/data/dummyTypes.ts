@@ -93,3 +93,9 @@ export type notification = {
   message: string;
   time: string;
 };
+
+export type faq = {
+  id: number;
+  question: string;
+  answer: string;
+};

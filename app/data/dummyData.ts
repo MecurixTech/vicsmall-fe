@@ -496,6 +496,57 @@ export const notifications = [
   },
 ];
 
+export const FAQs = [
+  {
+    id: 0,
+    question: "What is the return policy?",
+    answer:
+      "Our return policy lasts 30 days. If 30 days have gone by since your purchase, unfortunately we cannot offer you a refund or exchange.",
+  },
+  {
+    id: 1,
+    question: "How do I track my order?",
+    answer:
+      "You can track your order by logging into your account and visiting the 'Orders' section. You will find the tracking information there.",
+  },
+  {
+    id: 2,
+    question: "What payment methods are accepted?",
+    answer:
+      "We accept various payment methods including Visa, Mastercard, and PayPal.",
+  },
+  {
+    id: 3,
+    question: "How do I cancel my order?",
+    answer:
+      "To cancel your order, please contact our customer support team as soon as possible. If the order has not been shipped yet, we will be able to cancel it for you.",
+  },
+  {
+    id: 4,
+    question: "Can I change my shipping address after placing an order?",
+    answer:
+      "Yes, you can change your shipping address before the order is shipped. Please contact our customer support team to update your address.",
+  },
+  {
+    id: 5,
+    question: "What should I do if I receive a damaged product?",
+    answer:
+      "If you receive a damaged product, please contact our customer support team immediately. We will assist you with the return process and send you a replacement.",
+  },
+  {
+    id: 6,
+    question: "How long does shipping take?",
+    answer:
+      "Shipping times vary depending on your location and the shipping method chosen. Typically, it takes 5-7 business days for standard shipping.",
+  },
+  {
+    id: 7,
+    question: "Do you offer international shipping?",
+    answer:
+      "Yes, we offer international shipping to many countries. Shipping fees and delivery times may vary based on the destination.",
+  },
+];
+
 // const productData = {
 //     id: 0,
 //     name: "Butterfly on My Necklace",
