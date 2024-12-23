@@ -467,6 +467,35 @@ export const paymentMethods = [
   },
 ];
 
+export const notifications = [
+  {
+    id: 0,
+    status: "delivered",
+    message:
+      " Your order has been delivered to the specified address. Thank you for shopping with us! If you have any questions or concerns, please contact our support team.",
+    time: "4 hours ago",
+  },
+  {
+    id: 1,
+    status: "shipped",
+    message: "Your order has been shipped and is on its way.",
+    time: "6 hours ago",
+  },
+  {
+    id: 2,
+    status: "shipped",
+    message: "Your order has been shipped and is on its way.",
+    time: "1 day ago",
+  },
+  {
+    id: 3,
+    status: "cancelled",
+    message:
+      "Your order has been cancelled. If you have any questions, please contact our support team.",
+    time: "2 days ago",
+  },
+];
+
 // const productData = {
 //     id: 0,
 //     name: "Butterfly on My Necklace",

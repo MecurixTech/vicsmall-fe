@@ -86,3 +86,10 @@ export type card = {
     imgSrc: string;
   };
 };
+
+export type notification = {
+  id: number;
+  status: string;
+  message: string;
+  time: string;
+};
