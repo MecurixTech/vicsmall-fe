@@ -59,7 +59,7 @@ const PartPaymentDetails = ({ order }: { order: order }) => {
         </div>
       </div>
 
-      <hr className="my-4" />
+      <hr className="my-4 last:hidden" />
     </>
   );
 };

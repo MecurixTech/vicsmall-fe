@@ -22,7 +22,7 @@ const AddressCard = ({ address }: { address: address }) => {
         </div>
       </div>
 
-      <hr className="my-4" />
+      <hr className="my-4 last:hidden" />
     </>
   );
 };
