@@ -17,7 +17,7 @@ const FAQ = ({
     <div className="mb-4">
       <button
         onClick={() => setVisibleQuestion(faq.id)}
-        className="flex w-full items-center justify-between rounded-xl border border-gray-400 px-4 py-2 text-left font-semibold"
+        className="flex w-full items-center justify-between rounded-xl border border-gray-300 px-4 py-2 text-left font-semibold"
       >
         <span>{faq.question}</span>
         {visibleQuestion === faq.id ? <RemoveOutlined /> : <AddOutlined />}
