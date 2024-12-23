@@ -1,3 +1,4 @@
+import AddNewCardButton from "@/app/components/payment-methods/add-new-card-button";
 import CardDetails from "@/app/components/payment-methods/card-details";
 import { paymentMethods } from "@/app/data/dummyData";
 
@@ -10,7 +11,7 @@ const PaymentMethodsPage = () => {
         <CardDetails key={card.id} card={card} />
       ))}
 
-      <button className="button button-accent px-4 py-2">Add new card</button>
+      <AddNewCardButton />
     </>
   );
 };
