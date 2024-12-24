@@ -247,7 +247,8 @@ export const vendorDetails = [
   {
     name: "Hactor Hozier",
     numberOfProducts: 40,
-    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    imageUrl:
+      "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
     reviews: {
       numberOfReviews: 2000,
       averageRating: "4.0",
@@ -263,7 +264,8 @@ export const vendorDetails = [
   {
     name: "rick",
     numberOfProducts: 30,
-    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    imageUrl:
+      "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
     reviews: {
       numberOfReviews: 1500,
       averageRating: "3.8",
@@ -279,7 +281,8 @@ export const vendorDetails = [
   {
     name: "edd",
     numberOfProducts: 25,
-    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    imageUrl:
+      "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
     reviews: {
       numberOfReviews: 1200,
       averageRating: "4.2",
@@ -295,7 +298,8 @@ export const vendorDetails = [
   {
     name: "moonpie",
     numberOfProducts: 50,
-    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    imageUrl:
+      "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
     reviews: {
       numberOfReviews: 1800,
       averageRating: "3.9",
@@ -311,7 +315,8 @@ export const vendorDetails = [
   {
     name: "bob",
     numberOfProducts: 15,
-    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    imageUrl:
+      "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
     reviews: {
       numberOfReviews: 800,
       averageRating: "4.5",
@@ -327,7 +332,8 @@ export const vendorDetails = [
   {
     name: "young money",
     numberOfProducts: 60,
-    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    imageUrl:
+      "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
     reviews: {
       numberOfReviews: 3000,
       averageRating: "4.7",
@@ -343,7 +349,8 @@ export const vendorDetails = [
   {
     name: "tim",
     numberOfProducts: 35,
-    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    imageUrl:
+      "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
     reviews: {
       numberOfReviews: 1700,
       averageRating: "3.6",
@@ -359,7 +366,8 @@ export const vendorDetails = [
   {
     name: "guy",
     numberOfProducts: 20,
-    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    imageUrl:
+      "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
     reviews: {
       numberOfReviews: 900,
       averageRating: "4.3",
@@ -375,7 +383,8 @@ export const vendorDetails = [
   {
     name: "zayn",
     numberOfProducts: 45,
-    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    imageUrl:
+      "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
     reviews: {
       numberOfReviews: 2100,
       averageRating: "4.1",
@@ -391,7 +400,8 @@ export const vendorDetails = [
   {
     name: "gait",
     numberOfProducts: 10,
-    imageUrl: "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
+    imageUrl:
+      "https://utfs.io/f/QVO6Qx1nmSgLPKIXXBjiTeyXQZmwNR9dOu60B1LqH7vSzrF2",
     reviews: {
       numberOfReviews: 400,
       averageRating: "3.5",
@@ -405,7 +415,6 @@ export const vendorDetails = [
     },
   },
 ];
-};
 
 export const interests = [
   {
