@@ -16,7 +16,6 @@ import DescriptionSection from "./components/home/description";
 const Home = () => {
   return (
     <>
-      <Navbar />
       <Banner />
       <section className="mx-auto my-12 w-[90%] block sm:hidden">
         <h2 className="mb-12 text-center text-xl font-medium text-black">Explore our Top Categories</h2>

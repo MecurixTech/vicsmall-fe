@@ -1,3 +1,13 @@
+import {
+  DashboardOutlined,
+  LogoutOutlined,
+  PaymentsOutlined,
+  PersonOutlined,
+  PlaceOutlined,
+  ShoppingBagOutlined,
+  WalletOutlined,
+} from "@mui/icons-material";
+
 export const navLinks = [
   "Accessories",
   "All Hoodies",
@@ -464,6 +474,218 @@ export const interests = [
   {
     id: 11,
     value: "Caps",
+  },
+];
+
+export const userAccountSidebarLinks = [
+  {
+    id: 0,
+    label: "Profile",
+    href: "/account/profile",
+    icon: PersonOutlined,
+  },
+  {
+    id: 1,
+    label: "Dashboard",
+    href: "/account/dashboard",
+    icon: DashboardOutlined,
+  },
+  {
+    id: 2,
+    label: "Orders",
+    href: "/account/orders",
+    icon: ShoppingBagOutlined,
+  },
+  {
+    id: 3,
+    label: "Part payments",
+    href: "/account/part-payments",
+    icon: PaymentsOutlined,
+  },
+  {
+    id: 4,
+    label: "Addresses",
+    href: "/account/addresses",
+    icon: PlaceOutlined,
+  },
+  {
+    id: 5,
+    label: "Payment methods",
+    href: "/account/payment-methods",
+    icon: WalletOutlined,
+  },
+  {
+    id: 6,
+    label: "Logout",
+    href: "/account/logout",
+    icon: LogoutOutlined,
+  },
+];
+
+export const orders = [
+  {
+    id: 0,
+    productDetails: {
+      imgSrc:
+        "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+      productName: "Nike Air Force 1 Low",
+      price: "25,000",
+    },
+    status: "delivered",
+    paymentMade: "15,000",
+    balance: "10,000",
+  },
+  {
+    id: 1,
+    productDetails: {
+      imgSrc:
+        "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+      productName:
+        "Fashion Front Classic Men Leather Multilayer Bracelet  Brown",
+      price: "25,000",
+    },
+    status: "in transit",
+    paymentMade: "25,000",
+    balance: "0",
+  },
+  {
+    id: 2,
+    productDetails: {
+      imgSrc:
+        "https://utfs.io/f/wLDjZbdcJHpR6GzP9tNC4ixdcsRJyHYuWMK8l0EPahTBok7f",
+      productName: "Nike Jordan 1",
+      price: "25,000",
+    },
+    status: "cancelled",
+    paymentMade: "20,000",
+    balance: "5,000",
+  },
+];
+
+export const addresses = [
+  {
+    id: 0,
+    fullName: "John Placeholder Doe",
+    address: "No. 35 Plaza Road Uyo",
+    state: "Akwa-Ibom",
+    phoneNumber: "0814 333 8983",
+  },
+  {
+    id: 1,
+    fullName: "John Placeholder Doe",
+    address: "No. 12 Dummy Street, Fake Estate Uyo",
+    state: "Akwa-Ibom",
+    phoneNumber: "0814 333 8983",
+  },
+  {
+    id: 2,
+    fullName: "John Placeholder Doe",
+    address: "No. 40 Placeholder Street Uyo",
+    state: "Akwa-Ibom",
+    phoneNumber: "0814 333 8983",
+  },
+];
+
+export const paymentMethods = [
+  {
+    id: 0,
+    nameOnCard: "John Placeholder Doe",
+    cardNumber: "7748 4948 2293 2200",
+    cardType: {
+      name: "Visa",
+      imgSrc:
+        "https://utfs.io/f/wLDjZbdcJHpRPX4PXilmjskbuFOfhd9rRGH0xBp2yi3evQ71",
+    },
+  },
+  {
+    id: 1,
+    nameOnCard: "John Placeholder Doe",
+    cardNumber: "8899 8890 0029 8839",
+    cardType: {
+      name: "Mastercard",
+      imgSrc:
+        "https://utfs.io/f/wLDjZbdcJHpRmvvpNoyR3IeQOKw86LrAaEsNXpnHzPq75WUR",
+    },
+  },
+];
+
+export const notifications = [
+  {
+    id: 0,
+    status: "delivered",
+    message:
+      " Your order has been delivered to the specified address. Thank you for shopping with us! If you have any questions or concerns, please contact our support team.",
+    time: "4 hours ago",
+  },
+  {
+    id: 1,
+    status: "shipped",
+    message: "Your order has been shipped and is on its way.",
+    time: "6 hours ago",
+  },
+  {
+    id: 2,
+    status: "shipped",
+    message: "Your order has been shipped and is on its way.",
+    time: "1 day ago",
+  },
+  {
+    id: 3,
+    status: "cancelled",
+    message:
+      "Your order has been cancelled. If you have any questions, please contact our support team.",
+    time: "2 days ago",
+  },
+];
+
+export const FAQs = [
+  {
+    id: 0,
+    question: "What is the return policy?",
+    answer:
+      "Our return policy lasts 30 days. If 30 days have gone by since your purchase, unfortunately we cannot offer you a refund or exchange.",
+  },
+  {
+    id: 1,
+    question: "How do I track my order?",
+    answer:
+      "You can track your order by logging into your account and visiting the 'Orders' section. You will find the tracking information there.",
+  },
+  {
+    id: 2,
+    question: "What payment methods are accepted?",
+    answer:
+      "We accept various payment methods including Visa, Mastercard, and PayPal.",
+  },
+  {
+    id: 3,
+    question: "How do I cancel my order?",
+    answer:
+      "To cancel your order, please contact our customer support team as soon as possible. If the order has not been shipped yet, we will be able to cancel it for you.",
+  },
+  {
+    id: 4,
+    question: "Can I change my shipping address after placing an order?",
+    answer:
+      "Yes, you can change your shipping address before the order is shipped. Please contact our customer support team to update your address.",
+  },
+  {
+    id: 5,
+    question: "What should I do if I receive a damaged product?",
+    answer:
+      "If you receive a damaged product, please contact our customer support team immediately. We will assist you with the return process and send you a replacement.",
+  },
+  {
+    id: 6,
+    question: "How long does shipping take?",
+    answer:
+      "Shipping times vary depending on your location and the shipping method chosen. Typically, it takes 5-7 business days for standard shipping.",
+  },
+  {
+    id: 7,
+    question: "Do you offer international shipping?",
+    answer:
+      "Yes, we offer international shipping to many countries. Shipping fees and delivery times may vary based on the destination.",
   },
 ];
 

@@ -86,10 +86,10 @@ const Shipping = () => {
           </p>
           <p className="mb-2">Package Weight: 0.56kg (1.23lb)</p>
         </div>
-
+        
         <div className="flex justify-center sm:justify-end">
           <Image
-            src="/woman-with-boxes.jpg"
+            src="https://utfs.io/f/wLDjZbdcJHpROdJwKYhJGvZCKhNsX5DTR0yukSmjMFE2Aezw"
             alt="Woman with boxes"
             height={320}
             width={320}

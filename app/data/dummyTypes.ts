@@ -57,3 +57,46 @@ export type vendorData = {
     reviewDistribution: reviewDistributionItem[];
   };
 };
+
+export type order = {
+  id: number;
+  productDetails: {
+    imgSrc: string;
+    productName: string;
+    price: string;
+  };
+  status: string;
+  paymentMade: string;
+  balance: string;
+};
+
+export type address = {
+  id: number;
+  fullName: string;
+  address: string;
+  state: string;
+  phoneNumber: string;
+};
+
+export type card = {
+  id: number;
+  nameOnCard: string;
+  cardNumber: string;
+  cardType: {
+    name: string;
+    imgSrc: string;
+  };
+};
+
+export type notification = {
+  id: number;
+  status: string;
+  message: string;
+  time: string;
+};
+
+export type faq = {
+  id: number;
+  question: string;
+  answer: string;
+};
