@@ -48,7 +48,7 @@ const ComponentsPage = () => {
       <hr className="mb-8" />
 
       <div className="flex items-start justify-between gap-4">
-        <ProductGallery />
+        {/* <ProductGallery /> */}
         <ProductSettings />
       </div>
     </main>
