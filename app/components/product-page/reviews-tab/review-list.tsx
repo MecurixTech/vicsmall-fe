@@ -8,7 +8,7 @@ const ReviewList = () => {
   const [activeTab, setActiveTab] = useState<string>("all");
   return (
     <section>
-      <div className="mb-8 flex gap-2">
+      <div className="mb-8 flex flex-wrap gap-2 sm:gap-4">
         <button
           onClick={() => setActiveTab("all")}
           className={`${activeTab === "all" ? "border-accent-900 bg-accent-100 font-medium text-accent-900" : "border-gray-600"} rounded-full border px-4 py-2 text-sm`}

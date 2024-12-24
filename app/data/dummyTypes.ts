@@ -47,9 +47,10 @@ type reviewDistributionItem = {
   amount: number;
 };
 
-export type vendor = {
+export type vendorData = {
   name: string;
   numberOfProducts: number;
+  imageUrl: string;
   reviews: {
     numberOfReviews: number;
     averageRating: string;
