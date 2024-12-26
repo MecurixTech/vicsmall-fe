@@ -167,7 +167,10 @@ const Navbar = () => {
               </div>
 
               <div className="relative sm:hidden">
-                <button className="flex items-center space-x-2 rounded-md px-3 py-2">
+                <Link
+                  href="/account/profile"
+                  className="flex items-center space-x-2 rounded-md px-3 py-2"
+                >
                   <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-400 text-white">
                     <span className="text-sm">
                       <Image
@@ -179,7 +182,7 @@ const Navbar = () => {
                       />
                     </span>
                   </div>
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -303,7 +306,7 @@ const Navbar = () => {
         )}
       </div>
 
-      <div className="flex items-center justify-start lg:justify-center gap-6 bg-black px-4 py-2 text-sm text-neutral-light-gray overflow-x-auto whitespace-nowrap scrollbar-hide ">
+      <div className="scrollbar-hide flex items-center justify-start gap-6 overflow-x-auto whitespace-nowrap bg-black px-4 py-2 text-sm text-neutral-light-gray lg:justify-center">
         {navLinks.map((link, index) => (
           <Link key={index} href="/components">
             {link}

@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Sidebar from "../components/account/sidebar";
+import Tabs from "../components/account/tabs";
 
 export const metadata: Metadata = {
   title: "User Account | Vicsmall",
@@ -18,6 +19,7 @@ export default function AccountLayout({
       </p>
       <div className="flex flex-col items-start gap-6 md:flex-row">
         <Sidebar />
+        <Tabs />
         <div className="w-full flex-[9] rounded-xl bg-white p-8 shadow-sm">
           {children}
         </div>
