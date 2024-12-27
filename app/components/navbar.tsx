@@ -308,7 +308,7 @@ const Navbar = () => {
 
       <div className="scrollbar-hide flex items-center justify-start gap-6 overflow-x-auto whitespace-nowrap bg-black px-4 py-2 text-sm text-neutral-light-gray lg:justify-center">
         {navLinks.map((link, index) => (
-          <Link key={index} href="/components">
+          <Link key={index} href="/categories">
             {link}
           </Link>
         ))}
