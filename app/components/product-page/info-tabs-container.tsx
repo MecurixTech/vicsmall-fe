@@ -57,7 +57,7 @@ const InfoTabs = () => {
 
       <div className="px-4">
         {activeTab === "overview" && <Overview />}
-        {activeTab === "reviews" && <Reviews reviews={reviews} />}
+        {activeTab === "reviews" && <Reviews />}
         {activeTab === "vendor" && <Vendor vendor={vendorDetails[0]} />}
         {activeTab === "shipping" && <Shipping />}
       </div>
