@@ -7,7 +7,6 @@ import {
   VisibilityOffOutlined,
 } from "@mui/icons-material";
 import * as Yup from "yup";
-import TextError from "../../text-error";
 import { useState } from "react";
 import { Value } from "react-phone-number-input";
 import PhoneInput from "react-phone-number-input/input";
