@@ -2,10 +2,9 @@
 
 import React from "react";
 import Reviews from "../components/product-page/reviews-tab/reviews";
-import { review } from "../data/dummyTypes";
 import { ArrowLeft } from "@mui/icons-material";
 
-const ReviewSection = ({ reviews }: { reviews: review[] }) => {
+const ReviewSection = () => {
   return (
     <div className="pt-4">
       <div className="sticky top-0 z-10 mb-4 flex items-center gap-2 bg-slate-100 px-4">
@@ -22,7 +21,7 @@ const ReviewSection = ({ reviews }: { reviews: review[] }) => {
       </div>
 
       <div className="px-4">
-        <Reviews reviews={reviews} />
+        <Reviews />
       </div>
     </div>
   );
