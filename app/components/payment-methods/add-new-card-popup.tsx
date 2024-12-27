@@ -1,9 +1,8 @@
 "use client";
 
 import { Dispatch, SetStateAction } from "react";
-import { Form, Formik, Field, ErrorMessage } from "formik";
+import { Form, Formik, Field } from "formik";
 import * as Yup from "yup";
-import TextError from "../text-error";
 
 const AddNewCardPopup = ({
   setIsShowingAddNewCardPopup,
@@ -51,25 +50,25 @@ const AddNewCardPopup = ({
               <div>
                 <label htmlFor="card_holder">Card holder</label>
                 <Field type="text" name="card_holder" className="w-full" />
-                <ErrorMessage name="card_holder" component={TextError} />
+                {/* <ErrorMessage name="card_holder" component={TextError} /> */}
               </div>
 
               <div>
                 <label htmlFor="card_number">Card number</label>
                 <Field type="text" name="card_number" className="w-full" />
-                <ErrorMessage name="card_number" component={TextError} />
+                {/* <ErrorMessage name="card_number" component={TextError} /> */}
               </div>
 
               <div>
                 <label htmlFor="expiry_date">Expiry date</label>
                 <Field type="text" name="expiry_date" className="w-full" />
-                <ErrorMessage name="expiry_date" component={TextError} />
+                {/* <ErrorMessage name="expiry_date" component={TextError} /> */}
               </div>
 
               <div>
                 <label htmlFor="cvv">CVV</label>
                 <Field type="text" name="cvv" className="w-full" />
-                <ErrorMessage name="cvv" component={TextError} />
+                {/* <ErrorMessage name="cvv" component={TextError} /> */}
               </div>
             </div>
 
