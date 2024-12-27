@@ -29,10 +29,41 @@ const stepOneValidationSchema = Yup.object({
     .oneOf([Yup.ref("password")], "Passwords must match"),
 });
 
-const StepOne = (props: any) => {
-  const handleSubmit = (values: any) => {
+const StepOne = (props: {
+  next: (
+    newData: {
+      email: string;
+      first_name: string;
+      last_name: string;
+      phone_number: string;
+      password: string;
+      confirm_password: string;
+      interests: string;
+    },
+    final: boolean,
+  ) => void;
+  data: {
+    email: string;
+    first_name: string;
+    last_name: string;
+    phone_number: string;
+    password: string;
+    confirm_password: string;
+    interests: string;
+  };
+  key: number;
+}) => {
+  const handleSubmit = (values: {
+    email: string;
+    first_name: string;
+    last_name: string;
+    phone_number: string;
+    password: string;
+    confirm_password: string;
+    interests: string;
+  }) => {
     console.log("Wassup!");
-    props.next(values);
+    props.next(values, false);
   };
 
   const [isShowingPassword, setIsShowingPassword] = useState<boolean>(false);
@@ -47,7 +78,7 @@ const StepOne = (props: any) => {
         validationSchema={stepOneValidationSchema}
         onSubmit={handleSubmit}
       >
-        <Form className="mb-8" onSubmit={handleSubmit}>
+        <Form className="mb-8">
           <h1 className="mb-8 text-center text-2xl">Sign up to Vicsmall</h1>
           <div className="mb-4">
             <div className="mb-2 mr-2 flex items-center justify-between">

@@ -13,7 +13,15 @@ const ProfilePage = () => {
     confirm_new_password: "",
   };
 
-  const onSubmit = (values: any) => {
+  const onSubmit = (values: {
+    first_name: string;
+    last_name: string;
+    display_name: string;
+    email: string;
+    current_password: string;
+    new_password: string;
+    confirm_new_password: string;
+  }) => {
     console.log(values);
   };
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { faq } from "../../data/dummyTypes";
 import { AddOutlined, RemoveOutlined } from "@mui/icons-material";
 

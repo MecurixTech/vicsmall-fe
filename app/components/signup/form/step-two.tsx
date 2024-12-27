@@ -4,7 +4,60 @@ import { interests } from "@/app/data/dummyData";
 import { SearchOutlined } from "@mui/icons-material";
 import Link from "next/link";
 
-const StepTwo = (props: any) => {
+interface StepTwoProps {
+  next: (
+    newData: {
+      email: string;
+
+      first_name: string;
+
+      last_name: string;
+
+      phone_number: string;
+
+      password: string;
+
+      confirm_password: string;
+
+      interests: string;
+    },
+    final?: boolean,
+  ) => void;
+
+  prev: (newData: {
+    email: string;
+
+    first_name: string;
+
+    last_name: string;
+
+    phone_number: string;
+
+    password: string;
+
+    confirm_password: string;
+
+    interests: string;
+  }) => void;
+
+  data: {
+    email: string;
+
+    first_name: string;
+
+    last_name: string;
+
+    phone_number: string;
+
+    password: string;
+
+    confirm_password: string;
+
+    interests: string;
+  };
+}
+
+const StepTwo: React.FC<StepTwoProps> = ({ next, prev, data }) => {
   return (
     <>
       <h1 className="mb-2 text-center text-2xl">

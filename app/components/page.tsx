@@ -6,7 +6,6 @@ import CategoryCard from "./home/category-card";
 import CountdownTimer from "./home/countdown-timer";
 import ProductCard from "./product-card/product-card";
 import InfoTabs from "./product-page/info-tabs-container";
-import ProductGallery from "./product-page/product-gallery";
 import ProductSettings from "./product-page/product-settings";
 
 const ComponentsPage = () => {

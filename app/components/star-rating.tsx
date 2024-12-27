@@ -1,6 +1,12 @@
 import { Star } from "@mui/icons-material";
 
-const StarRating = ({ rating, size }: { rating: number; size: any }) => {
+const StarRating = ({
+  rating,
+  size,
+}: {
+  rating: number;
+  size: "small" | "inherit" | "large" | "medium";
+}) => {
   return [...Array(5)].map((star, index) => {
     const currentRating = index + 1;
     return (

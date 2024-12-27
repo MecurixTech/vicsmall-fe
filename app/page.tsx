@@ -1,4 +1,3 @@
-import Navbar from "./components/navbar";
 import Banner from "./components/home/banner";
 import Link from "next/link";
 import { ArrowForwardOutlined } from "@mui/icons-material";
@@ -17,8 +16,10 @@ const Home = () => {
   return (
     <>
       <Banner />
-      <section className="mx-auto my-12 w-[90%] block sm:hidden">
-        <h2 className="mb-12 text-center text-xl font-medium text-black">Explore our Top Categories</h2>
+      <section className="mx-auto my-12 block w-[90%] sm:hidden">
+        <h2 className="mb-12 text-center text-xl font-medium text-black">
+          Explore our Top Categories
+        </h2>
 
         <div className="grid grid-cols-3 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {categories.map((category) => (
@@ -27,14 +28,12 @@ const Home = () => {
         </div>
       </section>
 
-
-
       <section
         style={{
           backgroundImage:
             "linear-gradient(to right, #FF4040, #FF0202), url('https://utfs.io/f/wLDjZbdcJHpRZf4TaQuIU7aODg2yt0HSxWFBNfqTKvI59cYP')",
         }}
-        className="relative my-12 w-full overflow-hidden block sm:hidden"
+        className="relative my-12 block w-full overflow-hidden sm:hidden"
       >
         <div className="relative z-10 flex flex-col items-center justify-evenly px-4 py-8 lg:flex-row lg:items-center lg:py-12">
           <div className="flex flex-col items-center text-center lg:items-center lg:text-left">
@@ -57,21 +56,16 @@ const Home = () => {
           ))}
         </div>
       </section>
-      <div className=" block sm:hidden">
+      <div className="block sm:hidden">
         <Banner />
       </div>
-
-
-
-
-
 
       <section
         style={{
           backgroundImage:
             "linear-gradient(to right, #FF4040, #FF0202), url('https://utfs.io/f/wLDjZbdcJHpRZf4TaQuIU7aODg2yt0HSxWFBNfqTKvI59cYP')",
         }}
-        className="relative my-12 w-full overflow-hidden hidden sm:block"
+        className="relative my-12 hidden w-full overflow-hidden sm:block"
       >
         <div className="relative z-10 flex flex-col items-center justify-evenly px-4 py-8 lg:flex-row lg:items-center lg:py-12">
           <div className="flex flex-col items-center text-center lg:items-center lg:text-left">
@@ -106,10 +100,10 @@ const Home = () => {
             <ArrowForwardOutlined fontSize="inherit" />
           </Link>
         </div>
-        <div className=" hidden sm:block">
+        <div className="hidden sm:block">
           <Slider />
         </div>
-        <div className=" block sm:hidden">
+        <div className="block sm:hidden">
           <Stacks />
         </div>
       </section>
@@ -132,46 +126,40 @@ const Home = () => {
         <h2 className="mb-12 text-center text-neutral-light-gray">
           For the Ladies
         </h2>
-        <div >
-
-          <div className=" hidden sm:block">
-            <div className="scrollbar-hide relative z-10 mb-11 mt-5 flex gap-6 overflow-x-auto px-4 lg:px-8 ">
+        <div>
+          <div className="hidden sm:block">
+            <div className="scrollbar-hide relative z-10 mb-11 mt-5 flex gap-6 overflow-x-auto px-4 lg:px-8">
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
           </div>
 
-
-          <div className=" block sm:hidden">
+          <div className="block sm:hidden">
             <Stacks />
           </div>
-          <div className=" justify-items-center">
-            <button className="mt-6 flex items-center px-8 py-3 border text-white border-white text-[16px] sm:text-[18px] font-medium rounded-[8px] hover:bg-opacity-90 transition-all">
+          <div className="justify-items-center">
+            <button className="mt-6 flex items-center rounded-[8px] border border-white px-8 py-3 text-[16px] font-medium text-white transition-all hover:bg-opacity-90 sm:text-[18px]">
               View more{"  "}
               <ArrowForwardOutlined fontSize="inherit" />
             </button>
           </div>
-
         </div>
-
-
       </section>
 
-      <section className="mx-auto my-12 w-[90%] block sm:hidden">
+      <section className="mx-auto my-12 block w-[90%] sm:hidden">
         <div className="flex justify-between">
           <h2 className="mb-12 text-left text-xl font-medium text-black">
             Vendors
           </h2>
           <Link
             href="/vendors"
-            className="items-right justify-end text-right gap-1 font-medium text-neutral-dark-blue"
+            className="items-right justify-end gap-1 text-right font-medium text-neutral-dark-blue"
           >
             <span>View more</span>
             <ArrowForwardOutlined fontSize="inherit" />
           </Link>
         </div>
-
 
         <div className="grid grid-cols-3 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {vendorDetails.map((vendor) => (
@@ -179,7 +167,6 @@ const Home = () => {
           ))}
         </div>
       </section>
-
 
       <section className="mx-auto my-14 w-[95%]">
         <div className="flex items-center justify-between">
@@ -192,16 +179,15 @@ const Home = () => {
             <ArrowForwardOutlined fontSize="inherit" />
           </Link>
         </div>
-        <div className=" hidden sm:block">
+        <div className="hidden sm:block">
           <Slider />
         </div>
-        <div className=" block sm:hidden">
+        <div className="block sm:hidden">
           <Stacks />
         </div>
-
       </section>
 
-      <section className="mx-auto my-14 w-[95%] hidden sm:block">
+      <section className="mx-auto my-14 hidden w-[95%] sm:block">
         <h3 className="mb-4">Recommended items</h3>
         <div className="grid grid-cols-3 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {products.map((product) => (
@@ -209,7 +195,7 @@ const Home = () => {
           ))}
         </div>
       </section>
-      <section className="mx-auto my-14 w-[95%] block sm:hidden">
+      <section className="mx-auto my-14 block w-[95%] sm:hidden">
         <h3 className="mb-4">Recommended items</h3>
         <div className="grid grid-cols-3 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {products.map((product) => (
@@ -217,7 +203,7 @@ const Home = () => {
           ))}
         </div>
       </section>
-      <div className=" block sm:hidden">
+      <div className="block sm:hidden">
         <DescriptionSection />
       </div>
 

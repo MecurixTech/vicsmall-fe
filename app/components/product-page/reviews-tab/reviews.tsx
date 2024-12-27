@@ -4,7 +4,7 @@ import { ArrowDownwardOutlined, Star } from "@mui/icons-material";
 import ReviewList from "./review-list";
 import Link from "next/link";
 
-const Reviews = ({ reviews }: { reviews: review[] }) => {
+const Reviews = () => {
   const stars = 4;
   return (
     <>

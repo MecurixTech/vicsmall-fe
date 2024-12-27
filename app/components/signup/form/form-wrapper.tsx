@@ -16,11 +16,30 @@ const FormWrapper = () => {
   });
   const [currentStep, setCurrentStep] = useState<number>(0);
 
-  const makeRequest = (formData: any) => {
+  const makeRequest = (formData: {
+    email: string;
+    first_name: string;
+    last_name: string;
+    phone_number: string;
+    password: string;
+    confirm_password: string;
+    interests: string;
+  }) => {
     console.log("Form submitted", formData);
   };
 
-  const handleNextStep = (newData: any, final = false) => {
+  const handleNextStep = (
+    newData: {
+      email: string;
+      first_name: string;
+      last_name: string;
+      phone_number: string;
+      password: string;
+      confirm_password: string;
+      interests: string;
+    },
+    final = false,
+  ) => {
     setData((prev) => ({ ...prev, ...newData }));
 
     if (final) {
@@ -30,14 +49,27 @@ const FormWrapper = () => {
     setCurrentStep((prev) => prev + 1);
   };
 
-  const handlePreviousStep = (newData: any) => {
+  const handlePreviousStep = (newData: {
+    email: string;
+    first_name: string;
+    last_name: string;
+    phone_number: string;
+    password: string;
+    confirm_password: string;
+    interests: string;
+  }) => {
     setData((prev) => ({ ...prev, ...newData }));
     setCurrentStep((prev) => prev - 1);
   };
 
   const steps = [
-    <StepOne next={handleNextStep} data={data} />,
-    <StepTwo next={handleNextStep} prev={handlePreviousStep} data={data} />,
+    <StepOne next={handleNextStep} data={data} key={0} />,
+    <StepTwo
+      next={handleNextStep}
+      prev={handlePreviousStep}
+      data={data}
+      key={1}
+    />,
   ];
 
   useEffect(() => {
