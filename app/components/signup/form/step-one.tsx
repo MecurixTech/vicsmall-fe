@@ -1,6 +1,6 @@
 "use client";
 
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import {
   ArrowForwardOutlined,
   RemoveRedEyeOutlined,
@@ -95,7 +95,7 @@ const StepOne = (props: {
               placeholder="e.g. johndoe@gmail.com"
               required
             />
-            <ErrorMessage name="email" component={TextError} />
+            {/* <ErrorMessage name="email" component={TextError} /> */}
           </div>
 
           <div className="mb-4 flex gap-2">
@@ -114,7 +114,7 @@ const StepOne = (props: {
                 placeholder="e.g. John"
                 required
               />
-              <ErrorMessage name="first_name" component={TextError} />
+              {/* <ErrorMessage name="first_name" component={TextError} /> */}
             </div>
 
             <div className="flex-1">
@@ -132,7 +132,7 @@ const StepOne = (props: {
                 placeholder="e.g. Doe"
                 required
               />
-              <ErrorMessage name="last_name" component={TextError} />
+              {/* <ErrorMessage name="last_name" component={TextError} /> */}
             </div>
           </div>
 
@@ -177,7 +177,7 @@ const StepOne = (props: {
                 )}
               </button>
             </div>
-            <ErrorMessage name="password" component={TextError} />
+            {/* <ErrorMessage name="password" component={TextError} /> */}
           </div>
 
           <div className="mb-4">
@@ -207,7 +207,7 @@ const StepOne = (props: {
                 )}
               </button>
             </div>
-            <ErrorMessage name="confirm_password" component={TextError} />
+            {/* <ErrorMessage name="confirm_password" component={TextError} /> */}
           </div>
 
           <button

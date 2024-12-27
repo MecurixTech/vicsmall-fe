@@ -1,5 +1,4 @@
 import { vendorDetails } from "@/app/data/dummyData";
-import { review } from "@/app/data/dummyTypes";
 import { ArrowDownwardOutlined, Star } from "@mui/icons-material";
 import ReviewList from "./review-list";
 import Link from "next/link";

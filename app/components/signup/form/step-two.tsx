@@ -57,7 +57,7 @@ interface StepTwoProps {
   };
 }
 
-const StepTwo: React.FC<StepTwoProps> = ({ next, prev, data }) => {
+const StepTwo: React.FC<StepTwoProps> = () => {
   return (
     <>
       <h1 className="mb-2 text-center text-2xl">
