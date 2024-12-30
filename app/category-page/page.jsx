@@ -164,6 +164,7 @@ export default function AccessoriesPage() {
   const [selectedRating, setSelectedRating] = useState(0)
 
   const filteredProducts = products.filter(product => {
+    
     const categoryMatch = selectedCategory === "All Accessories" || product.name.toLowerCase().includes(selectedCategory.toLowerCase())
     const priceMatch = (!minPrice || product.price >= parseInt(minPrice)) && (!maxPrice || product.price <= parseInt(maxPrice))
     const ratingMatch = selectedRating === 0 || product.rating >= selectedRating
