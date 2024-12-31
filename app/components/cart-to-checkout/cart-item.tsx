@@ -1,47 +1,57 @@
 "use client";
 
 import { cartItem } from "@/app/data/dummyTypes";
-import {
-  AddOutlined,
-  DeleteOutlined,
-  RemoveOutlined,
-} from "@mui/icons-material";
+import { DeleteOutlined } from "@mui/icons-material";
 import Image from "next/image";
 
-const CartItem = ({ cartItemData }: { cartItemData: cartItem }) => {
+const CartItem = ({
+  item,
+  updateQuantity,
+  removeItem,
+}: {
+  item: cartItem;
+  updateQuantity: (id: number, newQuantity: number) => void;
+  removeItem: (id: number) => void;
+}) => {
   return (
-    <div className="flex items-center justify-between gap-4 p-4">
-      <div className="flex items-center gap-4">
-        <Image
-          src={cartItemData.imgSrc}
-          alt={cartItemData.name}
-          height={64}
-          width={64}
-          className="rounded-xl"
-        />
-        <div>
-          <p className="mb-1">{cartItemData.name}</p>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <button className="grid h-8 w-8 place-content-center rounded-xl bg-neutral-light-gray">
-                <RemoveOutlined fontSize="inherit" />
-              </button>
-              <span className="font-medium text-gray-800">
-                {cartItemData.quantity}
-              </span>
-              <button className="grid h-8 w-8 place-content-center rounded-xl bg-neutral-light-gray">
-                <AddOutlined fontSize="inherit" />
-              </button>
-            </div>
-            <span>|</span>
-            <span className="font-semibold text-gray-800">
-              &#8358;{cartItemData.price}
-            </span>
+    <div key={item.id} className="flex gap-4 rounded-lg border p-4">
+      <Image
+        src={item.image}
+        alt={item.name}
+        width={80}
+        height={80}
+        className="rounded-lg object-cover"
+      />
+      <div className="min-w-0 flex-1">
+        <h3 className="text-lg font-bold text-gray-900">{item.name}</h3>
+        <p className="text-sm text-gray-500">{item.variant}</p>
+        <div className="mt-2 flex items-center gap-4">
+          <div className="flex items-center rounded border">
+            <button
+              onClick={() => updateQuantity(item.id, item.quantity - 1)}
+              className="m-1 h-6 w-6 rounded-sm bg-red-600 text-white hover:bg-red-200"
+              aria-label="Decrease quantity"
+            >
+              -
+            </button>
+            <span className="px-3 py-1 text-sm">{item.quantity}</span>
+            <button
+              onClick={() => updateQuantity(item.id, item.quantity + 1)}
+              className="m-1 h-6 w-6 rounded-sm bg-green-800 text-white hover:bg-green-200"
+              aria-label="Increase quantity"
+            >
+              +
+            </button>
           </div>
+          <p className="text-xl font-bold">N {item.price.toLocaleString()}</p>
         </div>
       </div>
-      <button>
-        <DeleteOutlined color="error" />
+      <button
+        onClick={() => removeItem(item.id)}
+        className="text-red-500 hover:text-red-600"
+        aria-label="Remove item"
+      >
+        <DeleteOutlined className="h-5 w-5" />
       </button>
     </div>
   );

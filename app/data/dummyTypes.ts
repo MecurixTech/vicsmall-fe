@@ -19,9 +19,10 @@ export type categoryData = {
 export type cartItem = {
   id: number;
   name: string;
-  price: string;
+  price: number;
   quantity: number;
-  imgSrc: string;
+  image: string;
+  variant: string;
 };
 
 type reviewImage = {

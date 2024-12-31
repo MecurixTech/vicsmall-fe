@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name is required"),
@@ -26,6 +27,8 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export default function CheckoutPage() {
+  const router = useRouter();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
@@ -47,6 +50,7 @@ export default function CheckoutPage() {
       // Add your submission logic here
       await new Promise((resolve) => setTimeout(resolve, 2000));
       console.log(data);
+      router.push("/payment");
     } finally {
       setIsSubmitting(false);
     }
