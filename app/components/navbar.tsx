@@ -16,6 +16,27 @@ const Navbar = () => {
     useState<FlagIconCode>("NG");
   const menuRef = useRef<HTMLDivElement>(null);
 
+  // Initialize the state from localStorage (ensure window is defined)
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(
+    typeof window !== "undefined" && Boolean(localStorage.getItem("token"))
+  );
+
+  useEffect(() => {
+    const updateLoginState = () => {
+      setIsLoggedIn(Boolean(localStorage.getItem("token")));
+    };
+
+    // Update the state on mount
+    updateLoginState();
+
+    // Listen for the custom event
+    window.addEventListener("tokenChanged", updateLoginState);
+
+    return () => {
+      window.removeEventListener("tokenChanged", updateLoginState);
+    };
+  }, []);
+
   const desktopCountries: {
     code: FlagIconCode;
     name: string;
@@ -124,12 +145,27 @@ const Navbar = () => {
                   </div>
                 )}
 
-                <Link
-                  href="/login"
-                  className="button button-secondary hidden px-4 py-2 sm:flex"
-                >
-                  Login
-                </Link>
+               
+{!isLoggedIn ? (
+  <Link
+    href="/login"
+    className="button button-secondary hidden px-4 py-2 sm:flex"
+  >
+    Login
+  </Link>
+) : (
+  <button
+    onClick={() => {
+      localStorage.removeItem("token"); 
+      setIsLoggedIn(false); 
+      window.dispatchEvent(new Event("tokenChanged")); 
+    }}
+    className="button button-secondary hidden px-4 py-2 sm:flex"
+  >
+    Log Out
+  </button>
+)}
+
               </div>
 
               <div className="relative sm:hidden">

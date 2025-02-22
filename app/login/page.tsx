@@ -6,65 +6,142 @@ import {
   RemoveRedEyeOutlined,
   VisibilityOffOutlined,
 } from "@mui/icons-material";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import * as Yup from "yup";
 
 const LoginPage = () => {
   const [isShowingPassword, setIsShowingPassword] = useState<boolean>(false);
+  const router = useRouter();
 
-  const handleSubmit = () => {
-    // TODO: Authenticate user
-    console.log("Form submitted");
+  const handleSubmit = async (values: { email: string; password: string }) => {
+    try {
+      const response = await fetch(
+        "https://vicsmall-backend.onrender.com/v1/api/auth/login-customer/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values), // Send email & password directly
+        }
+      );
+  
+      const data = await response.json();
+  
+      if (!response.ok) {
+        console.error("Login failed:", data);
+        // Handle API error feedback for email validation specifically
+        if (data.email) {
+          alert(`Email error: ${data.email.join(", ")}`);
+        } else {
+          alert(data.message || "Login failed. Please try again.");
+        }
+      } else {
+        console.log("Login successful:", data);
+  
+        if (data.token) {
+          // Save the token to localStorage
+          localStorage.setItem("token", data.token);
+  
+          // Save the email to localStorage (assuming the server returns `email`)
+          if (data.email) {
+            localStorage.setItem("email", data.email);
+          }
+  
+          // Dispatch a custom event to let other components know the token has been updated
+          window.dispatchEvent(new Event("tokenChanged"));
+        }
+  
+        // Redirect the user to the homepage after login
+        router.push("/");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      alert("An error occurred. Please try again later.");
+    }
   };
-
   const initialValues = {
-    email_or_phone: "",
+    email: "",
     password: "",
   };
+
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("Invalid email format")
+      .required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
 
   return (
     <main className="mx-auto mb-12 w-[95%] rounded-xl bg-white p-8 shadow-lg sm:w-3/5 lg:w-2/5">
       <h1 className="mb-8 text-center text-2xl">Welcome back to Vicsmall</h1>
 
-      <Formik onSubmit={handleSubmit} initialValues={initialValues}>
-        <Form>
-          <div className="mb-4">
-            <label htmlFor="email_or_phone" className="mb-2">
-              Email or phone number
-            </label>
-            <Field
-              type="text"
-              id="email_or_phone"
-              name="email_or_phone"
-              className="w-full"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="password" className="mb-2">
-              Password
-            </label>
-            <div className="relative">
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            <div className="mb-4">
+              <label htmlFor="email" className="mb-2 block">
+                Email
+              </label>
               <Field
-                type={isShowingPassword ? "text" : "password"}
-                id="password"
-                name="password"
-                className="w-full"
+                type="email"
+                id="email"
+                name="email"
+                className="w-full border rounded p-2"
               />
-              <button
-                onClick={() => setIsShowingPassword((prev) => !prev)}
-                className="absolute right-4 top-1/2 -translate-y-1/2"
-              >
-                {isShowingPassword ? (
-                  <RemoveRedEyeOutlined />
-                ) : (
-                  <VisibilityOffOutlined />
-                )}
-              </button>
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="text-red-600 text-sm mt-1"
+              />
             </div>
-          </div>
-          <button className="button button-accent w-full py-3">Login</button>
-        </Form>
+
+            <div className="mb-4">
+              <label htmlFor="password" className="mb-2 block">
+                Password
+              </label>
+              <div className="relative">
+                <Field
+                  type={isShowingPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  className="w-full border rounded p-2"
+                />
+                <button
+                  type="button"
+                  onClick={() => setIsShowingPassword((prev) => !prev)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2"
+                >
+                  {isShowingPassword ? (
+                    <RemoveRedEyeOutlined />
+                  ) : (
+                    <VisibilityOffOutlined />
+                  )}
+                </button>
+              </div>
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="text-red-600 text-sm mt-1"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="button button-accent w-full py-3"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Logging in..." : "Login"}
+            </button>
+          </Form>
+        )}
       </Formik>
 
       <div className="my-8 flex items-center gap-4">

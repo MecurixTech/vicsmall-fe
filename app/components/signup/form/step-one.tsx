@@ -1,5 +1,3 @@
-"use client";
-
 import { Field, Form, Formik } from "formik";
 import {
   ArrowForwardOutlined,
@@ -8,7 +6,6 @@ import {
 } from "@mui/icons-material";
 import * as Yup from "yup";
 import { useState } from "react";
-import { Value } from "react-phone-number-input";
 import PhoneInput from "react-phone-number-input/input";
 import Link from "next/link";
 
@@ -39,7 +36,7 @@ const StepOne = (props: {
       confirm_password: string;
       interests: string;
     },
-    final: boolean,
+    final: boolean
   ) => void;
   data: {
     email: string;
@@ -52,172 +49,206 @@ const StepOne = (props: {
   };
   key: number;
 }) => {
-  const handleSubmit = (values: {
-    email: string;
-    first_name: string;
-    last_name: string;
-    phone_number: string;
-    password: string;
-    confirm_password: string;
-    interests: string;
-  }) => {
-    console.log("Wassup!");
-    props.next(values, false);
-  };
-
   const [isShowingPassword, setIsShowingPassword] = useState<boolean>(false);
   const [isShowingConfirmPassword, setIsShowingConfirmPassword] =
     useState<boolean>(false);
-  const [phoneNumber, setPhoneNumber] = useState<Value>();
-
+    const [loading, setLoading] = useState<boolean>(false);
+    const handleSubmit = async (values: {
+      email: string;
+      first_name: string;
+      last_name: string;
+      phone_number: string;
+      password: string;
+      confirm_password: string;
+      interests: string;
+    }) => {
+      console.log("Form submission triggered with values:", values);
+    
+      setLoading(true); // Set loading state to true before making the API request
+    
+      const requestBody = {
+        email: values.email,
+        full_name: `${values.first_name} ${values.last_name}`,
+        country_code: values.phone_number ? values.phone_number.slice(0, 4) : "+234",
+        phone_number: values.phone_number,
+        password: values.password,
+        is_customer: true,
+        is_active: true,
+        is_delete: false,
+      };
+    
+      try {
+        const response = await fetch(
+          "https://vicsmall-backend.onrender.com/v1/api/auth/create-customer/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestBody),
+          }
+        );
+    
+        const data = await response.json();
+    
+        if (response.ok) {
+          console.log("Account created successfully:", data);
+          alert("Account created successfully!");
+          props.next(values, false);
+        } else {
+          console.error("Failed to create account. Response:", data);
+          alert(`Signup failed: ${data.message || "Unknown error"}`);
+        }
+      } catch (error) {
+        console.error("Signup error:", error);
+        alert(`Signup error: ${error instanceof Error ? error.message : "Unknown error"}`);
+      } finally {
+        setLoading(false); // Set loading state to false once the request is finished (either success or failure)
+      }
+    };
   return (
     <>
-      <Formik
-        initialValues={props.data}
-        validationSchema={stepOneValidationSchema}
-        onSubmit={handleSubmit}
-      >
-        <Form className="mb-8">
-          <h1 className="mb-8 text-center text-2xl">Sign up to Vicsmall</h1>
-          <div className="mb-4">
-            <div className="mb-2 mr-2 flex items-center justify-between">
-              <label htmlFor="email">Email</label>
-              <span className="text-xl font-bold leading-none text-red-500">
-                *
-              </span>
-            </div>
-            <Field
-              type="text"
-              id="email"
-              name="email"
-              className="w-full"
-              placeholder="e.g. johndoe@gmail.com"
-              required
-            />
-            {/* <ErrorMessage name="email" component={TextError} /> */}
-          </div>
+   <Formik
+  initialValues={props.data}
+  validationSchema={stepOneValidationSchema}
+  onSubmit={handleSubmit}
+>
+  {({ values, errors, touched, setFieldValue }) => (
+    <Form className="mb-8">
+      <h1 className="mb-8 text-center text-2xl">Sign up to Vicsmall</h1>
+      <div className="mb-4">
+        <label htmlFor="email">Email</label>
+        <Field
+          type="email"
+          id="email"
+          name="email"
+          className="w-full"
+          placeholder="e.g. johndoe@gmail.com"
+          required
+        />
+        {touched.email && errors.email && (
+          <div className="text-red-600">{errors.email}</div>
+        )}
+      </div>
 
-          <div className="mb-4 flex gap-2">
-            <div className="flex-1">
-              <div className="mb-2 mr-2 flex items-center justify-between">
-                <label htmlFor="first_name">First name</label>
-                <span className="text-xl font-bold leading-none text-red-500">
-                  *
-                </span>
-              </div>
-              <Field
-                type="text"
-                id="first_name"
-                name="first_name"
-                className="w-full"
-                placeholder="e.g. John"
-                required
-              />
-              {/* <ErrorMessage name="first_name" component={TextError} /> */}
-            </div>
+      <div className="mb-4 flex gap-2">
+        <div className="flex-1">
+          <label htmlFor="first_name">First name</label>
+          <Field
+            type="text"
+            id="first_name"
+            name="first_name"
+            className="w-full"
+            placeholder="e.g. John"
+            required
+          />
+          {touched.first_name && errors.first_name && (
+            <div className="text-red-600">{errors.first_name}</div>
+          )}
+        </div>
 
-            <div className="flex-1">
-              <div className="mb-2 mr-2 flex items-center justify-between">
-                <label htmlFor="last_name">Last name</label>
-                <span className="text-xl font-bold leading-none text-red-500">
-                  *
-                </span>
-              </div>
-              <Field
-                type="text"
-                id="last_name"
-                name="last_name"
-                className="w-full"
-                placeholder="e.g. Doe"
-                required
-              />
-              {/* <ErrorMessage name="last_name" component={TextError} /> */}
-            </div>
-          </div>
+        <div className="flex-1">
+          <label htmlFor="last_name">Last name</label>
+          <Field
+            type="text"
+            id="last_name"
+            name="last_name"
+            className="w-full"
+            placeholder="e.g. Doe"
+            required
+          />
+          {touched.last_name && errors.last_name && (
+            <div className="text-red-600">{errors.last_name}</div>
+          )}
+        </div>
+      </div>
 
-          <div className="mb-4">
-            <div className="mb-2 mr-2 flex items-center justify-between">
-              <label htmlFor="phone_number">Phone number</label>
-              <span className="text-xl font-bold leading-none text-red-500">
-                *
-              </span>
-            </div>
-            <PhoneInput
-              placeholder="Enter phone number"
-              value={phoneNumber}
-              onChange={setPhoneNumber}
-            />
-          </div>
+      <div className="mb-4">
+        <label htmlFor="phone_number">Phone number</label>
+        <PhoneInput
+          placeholder="Enter phone number"
+          value={values.phone_number}
+          onChange={(value) => setFieldValue("phone_number", value)}
+          country="NG"
+          className="w-full"
+        />
+        {touched.phone_number && errors.phone_number && (
+          <div className="text-red-600">{errors.phone_number}</div>
+        )}
+      </div>
 
-          <div className="mb-4">
-            <div className="mb-2 mr-2 flex items-center justify-between">
-              <label htmlFor="password">Password</label>
-              <span className="text-xl font-bold leading-none text-red-500">
-                *
-              </span>
-            </div>
-            <div className="relative">
-              <Field
-                type={isShowingPassword ? "text" : "password"}
-                id="password"
-                name="password"
-                className="w-full"
-                required
-              />
-              <button
-                type="button"
-                onClick={() => setIsShowingPassword((prev) => !prev)}
-                className="absolute right-4 top-1/2 -translate-y-1/2"
-              >
-                {isShowingPassword ? (
-                  <RemoveRedEyeOutlined />
-                ) : (
-                  <VisibilityOffOutlined />
-                )}
-              </button>
-            </div>
-            {/* <ErrorMessage name="password" component={TextError} /> */}
-          </div>
-
-          <div className="mb-4">
-            <div className="mb-2 mr-2 flex items-center justify-between">
-              <label htmlFor="confirm_password">Confirm password</label>
-              <span className="text-xl font-bold leading-none text-red-500">
-                *
-              </span>
-            </div>
-            <div className="relative">
-              <Field
-                type={isShowingConfirmPassword ? "text" : "password"}
-                id="confirm_password"
-                name="confirm_password"
-                className="w-full"
-                required
-              />
-              <button
-                type="button"
-                onClick={() => setIsShowingConfirmPassword((prev) => !prev)}
-                className="absolute right-4 top-1/2 -translate-y-1/2"
-              >
-                {isShowingConfirmPassword ? (
-                  <RemoveRedEyeOutlined />
-                ) : (
-                  <VisibilityOffOutlined />
-                )}
-              </button>
-            </div>
-            {/* <ErrorMessage name="confirm_password" component={TextError} /> */}
-          </div>
-
+      <div className="mb-4">
+        <label htmlFor="password">Password</label>
+        <div className="relative">
+          <Field
+            type={isShowingPassword ? "text" : "password"}
+            id="password"
+            name="password"
+            className="w-full"
+            required
+          />
           <button
-            type="submit"
-            className="button button-accent flex w-full items-center justify-center gap-1 py-3"
+            type="button"
+            onClick={() => setIsShowingPassword((prev) => !prev)}
+            className="absolute right-4 top-1/2 -translate-y-1/2"
           >
-            <span>Continue</span>
-            <ArrowForwardOutlined fontSize="inherit" className="mt-1" />
+            {isShowingPassword ? (
+              <RemoveRedEyeOutlined />
+            ) : (
+              <VisibilityOffOutlined />
+            )}
           </button>
-        </Form>
-      </Formik>
+        </div>
+        {touched.password && errors.password && (
+          <div className="text-red-600">{errors.password}</div>
+        )}
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="confirm_password">Confirm password</label>
+        <div className="relative">
+          <Field
+            type={isShowingConfirmPassword ? "text" : "password"}
+            id="confirm_password"
+            name="confirm_password"
+            className="w-full"
+            required
+          />
+          <button
+            type="button"
+            onClick={() => setIsShowingConfirmPassword((prev) => !prev)}
+            className="absolute right-4 top-1/2 -translate-y-1/2"
+          >
+            {isShowingConfirmPassword ? (
+              <RemoveRedEyeOutlined />
+            ) : (
+              <VisibilityOffOutlined />
+            )}
+          </button>
+        </div>
+        {touched.confirm_password && errors.confirm_password && (
+          <div className="text-red-600">{errors.confirm_password}</div>
+        )}
+      </div>
+
+      <button
+  type="submit"
+  className="button button-accent flex w-full items-center justify-center gap-1 py-3"
+  disabled={loading} // Disable the button when loading
+>
+  {loading ? (
+    <span className="loader"> Creating Account...</span> // You can use a spinner or loading text here
+  ) : (
+    <>
+      <span>Continue</span>
+      <ArrowForwardOutlined fontSize="inherit" className="mt-1" />
+    </>
+  )}
+</button>
+    </Form>
+  )}
+</Formik>
+
 
       <p className="text-center">
         Already have an account?{" "}

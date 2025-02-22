@@ -3,61 +3,106 @@
 import { interests } from "@/app/data/dummyData";
 import { SearchOutlined } from "@mui/icons-material";
 import Link from "next/link";
+import { useState } from "react";
 
 interface StepTwoProps {
   next: (
     newData: {
       email: string;
-
       first_name: string;
-
       last_name: string;
-
       phone_number: string;
-
       password: string;
-
       confirm_password: string;
-
       interests: string;
     },
-    final?: boolean,
+    final?: boolean
   ) => void;
-
+  
   prev: (newData: {
     email: string;
-
     first_name: string;
-
     last_name: string;
-
     phone_number: string;
-
     password: string;
-
     confirm_password: string;
-
     interests: string;
   }) => void;
 
   data: {
     email: string;
-
     first_name: string;
-
     last_name: string;
-
     phone_number: string;
-
     password: string;
-
     confirm_password: string;
-
     interests: string;
   };
 }
 
-const StepTwo: React.FC<StepTwoProps> = () => {
+const StepTwo: React.FC<StepTwoProps> = ({ data, next }) => {
+  // Track selected interests
+  const [selectedInterests, setSelectedInterests] = useState<string[]>(data.interests ? data.interests.split(",") : []);
+  const [loading, setLoading] = useState(false);
+
+  const handleInterestSelection = (interest: string) => {
+    setSelectedInterests((prev) => {
+      // Toggle selection of the interest
+      if (prev.includes(interest)) {
+        return prev.filter((item) => item !== interest); // Remove if already selected
+      }
+      return [...prev, interest]; // Add if not selected
+    });
+  };
+
+  const handleSubmit = async () => {
+    if (selectedInterests.length < 5 || selectedInterests.length > 7) {
+      alert("Please select between 5 to 7 interests.");
+      return;
+    }
+
+    setLoading(true);
+
+    const requestBody = {
+      email: data.email,
+      full_name: `${data.first_name} ${data.last_name}`,
+      country_code: data.phone_number.slice(0, 4),
+      phone_number: data.phone_number,
+      password: data.password,
+      is_customer: true,
+      is_active: true,
+      is_delete: false,
+      interests: selectedInterests.join(",") // Joining the selected interests as a comma-separated string
+    };
+
+    try {
+      const response = await fetch(
+        "https://vicsmall-backend.onrender.com/v1/api/auth/create-customer/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Account created successfully!");
+        next({ ...data, interests: selectedInterests.join(",") }, true); // Passing selected interests
+      } else {
+        alert(`Signup failed: ${data.message || "Unknown error"}`);
+      }
+    } catch (error) {
+      console.error("Error creating account:", error);
+      alert("An error occurred during signup.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <h1 className="mb-2 text-center text-2xl">
@@ -83,15 +128,21 @@ const StepTwo: React.FC<StepTwoProps> = () => {
         {interests.map((interest) => (
           <button
             key={interest.id}
-            className="rounded-full border border-gray-400 px-6 py-3 font-medium hover:bg-gray-100"
+            onClick={() => handleInterestSelection(interest.value)}
+            className={`rounded-full border px-6 py-3 font-medium ${selectedInterests.includes(interest.value) ? 'bg-blue-500 text-white' : 'border-gray-400 hover:bg-gray-100'}`}
           >
             {interest.value}
           </button>
         ))}
       </div>
 
-      <button type="submit" className="button button-accent mb-8 w-full py-3">
-        Sign up
+      <button
+        type="button"
+        onClick={handleSubmit}
+        className="button button-accent mb-8 w-full py-3"
+        disabled={loading || selectedInterests.length < 5 || selectedInterests.length > 7} // Disable if the conditions aren't met
+      >
+        {loading ? "Signing up..." : "Sign up"}
       </button>
 
       <p className="text-center">
