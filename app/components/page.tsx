@@ -1,3 +1,4 @@
+"use client"; 
 import { useState } from "react";
 import { products, categories, cartItems as dummyCartItems } from "../data/dummyData";
 import CartItem from "./cart-to-checkout/cart-item";
