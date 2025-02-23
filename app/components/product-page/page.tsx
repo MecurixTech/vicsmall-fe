@@ -32,7 +32,12 @@ const page = () => {
       </form>
 
       {cartItems.map((item) => (
-        <CartItem key={item.id} cartItemData={item} />
+     <CartItem 
+     key={item.id} 
+     item={item} 
+     updateQuantity={(id, newQuantity) => console.log("Update quantity:", id, newQuantity)}
+     removeItem={(id) => console.log("Remove item:", id)}
+   />
       ))}
 
     </div>
