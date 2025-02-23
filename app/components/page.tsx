@@ -39,7 +39,7 @@ const ComponentsPage = () => {
       </form>
 
       {cartItems.map((item) => (
-      <CartItem key={item.id} item={item} />
+        <CartItem key={item.id} item={item} />
 
       ))}
 
