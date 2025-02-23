@@ -55,7 +55,6 @@ const LoginPage = () => {
           window.dispatchEvent(new Event("tokenChanged"));
         }
   
-        // Redirect the user to the homepage after login
         router.push("/");
       }
     } catch (error) {
