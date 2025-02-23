@@ -56,7 +56,7 @@ export default function CheckoutPage() {
     }
   };
 
-  const watchPaymentMethod = watch("paymentMethod");
+
   const watchTermsAccepted = watch("termsAccepted");
 
   return (

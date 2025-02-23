@@ -1,5 +1,5 @@
 'use client'
-
+import Link from 'next/link';
 import { useState } from 'react'
 import { ChevronRight } from 'lucide-react'
 
@@ -21,7 +21,7 @@ export default function Payment() {
     <div className="container mx-auto px-4 py-8">
       {/* Breadcrumb */}
       <nav className="flex items-center space-x-2 mb-8 text-sm text-muted-foreground">
-        <a href="/" className="hover:text-primary">Home</a>
+        <Link href="/" className="hover:text-primary">Home</Link>
         <ChevronRight className="h-4 w-4" />
         <span>Cart</span>
       </nav>
