@@ -1,4 +1,5 @@
-import { products, categories, cartItems } from "../data/dummyData";
+import { useState } from "react";
+import { products, categories, cartItems as dummyCartItems } from "../data/dummyData";
 import CartItem from "./cart-to-checkout/cart-item";
 import Footer from "./footer";
 import Banner from "./home/banner";
@@ -9,6 +10,20 @@ import InfoTabs from "./product-page/info-tabs-container";
 import ProductSettings from "./product-page/product-settings";
 
 const ComponentsPage = () => {
+  const [cartItems, setCartItems] = useState(dummyCartItems); // ✅ Add state
+
+  const updateQuantity = (id: number, newQuantity: number) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, quantity: Math.max(1, newQuantity) } : item
+      )
+    );
+  };
+
+  const removeItem = (id: number) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
   return (
     <main className="mb-24 p-4">
       <CountdownTimer hours={3} minutes={36} seconds={14} />
@@ -38,10 +53,19 @@ const ComponentsPage = () => {
         />
       </form>
 
-      {cartItems.map((item) => (
-        <CartItem key={item.id} item={item} />
-
-      ))}
+      {/* ✅ Render cart items */}
+      {cartItems.length > 0 ? (
+        cartItems.map((item) => (
+          <CartItem 
+            key={item.id} 
+            item={item} 
+            updateQuantity={updateQuantity} 
+            removeItem={removeItem} 
+          />
+        ))
+      ) : (
+        <p className="text-center text-gray-500">Your cart is empty.</p>
+      )}
 
       <InfoTabs />
 
