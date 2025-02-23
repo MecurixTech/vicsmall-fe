@@ -39,7 +39,8 @@ const ComponentsPage = () => {
       </form>
 
       {cartItems.map((item) => (
-        <CartItem key={item.id} cartItemData={item} />
+      <CartItem key={item.id} item={item} />
+
       ))}
 
       <InfoTabs />
