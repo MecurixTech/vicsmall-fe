@@ -517,7 +517,7 @@ export const userAccountSidebarLinks = [
   {
     id: 6,
     label: "Logout",
-    href: "/account/logout",
+    href: "/login",
     icon: LogoutOutlined,
   },
 ];
