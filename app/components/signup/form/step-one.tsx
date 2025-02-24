@@ -53,7 +53,16 @@ const StepOne = (props: {
   const [isShowingConfirmPassword, setIsShowingConfirmPassword] =
     useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
-    const handleSubmit = async (values) => {
+    
+    interface FormValues {
+      first_name: string;
+      last_name: string;
+      email: string;
+      phone_number?: string;
+      password: string;
+    }
+    
+    const handleSubmit = async (values: FormValues) => {
       console.log("Form submission triggered with values:", values);
       setLoading(true);
   
