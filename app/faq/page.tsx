@@ -75,7 +75,7 @@ const LoginPage = () => {
   });
 
   return (
-    <main className="mx-auto mb-12 w-[95%] rounded-xl bg-white p-8 shadow-lg sm:w-3/5 lg:w-2/5">
+    <main className="mx-auto mb-12 w-[95%] rounded-xl bg-white p-8 shadow-lg sm:w-3/5 lg:w-2/5 mt-[100px]">
       <h1 className="mb-8 text-center text-2xl">Welcome back to Vicsmall</h1>
 
       <Formik

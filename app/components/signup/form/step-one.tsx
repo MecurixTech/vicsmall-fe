@@ -53,19 +53,10 @@ const StepOne = (props: {
   const [isShowingConfirmPassword, setIsShowingConfirmPassword] =
     useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
-    const handleSubmit = async (values: {
-      email: string;
-      first_name: string;
-      last_name: string;
-      phone_number: string;
-      password: string;
-      confirm_password: string;
-      interests: string;
-    }) => {
+    const handleSubmit = async (values) => {
       console.log("Form submission triggered with values:", values);
-    
-      setLoading(true); // Set loading state to true before making the API request
-    
+      setLoading(true);
+  
       const requestBody = {
         email: values.email,
         full_name: `${values.first_name} ${values.last_name}`,
@@ -76,24 +67,30 @@ const StepOne = (props: {
         is_active: true,
         is_delete: false,
       };
-    
+  
       try {
         const response = await fetch(
           "https://vicsmall-backend.onrender.com/v1/api/auth/create-customer/",
           {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(requestBody),
           }
         );
-    
+  
         const data = await response.json();
-    
+  
         if (response.ok) {
           console.log("Account created successfully:", data);
           alert("Account created successfully!");
+  
+          // Save user details to local storage
+          localStorage.setItem("user", JSON.stringify({
+            full_name: requestBody.full_name,
+            email: requestBody.email,
+            phone_number: requestBody.phone_number,
+          }));
+  
           props.next(values, false);
         } else {
           console.error("Failed to create account. Response:", data);
@@ -101,9 +98,9 @@ const StepOne = (props: {
         }
       } catch (error) {
         console.error("Signup error:", error);
-        alert(`Signup error: ${error instanceof Error ? error.message : "Unknown error"}`);
+        alert(`Signup error: ${error.message || "Unknown error"}`);
       } finally {
-        setLoading(false); // Set loading state to false once the request is finished (either success or failure)
+        setLoading(false);
       }
     };
   return (

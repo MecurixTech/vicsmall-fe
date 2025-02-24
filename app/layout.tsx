@@ -1,12 +1,13 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
-
 import "./globals.css";
-import Navbar from "./components/navbar";
+import NavbarWrapper from "./components/Navbarwrapper"; // Import the new wrapper
 
 const ubuntu = Ubuntu({
   subsets: ["latin"],
   weight: ["300", "400", "500", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -16,13 +17,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body className={ubuntu.className}>
-        <Navbar />
+        <NavbarWrapper />
         <main>{children}</main>
       </body>
     </html>
