@@ -60,12 +60,14 @@ const StepOne = (props: {
       email: string;
       phone_number?: string;
       password: string;
+      confirm_password?: string;
+      interests?: string;
     }
     
     const handleSubmit = async (values: FormValues) => {
       console.log("Form submission triggered with values:", values);
       setLoading(true);
-  
+    
       const requestBody = {
         email: values.email,
         full_name: `${values.first_name} ${values.last_name}`,
@@ -76,7 +78,7 @@ const StepOne = (props: {
         is_active: true,
         is_delete: false,
       };
-  
+    
       try {
         const response = await fetch(
           "https://vicsmall-backend.onrender.com/v1/api/auth/create-customer/",
@@ -86,21 +88,31 @@ const StepOne = (props: {
             body: JSON.stringify(requestBody),
           }
         );
-  
+    
         const data = await response.json();
-  
+    
         if (response.ok) {
           console.log("Account created successfully:", data);
           alert("Account created successfully!");
-  
+    
           // Save user details to local storage
-          localStorage.setItem("user", JSON.stringify({
-            full_name: requestBody.full_name,
-            email: requestBody.email,
-            phone_number: requestBody.phone_number,
-          }));
-  
-          props.next(values, false);
+          localStorage.setItem(
+            "user",
+            JSON.stringify({
+              full_name: requestBody.full_name,
+              email: requestBody.email,
+              phone_number: requestBody.phone_number,
+            })
+          );
+    
+          // Ensure confirm_password and interests are included
+          const updatedValues = {
+            ...values,
+            confirm_password: values.confirm_password || "",
+            interests: values.interests || "",
+          };
+    
+          props.next(updatedValues, false);
         } else {
           console.error("Failed to create account. Response:", data);
           alert(`Signup failed: ${data.message || "Unknown error"}`);
@@ -112,6 +124,7 @@ const StepOne = (props: {
         setLoading(false);
       }
     };
+    
   return (
     <>
    <Formik
