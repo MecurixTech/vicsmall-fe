@@ -53,20 +53,18 @@ const StepOne = (props: {
   const [isShowingConfirmPassword, setIsShowingConfirmPassword] =
     useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
-    
-    interface FormValues {
+    const handleSubmit = async (values: {
+      email: string;
       first_name: string;
       last_name: string;
-      email: string;
-      phone_number?: string;
+      phone_number: string;
       password: string;
-      confirm_password?: string;
-      interests?: string;
-    }
-    
-    const handleSubmit = async (values: FormValues) => {
+      confirm_password: string;
+      interests: string;
+    }) => {
       console.log("Form submission triggered with values:", values);
-      setLoading(true);
+    
+      setLoading(true); // Set loading state to true before making the API request
     
       const requestBody = {
         email: values.email,
@@ -84,7 +82,9 @@ const StepOne = (props: {
           "https://vicsmall-backend.onrender.com/v1/api/auth/create-customer/",
           {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+            },
             body: JSON.stringify(requestBody),
           }
         );
@@ -94,36 +94,18 @@ const StepOne = (props: {
         if (response.ok) {
           console.log("Account created successfully:", data);
           alert("Account created successfully!");
-    
-          // Save user details to local storage
-          localStorage.setItem(
-            "user",
-            JSON.stringify({
-              full_name: requestBody.full_name,
-              email: requestBody.email,
-              phone_number: requestBody.phone_number,
-            })
-          );
-    
-          const updatedValues = {
-            ...values,
-            phone_number: values.phone_number || "", // Ensure phone_number is always a string
-            confirm_password: values.confirm_password || "",
-            interests: values.interests || "",
-          };
-          props.next(updatedValues, false);
+          props.next(values, false);
         } else {
           console.error("Failed to create account. Response:", data);
           alert(`Signup failed: ${data.message || "Unknown error"}`);
         }
       } catch (error) {
         console.error("Signup error:", error);
-        alert(`Signup error: ${error.message || "Unknown error"}`);
+        alert(`Signup error: ${error instanceof Error ? error.message : "Unknown error"}`);
       } finally {
-        setLoading(false);
+        setLoading(false); // Set loading state to false once the request is finished (either success or failure)
       }
     };
-    
   return (
     <>
    <Formik
