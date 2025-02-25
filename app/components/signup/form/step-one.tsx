@@ -64,11 +64,12 @@ const StepOne = (props: {
     }) => {
       console.log("Form submission triggered with values:", values);
     
-      setLoading(true); // Set loading state to true before making the API request
+      setLoading(true); // Show loading state
     
+      const full_name = `${values.first_name} ${values.last_name}`;
       const requestBody = {
         email: values.email,
-        full_name: `${values.first_name} ${values.last_name}`,
+        full_name: full_name,
         country_code: values.phone_number ? values.phone_number.slice(0, 4) : "+234",
         phone_number: values.phone_number,
         password: values.password,
@@ -94,6 +95,19 @@ const StepOne = (props: {
         if (response.ok) {
           console.log("Account created successfully:", data);
           alert("Account created successfully!");
+    
+         
+          if (typeof window !== "undefined") {
+            localStorage.setItem(
+              "user",
+              JSON.stringify({
+                full_name,
+                phone_number: values.phone_number,
+                email: values.email,
+              })
+            );
+          }
+    
           props.next(values, false);
         } else {
           console.error("Failed to create account. Response:", data);
@@ -101,11 +115,14 @@ const StepOne = (props: {
         }
       } catch (error) {
         console.error("Signup error:", error);
-        alert(`Signup error: ${error instanceof Error ? error.message : "Unknown error"}`);
+        alert(
+          `Signup error: ${error instanceof Error ? error.message : "Unknown error"}`
+        );
       } finally {
-        setLoading(false); // Set loading state to false once the request is finished (either success or failure)
+        setLoading(false); // Hide loading state
       }
     };
+    
   return (
     <>
    <Formik
