@@ -105,13 +105,12 @@ const StepOne = (props: {
             })
           );
     
-          // Ensure confirm_password and interests are included
           const updatedValues = {
             ...values,
+            phone_number: values.phone_number || "", // Ensure phone_number is always a string
             confirm_password: values.confirm_password || "",
             interests: values.interests || "",
           };
-    
           props.next(updatedValues, false);
         } else {
           console.error("Failed to create account. Response:", data);
