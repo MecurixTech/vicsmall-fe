@@ -47,7 +47,7 @@ interface StepOneProps {
 const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
   const [isShowingPassword, setIsShowingPassword] = useState(false);
   const [isShowingConfirmPassword, setIsShowingConfirmPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
 
   const handleSubmit = (values: typeof data) => {
     console.log("Form data saved for Step Two:", values);
