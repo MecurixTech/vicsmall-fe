@@ -25,103 +25,15 @@ const stepOneValidationSchema = Yup.object({
     .oneOf([Yup.ref("password")], "Passwords must match"),
 });
 
-const StepOne = (props: {
-  next: (
-    newData: {
-      email: string;
-      first_name: string;
-      last_name: string;
-      phone_number: string;
-      password: string;
-      confirm_password: string;
-      interests: string;
-    },
-    final: boolean
-  ) => void;
-  data: {
-    email: string;
-    first_name: string;
-    last_name: string;
-    phone_number: string;
-    password: string;
-    confirm_password: string;
-    interests: string;
+const StepOne = (props) => {
+  const [isShowingPassword, setIsShowingPassword] = useState(false);
+  const [isShowingConfirmPassword, setIsShowingConfirmPassword] = useState(false);
+  const [loading] = useState(false);
+
+  const handleSubmit = (values) => {
+    console.log("Form data saved for Step Two:", values);
+    props.next(values, false); // Pass form data to parent
   };
-  key: number;
-}) => {
-  const [isShowingPassword, setIsShowingPassword] = useState<boolean>(false);
-  const [isShowingConfirmPassword, setIsShowingConfirmPassword] =
-    useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(false);
-    const handleSubmit = async (values: {
-      email: string;
-      first_name: string;
-      last_name: string;
-      phone_number: string;
-      password: string;
-      confirm_password: string;
-      interests: string;
-    }) => {
-      console.log("Form submission triggered with values:", values);
-    
-      setLoading(true); // Show loading state
-    
-      const full_name = `${values.first_name} ${values.last_name}`;
-      const requestBody = {
-        email: values.email,
-        full_name: full_name,
-        country_code: values.phone_number ? values.phone_number.slice(0, 4) : "+234",
-        phone_number: values.phone_number,
-        password: values.password,
-        is_customer: true,
-        is_active: true,
-        is_delete: false,
-      };
-    
-      try {
-        const response = await fetch(
-          "https://vicsmall-backend.onrender.com/v1/api/auth/create-customer/",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(requestBody),
-          }
-        );
-    
-        const data = await response.json();
-    
-        if (response.ok) {
-          console.log("Account created successfully:", data);
-          alert("Account created successfully!");
-    
-         
-          if (typeof window !== "undefined") {
-            localStorage.setItem(
-              "user",
-              JSON.stringify({
-                full_name,
-                phone_number: values.phone_number,
-                email: values.email,
-              })
-            );
-          }
-    
-          props.next(values, false);
-        } else {
-          console.error("Failed to create account. Response:", data);
-          alert(`Signup failed: ${data.message || "Unknown error"}`);
-        }
-      } catch (error) {
-        console.error("Signup error:", error);
-        alert(
-          `Signup error: ${error instanceof Error ? error.message : "Unknown error"}`
-        );
-      } finally {
-        setLoading(false); // Hide loading state
-      }
-    };
     
   return (
     <>

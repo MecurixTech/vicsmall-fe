@@ -4,6 +4,7 @@ import { interests } from "@/app/data/dummyData";
 import { SearchOutlined } from "@mui/icons-material";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface StepTwoProps {
   next: (
@@ -41,17 +42,17 @@ interface StepTwoProps {
 }
 
 const StepTwo: React.FC<StepTwoProps> = ({ data, next }) => {
-  // Track selected interests
+  
   const [selectedInterests, setSelectedInterests] = useState<string[]>(data.interests ? data.interests.split(",") : []);
   const [loading, setLoading] = useState(false);
-
+  const router = useRouter();
   const handleInterestSelection = (interest: string) => {
     setSelectedInterests((prev) => {
-      // Toggle selection of the interest
+
       if (prev.includes(interest)) {
-        return prev.filter((item) => item !== interest); // Remove if already selected
+        return prev.filter((item) => item !== interest); 
       }
-      return [...prev, interest]; // Add if not selected
+      return [...prev, interest]; 
     });
   };
 
@@ -60,10 +61,11 @@ const StepTwo: React.FC<StepTwoProps> = ({ data, next }) => {
       alert("Please select between 5 to 7 interests.");
       return;
     }
-
+  
     setLoading(true);
-
-    const requestBody = {
+    console.log("Submitting interests:", selectedInterests);
+  
+    const customerData = {
       email: data.email,
       full_name: `${data.first_name} ${data.last_name}`,
       country_code: data.phone_number.slice(0, 4),
@@ -72,29 +74,62 @@ const StepTwo: React.FC<StepTwoProps> = ({ data, next }) => {
       is_customer: true,
       is_active: true,
       is_delete: false,
-      interests: selectedInterests.join(",") // Joining the selected interests as a comma-separated string
     };
-
+  
     try {
-      const response = await fetch(
+      
+      const customerResponse = await fetch(
         "https://vicsmall-backend.onrender.com/v1/api/auth/create-customer/",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(customerData),
+        }
+      );
+  
+      const customerResult = await customerResponse.json();
+      if (!customerResponse.ok) {
+        console.error("Customer creation failed:", customerResult);
+        alert(`Signup failed: ${customerResult.message || "Unknown error"}`);
+        return;
+      }
+  
+      console.log("Customer created successfully:", customerResult);
+
+      const authToken = customerResult.Data?.token || customerResult.token;
+      if (!authToken) {
+        router.push("/login");
+      }
+  
+      
+      const preferencesResponse = await fetch(
+        "https://vicsmall-backend.onrender.com/v1/api/auth/customer-preference/",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
           },
-          body: JSON.stringify(requestBody),
+          body: JSON.stringify({
+            email: data.email,
+            interests: selectedInterests,
+          }),
         }
       );
-
-      const data = await response.json();
-
-      if (response.ok) {
-        alert("Account created successfully!");
-        next({ ...data, interests: selectedInterests.join(",") }, true); // Passing selected interests
-      } else {
-        alert(`Signup failed: ${data.message || "Unknown error"}`);
+  
+      const preferencesResult = await preferencesResponse.json();
+      if (!preferencesResponse.ok) {
+        console.error("Preferences update failed:", preferencesResult);
+        alert(`Preferences update failed: ${preferencesResult.message || "Unknown error"}`);
+        return;
       }
+  
+      console.log("Preferences saved successfully:", preferencesResult);
+  
+     
+      
+      next({ ...data, interests: selectedInterests.join(",") }, true);
+      router.push("/login");
     } catch (error) {
       console.error("Error creating account:", error);
       alert("An error occurred during signup.");
@@ -102,6 +137,7 @@ const StepTwo: React.FC<StepTwoProps> = ({ data, next }) => {
       setLoading(false);
     }
   };
+  
 
   return (
     <>
