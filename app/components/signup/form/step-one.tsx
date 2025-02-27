@@ -34,10 +34,17 @@ interface StepOneProps {
     password: string;
     confirm_password: string;
   };
-  next: (values: any, isFinalStep: boolean) => void;
+  next: (values: {
+    email: string;
+    first_name: string;
+    last_name: string;
+    phone_number: string;
+    password: string;
+    confirm_password: string;
+  }, isFinalStep: boolean) => void;
 }
 
-const StepOne: React.FC<StepOneProps> = (props) => {
+const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
   const [isShowingPassword, setIsShowingPassword] = useState(false);
   const [isShowingConfirmPassword, setIsShowingConfirmPassword] = useState(false);
   const [loading] = useState(false);
