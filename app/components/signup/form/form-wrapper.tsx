@@ -43,8 +43,12 @@ const FormWrapper = () => {
     setData((prev) => ({ ...prev, ...newData }));
 
     if (final) {
-      makeRequest(newData);
+      makeRequest({
+        ...newData,
+        interests: newData.interests ?? "", // Default to an empty string
+      });
     }
+    
 
     setCurrentStep((prev) => prev + 1);
   };
