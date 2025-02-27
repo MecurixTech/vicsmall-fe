@@ -36,7 +36,7 @@ const FormWrapper = () => {
       phone_number: string;
       password: string;
       confirm_password: string;
-      interests: string;
+      interests?: string;
     },
     final = false,
   ) => {

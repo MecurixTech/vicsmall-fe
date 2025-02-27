@@ -51,7 +51,7 @@ const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
 
   const handleSubmit = (values: typeof data) => {
     console.log("Form data saved for Step Two:", values);
-    next(values, false); // Pass form data to parent
+    next(values, false);
   };
     
   return (
