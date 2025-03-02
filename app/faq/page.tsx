@@ -25,40 +25,36 @@ const LoginPage = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(values), // Send email & password directly
+          body: JSON.stringify(values),
         }
       );
   
       const data = await response.json();
   
       if (!response.ok) {
-        console.error("Login failed:", data);
-        // Handle API error feedback for email validation specifically
         if (data.email) {
           alert(`Email error: ${data.email.join(", ")}`);
         } else {
           alert(data.message || "Login failed. Please try again.");
         }
       } else {
-        console.log("Login successful:", data);
+       
   
         if (data.token) {
-          // Save the token to localStorage
+        
           localStorage.setItem("token", data.token);
   
-          // Save the email to localStorage (assuming the server returns `email`)
           if (data.email) {
             localStorage.setItem("email", data.email);
           }
   
-          // Dispatch a custom event to let other components know the token has been updated
           window.dispatchEvent(new Event("tokenChanged"));
         }
   
         router.push("/");
       }
     } catch (error) {
-      console.error("Error during login:", error);
+   
       alert("An error occurred. Please try again later.");
     }
   };

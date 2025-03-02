@@ -11,7 +11,7 @@ import InfoTabs from "./product-page/info-tabs-container";
 import ProductSettings from "./product-page/product-settings";
 
 const ComponentsPage = () => {
-  const [cartItems, setCartItems] = useState(dummyCartItems); // ✅ Add state
+  const [cartItems, setCartItems] = useState(dummyCartItems);
 
   const updateQuantity = (id: number, newQuantity: number) => {
     setCartItems((prevItems) =>

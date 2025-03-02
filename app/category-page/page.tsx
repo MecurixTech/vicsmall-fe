@@ -137,7 +137,6 @@ const products: Product[] = [
   },
 ];
 
-// Fill the rest of the array with the existing placeholder products
 while (products.length < 16) {
   products.push({
     id: products.length + 1,

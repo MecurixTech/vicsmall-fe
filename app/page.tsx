@@ -1,3 +1,5 @@
+"use client"
+
 import Banner from "./components/home/banner";
 import Link from "next/link";
 import { ArrowForwardOutlined } from "@mui/icons-material";
@@ -11,10 +13,47 @@ import Footer from "./components/footer";
 import Stacks from "./components/home/stacks";
 import RecommendSection from "./components/product-card/recommended-card";
 import DescriptionSection from "./components/home/description";
+import { useEffect, useState } from "react";
+import NavbarWrapper from "./components/Navbarwrapper";
+import { isUserLoggedIn, getUserData } from "@/utils/auth-helpers"
+
+interface UserData {
+  firstName: string
+  image: string
+}
 
 const Home = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [userData, setUserData] = useState(null)
+
+  useEffect(() => {
+  
+
+    const checkAuth = () => {
+    
+      const loggedIn = isUserLoggedIn()
+      const user = getUserData()
+
+
+      setIsLoggedIn(loggedIn)
+      setUserData(user)
+    }
+    checkAuth()
+
+    const handleAuthChange = () => {
+      checkAuth()
+    }
+
+    window.addEventListener("auth-change", handleAuthChange)
+
+    return () => {
+      window.removeEventListener("auth-change", handleAuthChange)
+    }
+  }, [])
+
   return (
     <>
+     <NavbarWrapper />
       <Banner />
       <section className="mx-auto my-12 block w-[90%] sm:hidden">
         <h2 className="mb-12 text-center text-xl font-medium text-black">
