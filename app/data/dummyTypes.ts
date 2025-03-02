@@ -5,14 +5,14 @@ export type productData = {
   currentPrice: string;
   isShippedFromAbroad: boolean;
   colorVariants?: string[];
-  imgSrc: string;
+  imgSrc: string | StaticImageData;
 };
 
 export type categoryData = {
   id: number;
   name: string;
   numberOfProducts: string;
-  imgSrc: string;
+  imgSrc: string | StaticImageData;
   imgAlt: string;
 };
 
@@ -21,13 +21,13 @@ export type cartItem = {
   name: string;
   price: number;
   quantity: number;
-  image: string;
+  image: string | StaticImageData;
   variant: string;
 };
 
 type reviewImage = {
   id: number;
-  imgSrc: string;
+  imgSrc: string | StaticImageData;
   alt: string;
 };
 
@@ -85,7 +85,7 @@ export type card = {
   cardNumber: string;
   cardType: {
     name: string;
-    imgSrc: string;
+    imgSrc: string | StaticImageData;
   };
 };
 
