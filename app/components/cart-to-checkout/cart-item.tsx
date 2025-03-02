@@ -14,22 +14,29 @@ const CartItem = ({
   removeItem: (id: number) => void;
 }) => {
   return (
-    <div key={item.id} className="flex gap-4 rounded-lg border p-4">
-      <Image
-        src={item.image}
-        alt={item.name}
-        width={80}
-        height={80}
-        className="rounded-lg object-cover"
-      />
-      <div className="min-w-0 flex-1">
-        <h3 className="text-lg font-bold text-gray-900">{item.name}</h3>
-        <p className="text-sm text-gray-500">{item.variant}</p>
-        <div className="mt-2 flex items-center gap-4">
-          <div className="flex items-center rounded border">
+    <div key={item.id} className="flex flex-col sm:flex-row gap-4 rounded-lg border p-4">
+      {/* Product Image */}
+      <div className="flex justify-center sm:block">
+        <Image
+          src={item.image}
+          alt={item.name}
+          width={70}
+          height={70}
+          className="rounded-lg object-cover sm:w-20 sm:h-20"
+        />
+      </div>
+
+      {/* Product Details */}
+      <div className="flex-1">
+        <h3 className="text-base sm:text-lg font-bold text-gray-900">{item.name}</h3>
+        <p className="text-xs sm:text-sm text-gray-500">{item.variant}</p>
+
+        {/* Quantity & Price */}
+        <div className="mt-2 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+          <div className="flex items-center border rounded">
             <button
               onClick={() => updateQuantity(item.id, item.quantity - 1)}
-              className="m-1 h-6 w-6 rounded-sm bg-red-600 text-white hover:bg-red-200"
+              className="m-1 h-8 w-8 flex items-center justify-center rounded-sm bg-red-600 text-white hover:bg-red-700 transition"
               aria-label="Decrease quantity"
             >
               -
@@ -37,21 +44,23 @@ const CartItem = ({
             <span className="px-3 py-1 text-sm">{item.quantity}</span>
             <button
               onClick={() => updateQuantity(item.id, item.quantity + 1)}
-              className="m-1 h-6 w-6 rounded-sm bg-green-800 text-white hover:bg-green-200"
+              className="m-1 h-8 w-8 flex items-center justify-center rounded-sm bg-green-700 text-white hover:bg-green-800 transition"
               aria-label="Increase quantity"
             >
               +
             </button>
           </div>
-          <p className="text-xl font-bold">N {item.price.toLocaleString()}</p>
+          <p className="text-lg sm:text-xl font-bold">N {item.price.toLocaleString()}</p>
         </div>
       </div>
+
+      {/* Remove Button */}
       <button
         onClick={() => removeItem(item.id)}
-        className="text-red-500 hover:text-red-600"
+        className="text-red-500 hover:text-red-600 self-center sm:self-start"
         aria-label="Remove item"
       >
-        <DeleteOutlined className="h-5 w-5" />
+        <DeleteOutlined className="h-6 w-6" />
       </button>
     </div>
   );

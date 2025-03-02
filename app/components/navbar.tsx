@@ -350,6 +350,7 @@ const Navbar = () => {
         ))}
       </div>
     </nav>
+
   );
 };
 

@@ -7,7 +7,7 @@ import {
   ShoppingBagOutlined,
   WalletOutlined,
 } from "@mui/icons-material";
-
+import sneakersImage from "./sneakers.webp";
 export const navLinks = [
   "Accessories",
   "All Hoodies",
@@ -52,7 +52,7 @@ export const products = [
     currentPrice: "9,500",
     isShippedFromAbroad: true,
     imgSrc:
-      "https://utfs.io/f/wLDjZbdcJHpRxgNC5D8dYVwu9JvF5km2ElbzTQKC0BsMGigA",
+    sneakersImage,
   },
   {
     id: 3,
@@ -183,7 +183,7 @@ export const cartItems = [
     name: "Nike Air Force 1",
     price: 25000,
     quantity: 1,
-    image: "/images/air-force-1.jpg",
+    image: sneakersImage,
     variant: "White",
   },
 ];
