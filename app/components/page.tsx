@@ -56,6 +56,12 @@ const ComponentsPage = () => {
           ))}
         </section>    
 
+      {/* Categories */}
+      <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        {categories.map((category) => (
+          <CategoryCard key={category.id} category={category} />
+        ))}
+      </section>
        
         <form className="w-full max-w-md mx-auto rounded-xl bg-white p-6 sm:p-8 shadow-lg">
   <div className="flex flex-col space-y-4">
