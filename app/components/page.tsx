@@ -12,22 +12,30 @@ import ProductSettings from "./product-page/product-settings";
 
 const ComponentsPage = () => {
   const [cartItems, setCartItems] = useState(dummyCartItems);
-  const [visibleProducts, setVisibleProducts] = useState([]);
+  const [visibleProducts, setVisibleProducts] = useState(products.slice(0, 5)); // Initial state
 
-
+  // Function to update visible products based on screen width
   useEffect(() => {
     const updateVisibleProducts = () => {
       const screenWidth = window.innerWidth;
       if (screenWidth < 1024) {
         setVisibleProducts(products.slice(0, 4));
       } else {
-        setVisibleProducts(products.slice(0, 5)); 
+        setVisibleProducts(products.slice(0, 5));
       }
     };
+
+    // Run once on mount
+    updateVisibleProducts();
+
+    // Attach event listener
+    window.addEventListener("resize", updateVisibleProducts);
+    
+    // Cleanup listener on unmount
     return () => {
       window.removeEventListener("resize", updateVisibleProducts);
     };
-  }, []); 
+  }, []);
 
   const updateQuantity = (id: number, newQuantity: number) => {
     setCartItems((prevItems) =>
@@ -50,21 +58,21 @@ const ComponentsPage = () => {
           <Banner />
         </section>
 
-        <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 lg:p-16 lg:pl-[60px] pb-[40px]">
-          {visibleProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </section>    
+        <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 pb-[40px]">
+        {visibleProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </section>
 
       {/* Categories */}
-      <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4  pb-[40px]">
         {categories.map((category) => (
           <CategoryCard key={category.id} category={category} />
         ))}
       </section>
        
-        <form className="w-full max-w-md mx-auto rounded-xl bg-white p-6 sm:p-8 shadow-lg">
-  <div className="flex flex-col space-y-4">
+        <form className="w-full max-w-md mx-auto rounded-xl bg-white p-6 sm:p-8 shadow-lg ">
+  <div className="flex flex-col space-y-4 pb-[60px]">
     <label htmlFor="first_name" className="text-sm font-medium">First Name</label>
     <input
       type="text"
