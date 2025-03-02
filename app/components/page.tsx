@@ -25,13 +25,8 @@ const ComponentsPage = () => {
       }
     };
 
-    // Run once on mount
     updateVisibleProducts();
-
-    // Attach event listener
     window.addEventListener("resize", updateVisibleProducts);
-    
-    // Cleanup listener on unmount
     return () => {
       window.removeEventListener("resize", updateVisibleProducts);
     };
