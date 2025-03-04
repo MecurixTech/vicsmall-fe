@@ -1,4 +1,4 @@
-'use client'; // ✅ Must be lowercase
+'use client';
 
 import React from 'react';
 import ProductSettings from './product-settings';

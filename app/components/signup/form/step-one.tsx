@@ -1,67 +1,44 @@
-import { Field, Form, Formik } from "formik";
-import {
-  ArrowForwardOutlined,
-  RemoveRedEyeOutlined,
-  VisibilityOffOutlined,
-} from "@mui/icons-material";
-import * as Yup from "yup";
-import { useState } from "react";
-import PhoneInput from "react-phone-number-input/input";
-import Link from "next/link";
+"use client"
+
+import type React from "react"
+import { Field, Form, Formik } from "formik"
+import { ArrowForwardOutlined, RemoveRedEyeOutlined, VisibilityOffOutlined } from "@mui/icons-material"
+import * as Yup from "yup"
+import { useState } from "react"
+import PhoneInput from "react-phone-input-2"
+import "react-phone-input-2/lib/style.css"
+import Link from "next/link"
+import type { FormData } from "@/types/auth"
 
 const stepOneValidationSchema = Yup.object({
-  email: Yup.string()
-    .email("Invalid email address")
-    .required("Your email is required"),
-  first_name: Yup.string().required("Please enter your first name"),
-  last_name: Yup.string().required("Please enter your last name"),
+  email: Yup.string().email("Invalid email address").required("Your email is required"),
+  full_name: Yup.string().required("Please enter your full name"),
+  country_code: Yup.string().required("Country code is required"),
   phone_number: Yup.string().required("Please enter your phone number"),
-  password: Yup.string()
-    .min(8, "Password is too short - should be 8 characters minimum.")
-    .required("Required"),
+  password: Yup.string().min(8, "Password is too short - should be 8 characters minimum.").required("Required"),
   confirm_password: Yup.string()
     .required("Required")
     .min(8, "Password is too short")
     .oneOf([Yup.ref("password")], "Passwords must match"),
-});
+})
 
 interface StepOneProps {
-  data: {
-    email: string;
-    first_name: string;
-    last_name: string;
-    phone_number: string;
-    password: string;
-    confirm_password: string;
-  };
-  next: (values: {
-    email: string;
-    first_name: string;
-    last_name: string;
-    phone_number: string;
-    password: string;
-    confirm_password: string;
-  }, isFinalStep: boolean) => void;
+  data: FormData
+  next: (values: FormData, final: boolean) => void
 }
 
 const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
-  const [isShowingPassword, setIsShowingPassword] = useState(false);
-  const [isShowingConfirmPassword, setIsShowingConfirmPassword] = useState(false);
-  const [loading] = useState(false);
+  const [isShowingPassword, setIsShowingPassword] = useState(false)
+  const [isShowingConfirmPassword, setIsShowingConfirmPassword] = useState(false)
 
-  const handleSubmit = (values: typeof data) => {
-    console.log("Form data saved for Step Two:", values);
-    next(values, false);
-  };
-    
+  const handleSubmit = (values: FormData) => {
+    next(values, true)
+  }
+
   return (
     <>
-      <Formik
-        initialValues={data}
-        validationSchema={stepOneValidationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ values, errors, touched, setFieldValue }) => (
+      <Formik initialValues={data} validationSchema={stepOneValidationSchema} onSubmit={handleSubmit}>
+        {({ values, errors, touched, setFieldValue, isSubmitting }) => (
           <Form className="mb-8">
             <h1 className="mb-8 text-center text-2xl">Sign up to Vicsmall</h1>
 
@@ -75,55 +52,55 @@ const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
                 placeholder="e.g. johndoe@gmail.com"
                 required
               />
-              {touched.email && errors.email && (
-                <div className="text-red-600">{errors.email}</div>
-              )}
-            </div>
-
-            <div className="mb-4 flex gap-2">
-              <div className="flex-1">
-                <label htmlFor="first_name">First name</label>
-                <Field
-                  type="text"
-                  id="first_name"
-                  name="first_name"
-                  className="w-full"
-                  placeholder="e.g. John"
-                  required
-                />
-                {touched.first_name && errors.first_name && (
-                  <div className="text-red-600">{errors.first_name}</div>
-                )}
-              </div>
-
-              <div className="flex-1">
-                <label htmlFor="last_name">Last name</label>
-                <Field
-                  type="text"
-                  id="last_name"
-                  name="last_name"
-                  className="w-full"
-                  placeholder="e.g. Doe"
-                  required
-                />
-                {touched.last_name && errors.last_name && (
-                  <div className="text-red-600">{errors.last_name}</div>
-                )}
-              </div>
+              {touched.email && errors.email && <div className="text-red-600">{errors.email}</div>}
             </div>
 
             <div className="mb-4">
-              <label htmlFor="phone_number">Phone number</label>
-              <PhoneInput
-                placeholder="Enter phone number"
-                value={values.phone_number}
-                onChange={(value) => setFieldValue("phone_number", value)}
-                country="NG"
+              <label htmlFor="full_name">Full Name</label>
+              <Field
+                type="text"
+                id="full_name"
+                name="full_name"
                 className="w-full"
+                placeholder="e.g. John Doe"
+                required
               />
-              {touched.phone_number && errors.phone_number && (
-                <div className="text-red-600">{errors.phone_number}</div>
-              )}
+              {touched.full_name && errors.full_name && <div className="text-red-600">{errors.full_name}</div>}
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="phone_number" className="flex items-center gap-1">
+                Phone Number
+                <span className="text-red-500">*</span>
+              </label>
+              <div className="w-full">
+                <PhoneInput
+                  country="ng"
+                  value={values.phone_number}
+                  onChange={(phone, country: any) => {
+                    setFieldValue("phone_number", phone)
+                    setFieldValue("country_code", country.dialCode)
+                  }}
+                  inputClass="!w-full"
+                  containerClass="!w-full"
+                  buttonClass="!bg-[#F5F5F5] !border-[#A8A6A6] !rounded-[10px]"
+                  dropdownClass="!w-[300px]"
+                  specialLabel=""
+                  inputStyle={{
+                    width: "100%",
+                    height: "45px",
+                    fontSize: "14px",
+                    borderRadius: "10px",
+                    border: "0.5px solid #A8A6A6",
+                  }}
+                  buttonStyle={{
+                    border: "0.5px solid #A8A6A6",
+                    borderRadius: "10px",
+                    backgroundColor: "#F5F5F5",
+                  }}
+                />
+              </div>
+              {touched.phone_number && errors.phone_number && <div className="text-red-600">{errors.phone_number}</div>}
             </div>
 
             <div className="mb-4">
@@ -141,16 +118,10 @@ const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
                   onClick={() => setIsShowingPassword((prev) => !prev)}
                   className="absolute right-4 top-1/2 -translate-y-1/2"
                 >
-                  {isShowingPassword ? (
-                    <RemoveRedEyeOutlined />
-                  ) : (
-                    <VisibilityOffOutlined />
-                  )}
+                  {isShowingPassword ? <RemoveRedEyeOutlined /> : <VisibilityOffOutlined />}
                 </button>
               </div>
-              {touched.password && errors.password && (
-                <div className="text-red-600">{errors.password}</div>
-              )}
+              {touched.password && errors.password && <div className="text-red-600">{errors.password}</div>}
             </div>
 
             <div className="mb-4">
@@ -168,11 +139,7 @@ const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
                   onClick={() => setIsShowingConfirmPassword((prev) => !prev)}
                   className="absolute right-4 top-1/2 -translate-y-1/2"
                 >
-                  {isShowingConfirmPassword ? (
-                    <RemoveRedEyeOutlined />
-                  ) : (
-                    <VisibilityOffOutlined />
-                  )}
+                  {isShowingConfirmPassword ? <RemoveRedEyeOutlined /> : <VisibilityOffOutlined />}
                 </button>
               </div>
               {touched.confirm_password && errors.confirm_password && (
@@ -183,10 +150,10 @@ const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
             <button
               type="submit"
               className="button button-accent flex w-full items-center justify-center gap-1 py-3"
-              disabled={loading} // Disable the button when loading
+              disabled={isSubmitting}
             >
-              {loading ? (
-                <span className="loader"> Creating Account...</span>
+              {isSubmitting ? (
+                <span className="loader">Submitting...</span>
               ) : (
                 <>
                   <span>Continue</span>
@@ -205,7 +172,8 @@ const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
         </Link>
       </p>
     </>
-  );
-};
+  )
+}
 
-export default StepOne;
+export default StepOne
+

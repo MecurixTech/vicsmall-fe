@@ -21,7 +21,6 @@ const ChangePasswordForm = () => {
   const handleSubmit = async (values: typeof initialValues) => {
     try {
       const token = localStorage.getItem("token");
-      console.log(token)
       if (!token) {
         alert("You must be logged in to change your password.");
         return;
@@ -50,7 +49,6 @@ const ChangePasswordForm = () => {
         alert(data.message || "Failed to update password");
       }
     } catch (error) {
-      console.error("Error updating password:", error);
       alert("Something went wrong. Please try again later.");
     }
   };

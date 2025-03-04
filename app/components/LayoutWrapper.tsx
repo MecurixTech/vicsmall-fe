@@ -1,4 +1,4 @@
-"use client"; // ✅ Mark this as a client component
+"use client"; 
 
 import { usePathname } from "next/navigation";
 import Navbar from "./navbar";
@@ -9,7 +9,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
   return (
     <>
-      {!hideNavbarRoutes.includes(pathname) && <Navbar />} {/* ✅ Hide on /login & /faq */}
+      {!hideNavbarRoutes.includes(pathname) && <Navbar />}
       <main>{children}</main>
     </>
   );
