@@ -1,222 +1,168 @@
-"use client";
+"use client"
 
-import { Field, Form, Formik } from "formik";
-import {
-  ArrowForwardOutlined,
-  RemoveRedEyeOutlined,
-  VisibilityOffOutlined,
-} from "@mui/icons-material";
-import * as Yup from "yup";
-import { useState } from "react";
-import { Value } from "react-phone-number-input";
-import PhoneInput from "react-phone-number-input/input";
-import Link from "next/link";
+import type React from "react"
+import { Field, Form, Formik } from "formik"
+import { ArrowForwardOutlined, RemoveRedEyeOutlined, VisibilityOffOutlined } from "@mui/icons-material"
+import * as Yup from "yup"
+import { useState } from "react"
+import PhoneInput from "react-phone-input-2"
+import "react-phone-input-2/lib/style.css"
+import Link from "next/link"
+import type { FormData } from "@/types/auth"
 
 const stepOneValidationSchema = Yup.object({
-  email: Yup.string()
-    .email("Invalid email address")
-    .required("Your email is required"),
-  first_name: Yup.string().required("Please enter your first name"),
-  last_name: Yup.string().required("Please enter your last name"),
+  email: Yup.string().email("Invalid email address").required("Your email is required"),
+  full_name: Yup.string().required("Please enter your full name"),
+  country_code: Yup.string().required("Country code is required"),
   phone_number: Yup.string().required("Please enter your phone number"),
-  password: Yup.string()
-    .min(8, "Password is too short - should be 8 characters minimum.")
-    .required("Required"),
+  password: Yup.string().min(8, "Password is too short - should be 8 characters minimum.").required("Required"),
   confirm_password: Yup.string()
     .required("Required")
     .min(8, "Password is too short")
     .oneOf([Yup.ref("password")], "Passwords must match"),
-});
+})
 
-const StepOne = (props: {
-  next: (
-    newData: {
-      email: string;
-      first_name: string;
-      last_name: string;
-      phone_number: string;
-      password: string;
-      confirm_password: string;
-      interests: string;
-    },
-    final: boolean,
-  ) => void;
-  data: {
-    email: string;
-    first_name: string;
-    last_name: string;
-    phone_number: string;
-    password: string;
-    confirm_password: string;
-    interests: string;
-  };
-  key: number;
-}) => {
-  const handleSubmit = (values: {
-    email: string;
-    first_name: string;
-    last_name: string;
-    phone_number: string;
-    password: string;
-    confirm_password: string;
-    interests: string;
-  }) => {
-    console.log("Wassup!");
-    props.next(values, false);
-  };
+interface StepOneProps {
+  data: FormData
+  next: (values: FormData, final: boolean) => void
+}
 
-  const [isShowingPassword, setIsShowingPassword] = useState<boolean>(false);
-  const [isShowingConfirmPassword, setIsShowingConfirmPassword] =
-    useState<boolean>(false);
-  const [phoneNumber, setPhoneNumber] = useState<Value>();
+const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
+  const [isShowingPassword, setIsShowingPassword] = useState(false)
+  const [isShowingConfirmPassword, setIsShowingConfirmPassword] = useState(false)
+
+  const handleSubmit = (values: FormData) => {
+    next(values, true)
+  }
 
   return (
     <>
-      <Formik
-        initialValues={props.data}
-        validationSchema={stepOneValidationSchema}
-        onSubmit={handleSubmit}
-      >
-        <Form className="mb-8">
-          <h1 className="mb-8 text-center text-2xl">Sign up to Vicsmall</h1>
-          <div className="mb-4">
-            <div className="mb-2 mr-2 flex items-center justify-between">
+      <Formik initialValues={data} validationSchema={stepOneValidationSchema} onSubmit={handleSubmit}>
+        {({ values, errors, touched, setFieldValue, isSubmitting }) => (
+          <Form className="mb-8">
+            <h1 className="mb-8 text-center text-2xl">Sign up to Vicsmall</h1>
+
+            <div className="mb-4">
               <label htmlFor="email">Email</label>
-              <span className="text-xl font-bold leading-none text-red-500">
-                *
-              </span>
-            </div>
-            <Field
-              type="text"
-              id="email"
-              name="email"
-              className="w-full"
-              placeholder="e.g. johndoe@gmail.com"
-              required
-            />
-            {/* <ErrorMessage name="email" component={TextError} /> */}
-          </div>
-
-          <div className="mb-4 flex gap-2">
-            <div className="flex-1">
-              <div className="mb-2 mr-2 flex items-center justify-between">
-                <label htmlFor="first_name">First name</label>
-                <span className="text-xl font-bold leading-none text-red-500">
-                  *
-                </span>
-              </div>
               <Field
-                type="text"
-                id="first_name"
-                name="first_name"
+                type="email"
+                id="email"
+                name="email"
                 className="w-full"
-                placeholder="e.g. John"
+                placeholder="e.g. johndoe@gmail.com"
                 required
               />
-              {/* <ErrorMessage name="first_name" component={TextError} /> */}
+              {touched.email && errors.email && <div className="text-red-600">{errors.email}</div>}
             </div>
 
-            <div className="flex-1">
-              <div className="mb-2 mr-2 flex items-center justify-between">
-                <label htmlFor="last_name">Last name</label>
-                <span className="text-xl font-bold leading-none text-red-500">
-                  *
-                </span>
-              </div>
+            <div className="mb-4">
+              <label htmlFor="full_name">Full Name</label>
               <Field
                 type="text"
-                id="last_name"
-                name="last_name"
+                id="full_name"
+                name="full_name"
                 className="w-full"
-                placeholder="e.g. Doe"
+                placeholder="e.g. John Doe"
                 required
               />
-              {/* <ErrorMessage name="last_name" component={TextError} /> */}
+              {touched.full_name && errors.full_name && <div className="text-red-600">{errors.full_name}</div>}
             </div>
-          </div>
 
-          <div className="mb-4">
-            <div className="mb-2 mr-2 flex items-center justify-between">
-              <label htmlFor="phone_number">Phone number</label>
-              <span className="text-xl font-bold leading-none text-red-500">
-                *
-              </span>
+            <div className="mb-4">
+              <label htmlFor="phone_number" className="flex items-center gap-1">
+                Phone Number
+                <span className="text-red-500">*</span>
+              </label>
+              <div className="w-full">
+                <PhoneInput
+                  country="ng"
+                  value={values.phone_number}
+                  onChange={(phone, country: any) => {
+                    setFieldValue("phone_number", phone)
+                    setFieldValue("country_code", country.dialCode)
+                  }}
+                  inputClass="!w-full"
+                  containerClass="!w-full"
+                  buttonClass="!bg-[#F5F5F5] !border-[#A8A6A6] !rounded-[10px]"
+                  dropdownClass="!w-[300px]"
+                  specialLabel=""
+                  inputStyle={{
+                    width: "100%",
+                    height: "45px",
+                    fontSize: "14px",
+                    borderRadius: "10px",
+                    border: "0.5px solid #A8A6A6",
+                  }}
+                  buttonStyle={{
+                    border: "0.5px solid #A8A6A6",
+                    borderRadius: "10px",
+                    backgroundColor: "#F5F5F5",
+                  }}
+                />
+              </div>
+              {touched.phone_number && errors.phone_number && <div className="text-red-600">{errors.phone_number}</div>}
             </div>
-            <PhoneInput
-              placeholder="Enter phone number"
-              value={phoneNumber}
-              onChange={setPhoneNumber}
-            />
-          </div>
 
-          <div className="mb-4">
-            <div className="mb-2 mr-2 flex items-center justify-between">
+            <div className="mb-4">
               <label htmlFor="password">Password</label>
-              <span className="text-xl font-bold leading-none text-red-500">
-                *
-              </span>
+              <div className="relative">
+                <Field
+                  type={isShowingPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                  className="w-full"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setIsShowingPassword((prev) => !prev)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2"
+                >
+                  {isShowingPassword ? <RemoveRedEyeOutlined /> : <VisibilityOffOutlined />}
+                </button>
+              </div>
+              {touched.password && errors.password && <div className="text-red-600">{errors.password}</div>}
             </div>
-            <div className="relative">
-              <Field
-                type={isShowingPassword ? "text" : "password"}
-                id="password"
-                name="password"
-                className="w-full"
-                required
-              />
-              <button
-                type="button"
-                onClick={() => setIsShowingPassword((prev) => !prev)}
-                className="absolute right-4 top-1/2 -translate-y-1/2"
-              >
-                {isShowingPassword ? (
-                  <RemoveRedEyeOutlined />
-                ) : (
-                  <VisibilityOffOutlined />
-                )}
-              </button>
-            </div>
-            {/* <ErrorMessage name="password" component={TextError} /> */}
-          </div>
 
-          <div className="mb-4">
-            <div className="mb-2 mr-2 flex items-center justify-between">
+            <div className="mb-4">
               <label htmlFor="confirm_password">Confirm password</label>
-              <span className="text-xl font-bold leading-none text-red-500">
-                *
-              </span>
+              <div className="relative">
+                <Field
+                  type={isShowingConfirmPassword ? "text" : "password"}
+                  id="confirm_password"
+                  name="confirm_password"
+                  className="w-full"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setIsShowingConfirmPassword((prev) => !prev)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2"
+                >
+                  {isShowingConfirmPassword ? <RemoveRedEyeOutlined /> : <VisibilityOffOutlined />}
+                </button>
+              </div>
+              {touched.confirm_password && errors.confirm_password && (
+                <div className="text-red-600">{errors.confirm_password}</div>
+              )}
             </div>
-            <div className="relative">
-              <Field
-                type={isShowingConfirmPassword ? "text" : "password"}
-                id="confirm_password"
-                name="confirm_password"
-                className="w-full"
-                required
-              />
-              <button
-                type="button"
-                onClick={() => setIsShowingConfirmPassword((prev) => !prev)}
-                className="absolute right-4 top-1/2 -translate-y-1/2"
-              >
-                {isShowingConfirmPassword ? (
-                  <RemoveRedEyeOutlined />
-                ) : (
-                  <VisibilityOffOutlined />
-                )}
-              </button>
-            </div>
-            {/* <ErrorMessage name="confirm_password" component={TextError} /> */}
-          </div>
 
-          <button
-            type="submit"
-            className="button button-accent flex w-full items-center justify-center gap-1 py-3"
-          >
-            <span>Continue</span>
-            <ArrowForwardOutlined fontSize="inherit" className="mt-1" />
-          </button>
-        </Form>
+            <button
+              type="submit"
+              className="button button-accent flex w-full items-center justify-center gap-1 py-3"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <span className="loader">Submitting...</span>
+              ) : (
+                <>
+                  <span>Continue</span>
+                  <ArrowForwardOutlined fontSize="inherit" className="mt-1" />
+                </>
+              )}
+            </button>
+          </Form>
+        )}
       </Formik>
 
       <p className="text-center">
@@ -226,7 +172,8 @@ const StepOne = (props: {
         </Link>
       </p>
     </>
-  );
-};
+  )
+}
 
-export default StepOne;
+export default StepOne
+

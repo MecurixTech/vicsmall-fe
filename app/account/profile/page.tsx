@@ -1,27 +1,22 @@
 "use client";
-
+import ChangePasswordForm from "../profile/changepassword";
 import { Field, Form, Formik } from "formik";
 
 const ProfilePage = () => {
+  
+  const storedUser = typeof window !== "undefined" ? localStorage.getItem("user") : null;
+  const user = storedUser ? JSON.parse(storedUser) : { full_name: "", email: "", phone_number: "" };
+
   const initialValues = {
-    first_name: "John",
-    last_name: "Doe",
-    display_name: "johndoe123",
-    email: "thejohndoe@gmail.com",
+    full_name: user.full_name || "",
+    phone_number: user.phone_number || "",
+    email: user.email || "",
     current_password: "",
     new_password: "",
     confirm_new_password: "",
   };
 
-  const onSubmit = (values: {
-    first_name: string;
-    last_name: string;
-    display_name: string;
-    email: string;
-    current_password: string;
-    new_password: string;
-    confirm_new_password: string;
-  }) => {
+  const onSubmit = (values: typeof initialValues) => {
     console.log(values);
   };
   return (
@@ -32,26 +27,18 @@ const ProfilePage = () => {
         <Form>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="col-span-1">
-              <label htmlFor="first_name" className="mb-2">
-                First name
+              <label htmlFor="full_name" className="mb-2">
+                Full Name
               </label>
-              <Field type="text" name="first_name" className="w-full" />
+              <Field type="text" name="full_name" className="w-full" />
             </div>
+           
             <div className="col-span-1">
-              <label htmlFor="last_name" className="mb-2">
-                Last name
+              <label htmlFor="phone_number" className="mb-2">
+                Phone Number
               </label>
-              <Field type="text" name="last_name" className="w-full" />
-            </div>
-            <div className="col-span-1">
-              <label htmlFor="display_name" className="mb-2">
-                Display name
-              </label>
-              <Field type="text" name="display_name" className="w-full" />
-              <p className="mt-1 text-xs text-gray-400">
-                This will be how your name will be displayed in the account
-                section and in reviews
-              </p>
+              <Field type="text" name="phone_number" className="w-full" />
+              
             </div>
             <div className="col-span-1">
               <label htmlFor="email" className="mb-2">
@@ -63,39 +50,7 @@ const ProfilePage = () => {
 
           <hr className="my-4" />
 
-          <h2 className="mb-4 text-base">Password change</h2>
-          <div className="mb-4 grid gap-4 sm:grid-cols-2">
-            <div className="col-span-1">
-              <label htmlFor="current_password" className="mb-2">
-                Current password (leave blank to leave unchanged)
-              </label>
-              <Field
-                type="password"
-                name="current_password"
-                className="w-full"
-              />
-            </div>
-            <div className="col-span-1">
-              <label htmlFor="new_password" className="mb-2">
-                New password (leave blank to leave unchanged)
-              </label>
-              <Field type="password" name="new_password" className="w-full" />
-            </div>
-            <div className="col-span-1">
-              <label htmlFor="confirm_new_password" className="mb-2">
-                Confirm new password
-              </label>
-              <Field
-                type="password"
-                name="confirm_new_password"
-                className="w-full"
-              />
-            </div>
-          </div>
-
-          <button type="submit" className="button button-accent px-8 py-3">
-            Save changes
-          </button>
+         <ChangePasswordForm/>
         </Form>
       </Formik>
     </>
