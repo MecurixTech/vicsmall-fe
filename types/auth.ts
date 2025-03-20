@@ -9,6 +9,7 @@ export interface SignUpCredentials {
   export interface SignUpResult {
     success: boolean
     error?: string
+    token?: string
   }
   
   export interface FormData extends SignUpCredentials {

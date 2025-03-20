@@ -9,42 +9,29 @@ import {
 
 type ProductGalleryProps = {
   selectedColor: "black" | "red" | "orange" | "gray" | null;
+  productImages?: string;
 };
 
-const ProductGallery = ({ selectedColor }: ProductGalleryProps) => {
-  const colorImages: Record<"black" | "red" | "orange" | "gray", string> = {
-    black: "https://utfs.io/f/QVO6Qx1nmSgLG3FzAH7JYIBchDetdlziMZ8s6VUkq7WogTf9",
-    red: "https://utfs.io/f/QVO6Qx1nmSgLaEH2bWNQ0exu3JRmPfQalwBhoDrXWTHybOqV",
-    orange:
-      "https://utfs.io/f/QVO6Qx1nmSgL4uZFXwKmQVIExXUGOkvDzsPKiWZ6tcA9frHw",
-    gray: "https://utfs.io/f/QVO6Qx1nmSgLjezgUBpsuHGkVwpI8Qh52RFU71LnKtMNcZXo",
-  };
+const ProductGallery = ({
+  selectedColor,
+  productImages,
+}: ProductGalleryProps) => {
+  const apiImages = productImages
+    ? productImages.split(",").filter(Boolean)
+    : [];
 
-  const thumbnail = {
-    firstthumbnail:
-      "https://utfs.io/f/QVO6Qx1nmSgLjezgUBpsuHGkVwpI8Qh52RFU71LnKtMNcZXo",
-    secondthumbnail:
-      "https://utfs.io/f/QVO6Qx1nmSgLaEH2bWNQ0exu3JRmPfQalwBhoDrXWTHybOqV",
-    thirdthumbnail:
-      "https://utfs.io/f/QVO6Qx1nmSgL4uZFXwKmQVIExXUGOkvDzsPKiWZ6tcA9frHw",
-    fourththumbnail:
-      "https://utfs.io/f/QVO6Qx1nmSgLG3FzAH7JYIBchDetdlziMZ8s6VUkq7WogTf9",
-    fifththumbnail:
-      "https://utfs.io/f/QVO6Qx1nmSgLG3FzAH7JYIBchDetdlziMZ8s6VUkq7WogTf9",
-    sixththumbnail:
-      "https://utfs.io/f/QVO6Qx1nmSgLaEH2bWNQ0exu3JRmPfQalwBhoDrXWTHybOqV",
-    sevenththumbnail:
-      "https://utfs.io/f/QVO6Qx1nmSgL4uZFXwKmQVIExXUGOkvDzsPKiWZ6tcA9frHw",
-    eighththumbnail:
-      "https://utfs.io/f/QVO6Qx1nmSgLjezgUBpsuHGkVwpI8Qh52RFU71LnKtMNcZXo",
-    ninththumbnail:
-      "https://utfs.io/f/QVO6Qx1nmSgLjezgUBpsuHGkVwpI8Qh52RFU71LnKtMNcZXo",
-  };
+  const processedApiImages =
+    apiImages.length === 1 ? [apiImages[0], apiImages[0]] : apiImages;
 
-  const defaultImage = colorImages.black;
-  const productImage = selectedColor
-    ? colorImages[selectedColor]
-    : defaultImage;
+  const defaultImage =
+    processedApiImages.length > 0
+      ? processedApiImages[0]
+      : "/placeholder.svg?height=400&width=600";
+
+  const thumbnailImages =
+    processedApiImages.length > 0
+      ? processedApiImages
+      : Array(4).fill("/placeholder.svg?height=120&width=120");
 
   const [hoveredImage, setHoveredImage] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -86,7 +73,7 @@ const ProductGallery = ({ selectedColor }: ProductGalleryProps) => {
     <div className="flex flex-col items-center gap-4 sm:gap-6">
       <div className="relative w-full max-w-md sm:max-w-lg lg:max-w-xl">
         <Image
-          src={hoveredImage || productImage}
+          src={hoveredImage || defaultImage}
           alt="Product image"
           layout="responsive"
           quality={100}
@@ -111,7 +98,7 @@ const ProductGallery = ({ selectedColor }: ProductGalleryProps) => {
           className="scrollbar-hide flex w-full gap-2 overflow-x-auto py-2 md:gap-4"
           onScroll={checkScroll}
         >
-          {Object.values(thumbnail).map((image, index) => (
+          {thumbnailImages.map((image, index) => (
             <div
               key={index}
               className="relative h-16 w-16 flex-shrink-0 cursor-pointer overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105 md:h-20 md:w-20"
@@ -119,7 +106,7 @@ const ProductGallery = ({ selectedColor }: ProductGalleryProps) => {
               onMouseLeave={() => setHoveredImage(null)}
             >
               <Image
-                src={image}
+                src={image || "/placeholder.svg"}
                 alt={`Thumbnail ${index}`}
                 layout="fill"
                 objectFit="cover"

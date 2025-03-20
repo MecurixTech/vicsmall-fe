@@ -5,7 +5,7 @@ const ProductCardV2 = ({ productData }: { productData: productData }) => {
   return (
     <div className="col-span-1 rounded-xl border border-gray-200 bg-neutral-light-gray p-2">
       <Image
-        src={productData.imgSrc}
+        src="https://is7tai1wim.ufs.sh/f/QVO6Qx1nmSgLZmWv7R2vxIKbf5HP786CAD3UTizeLcunXgQ1"
         alt={productData.name}
         height={120}
         width={120}

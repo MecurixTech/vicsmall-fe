@@ -3,10 +3,13 @@ import Footer from "../components/footer";
 import Link from "next/link";
 import { CallOutlined } from "@mui/icons-material";
 import FAQList from "./faqs/faqList";
+import NavbarWrapper from "../components/Navbarwrapper";
 
 const ContactUsPage = () => {
   return (
     <>
+    <NavbarWrapper pageType="conditionalnavbar" />
+    
       <div className="mx-auto mb-16 block w-[95%] overflow-hidden rounded-xl bg-white shadow-lg sm:flex lg:w-4/5">
         <div className="h-[40vh] flex-1 sm:h-auto">
           <Image

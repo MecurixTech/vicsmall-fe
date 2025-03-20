@@ -1,341 +1,215 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import NavbarWrapper from "../components/Navbarwrapper"
+import { getCategories, type Category } from "@/lib/api"
+import Image from "next/image"
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  colors?: string[];
-  rating: number;
-  hasShipping?: boolean;
-}
+export default function CategoriesPage() {
+  const [categories, setCategories] = useState<Category[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
 
-const products: Product[] = [
-  {
-    id: 1,
-    name: "Elegant Watch",
-    price: 34500,
-    image: "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
-    colors: ["#C0C0C0", "#FFD700", "#8B4513"],
-    rating: 4,
-  },
-  {
-    id: 2,
-    name: "Diamond Ring",
-    price: 55000,
-    image: "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
-    colors: ["#FFD700", "#C0C0C0", "#FFFFFF"],
-    rating: 5,
-  },
-  {
-    id: 3,
-    name: "Gold Anklet",
-    price: 28000,
-    image: "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
-    colors: ["#FFD700", "#FFA500"],
-    rating: 3,
-  },
-  {
-    id: 4,
-    name: "Silver Wrist Stud",
-    price: 15000,
-    image: "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
-    colors: ["#C0C0C0", "#000000", "#FFFFFF"],
-    rating: 4,
-  },
-  {
-    id: 5,
-    name: "Silver",
-    price: 15000,
-    image: "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
-    colors: ["#C0C0C0", "#000000", "#FFFFFF"],
-    rating: 4,
-  },
-  {
-    id: 6,
-    name: "Silver",
-    price: 15000,
-    image: "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
-    colors: ["#C0C0C0", "#000000", "#FFFFFF"],
-    rating: 4,
-  },
-  {
-    id: 7,
-    name: "Silver",
-    price: 15000,
-    image: "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
-    colors: ["#C0C0C0", "#000000", "#FFFFFF"],
-    rating: 4,
-  },
-  {
-    id: 8,
-    name: "Silver",
-    price: 15000,
-    image: "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
-    colors: ["#C0C0C0", "#000000", "#FFFFFF"],
-    rating: 4,
-  },
-  {
-    id: 9,
-    name: "Silver",
-    price: 15000,
-    image: "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
-    colors: ["#C0C0C0", "#000000", "#FFFFFF"],
-    rating: 4,
-  },
-  {
-    id: 10,
-    name: "Silver",
-    price: 15000,
-    image: "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
-    colors: ["#C0C0C0", "#000000", "#FFFFFF"],
-    rating: 4,
-  },
-  {
-    id: 11,
-    name: "Silver",
-    price: 15000,
-    image: "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
-    colors: ["#C0C0C0", "#000000", "#FFFFFF"],
-    rating: 4,
-  },
-  {
-    id: 12,
-    name: "Silver",
-    price: 15000,
-    image: "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
-    colors: ["#C0C0C0", "#000000", "#FFFFFF"],
-    rating: 4,
-  },
-  {
-    id: 13,
-    name: "Silver",
-    price: 15000,
-    image: "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
-    colors: ["#C0C0C0", "#000000", "#FFFFFF"],
-    rating: 4,
-  },
-  {
-    id: 14,
-    name: "Silver",
-    price: 15000,
-    image: "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
-    colors: ["#C0C0C0", "#000000", "#FFFFFF"],
-    rating: 4,
-  },
-  {
-    id: 15,
-    name: "Silver",
-    price: 15000,
-    image: "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
-    colors: ["#C0C0C0", "#000000", "#FFFFFF"],
-    rating: 4,
-  },
-];
+  useEffect(() => {
 
-while (products.length < 16) {
-  products.push({
-    id: products.length + 1,
-    name: "Product Name",
-    price: 34500,
-    image: "https://utfs.io/f/wLDjZbdcJHpRYvzkoJDnqwxQN14hETb5kDvde3zrKMJZfRX0",
-    colors: ["#FF0000", "#00FF00", "#0000FF"],
-    rating: Math.floor(Math.random() * 4) + 1,
-  });
-}
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
 
-const categories = [
-  "All Accessories",
-  "Watches",
-  "Rings",
-  "Anklets",
-  "Wrist Studs",
-];
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
 
-export default function AccessoriesPage() {
-  const [selectedCategory, setSelectedCategory] = useState("All Accessories");
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-  const [selectedRating, setSelectedRating] = useState(0);
+    const fetchCategories = async () => {
+      setIsLoading(true)
+      try {
+        const data = await getCategories()
+        setCategories(data)
+      } catch (error) {
+        console.error("Error fetching categories:", error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
 
-  const filteredProducts = products.filter((product) => {
-    const categoryMatch =
-      selectedCategory === "All Accessories" ||
-      product.name.toLowerCase().includes(selectedCategory.toLowerCase());
-    const priceMatch =
-      (!minPrice || product.price >= parseInt(minPrice)) &&
-      (!maxPrice || product.price <= parseInt(maxPrice));
-    const ratingMatch =
-      selectedRating === 0 || product.rating >= selectedRating;
-    return categoryMatch && priceMatch && ratingMatch;
-  });
+    fetchCategories()
 
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8 flex gap-2 text-sm text-gray-500">
-        <Link href="/" className="hover:text-gray-700">
-          Home
-        </Link>
-        <span>/</span>
-        <span className="text-gray-700">Accessories</span>
-      </div>
+    return () => {
+      window.removeEventListener("resize", checkMobile)
+    }
+  }, [])
 
-      <div className="grid gap-8 lg:grid-cols-[250px_1fr]">
-        {/* Filters Sidebar */}
-        <div className="space-y-6 rounded-lg bg-white p-6 shadow-md">
-          <div>
-            <h2 className="mb-4 text-lg font-semibold">Accessories</h2>
-            <ul className="space-y-2">
-              {categories.map((category) => (
-                <li key={category}>
-                  <button
-                    className={`w-full rounded-md px-4 py-2 text-left ${
-                      selectedCategory === category ? "bg-gray-100" : ""
-                    } transition-colors hover:bg-gray-100`}
-                    onClick={() => setSelectedCategory(category)}
-                  >
-                    {category}
-                  </button>
-                </li>
-              ))}
-            </ul>
+  if (isLoading && isMobile) {
+    return (
+      <div className="min-h-screen bg-[#F9F9F9] pb-24">
+        <NavbarWrapper />
+
+        <div className="px-6 py-4 mt-4">
+          <div className="bg-white rounded-md shadow-md p-4 mb-5 flex justify-between items-center animate-pulse">
+            <div className="h-4 w-24 bg-gray-200 rounded"></div>
+            <div className="h-4 w-4 bg-gray-200 rounded"></div>
           </div>
 
-          <div>
-            <h2 className="mb-4 text-lg font-semibold">Sort By Price</h2>
-            <div className="flex items-center gap-2">
-              <input
-                type="number"
-                placeholder="Min"
-                value={minPrice}
-                onChange={(e) => setMinPrice(e.target.value)}
-                className="w-20 rounded-md border px-2 py-1"
-              />
-              <span>-</span>
-              <input
-                type="number"
-                placeholder="Max"
-                value={maxPrice}
-                onChange={(e) => setMaxPrice(e.target.value)}
-                className="w-20 rounded-md border px-2 py-1"
-              />
-            </div>
-          </div>
+          <div className="flex flex-col gap-5">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="bg-white rounded-md shadow-md p-4 animate-pulse">
+                <div className="h-4 w-32 bg-gray-200 rounded mb-4"></div>
 
-          <div>
-            <h2 className="mb-4 text-lg font-semibold">Sort By Rating</h2>
-            <div className="space-y-2">
-              {[5, 4, 3, 2, 1].map((rating) => (
-                <button
-                  key={rating}
-                  className={`w-full rounded-md px-4 py-2 text-left ${selectedRating === rating ? "bg-gray-100" : ""} transition-colors hover:bg-gray-100`}
-                  onClick={() => setSelectedRating(rating)}
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-gray-600">
-                      {rating} Stars
-                    </span>
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <svg
-                        key={i}
-                        className={`h-4 w-4 ${i < rating ? "fill-yellow-400 text-yellow-400" : "fill-[#B6B6B6] text-gray-300"}`}
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                      </svg>
-                    ))}
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Product Grid */}
-        <div className="grid grid-cols-2 gap-6 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredProducts.map((product) => (
-            <div
-              key={product.id}
-              className="group relative overflow-hidden rounded-lg bg-white shadow-md"
-            >
-              <div className="relative aspect-square overflow-hidden">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  width={300}
-                  height={300}
-                  className="h-full w-full object-cover object-center"
-                />
-                <div className="absolute right-2 top-2 flex flex-col gap-2">
-                  <button className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-md transition-colors hover:bg-gray-100">
-                    <svg
-                      className="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                      />
-                    </svg>
-                    <span className="sr-only">Add to cart</span>
-                  </button>
-                </div>
-                <div className="absolute bottom-2 right-2 flex gap-1">
-                  {product.colors?.map((color, i) => (
-                    <div
-                      key={i}
-                      className="h-4 w-4 rounded-full border shadow-sm"
-                      style={{ backgroundColor: color }}
-                    />
+                <div className="grid grid-cols-3 gap-4">
+                  {[...Array(6)].map((_, j) => (
+                    <div key={j} className="flex flex-col items-center">
+                      <div className="w-[96px] h-[80px] bg-gray-200 rounded mb-2"></div>
+                      <div className="h-3 w-16 bg-gray-200 rounded"></div>
+                    </div>
                   ))}
                 </div>
               </div>
-              <div className="space-y-2 p-4">
-                <h3 className="text-sm font-medium">{product.name}</h3>
-                <p className="text-sm font-semibold">
-                  ₦{product.price.toLocaleString()}
-                </p>
-                <div className="flex items-center">
-                  {/* {Array.from({ length: 5 }).map((_, i) => (
-                    // <svg
-                    //   key={i}
-                    //   className={`w-4 h-4 ${i < product.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"}`}
-                    //   viewBox="0 0 24 24"
-                    // >
-                    //   <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                    // </svg>
-                  ))} */}
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
+  if (isLoading && !isMobile) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <NavbarWrapper />
+
+        <div className="container mx-auto px-4 py-8 z-10">
+          <div className="mb-8 flex gap-2 text-sm text-gray-500 animate-pulse">
+            <div className="h-4 w-10 bg-gray-200 rounded"></div>
+            <div className="h-4 w-2 bg-gray-200 rounded"></div>
+            <div className="h-4 w-24 bg-gray-200 rounded"></div>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="rounded-lg bg-white shadow-md animate-pulse">
+                <div className="h-6 w-32 bg-gray-200 rounded mb-4"></div>
+                <div className="space-y-2">
+                  {[...Array(5)].map((_, j) => (
+                    <div key={j} className="h-4 bg-gray-200 rounded w-3/4"></div>
+                  ))}
                 </div>
               </div>
-              {product.hasShipping && (
-                <div className="absolute left-2 top-2">
-                  <svg
-                    className="h-4 w-4 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (isMobile) {
+    return (
+      <div className="min-h-screen bg-[#F9F9F9] pb-24">
+        <NavbarWrapper />
+
+        <div className="px-[23px] py-4 mt-4 z-10">
+          <div className="bg-[#FDFDFD] rounded-[5px] shadow-[0px_4px_28px_-2px_rgba(0,0,0,0.08)] p-4 mb-5 flex justify-between items-center h-[51px]">
+            <span className="font-semibold text-[14px] text-[#1E1E1E] font-poppins">All Products</span>
+            <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.40485 8L6.55015 7L0.793783 1.41L2.25605 0L10.4941 8L2.25605 16L0.804081 14.59L6.55015 9L7.40485 8Z" fill="black" />
+            </svg>
+
+          </div>
+
+          <div className="flex flex-col gap-[21px]">
+            {categories.map((category) => (
+              <div
+                key={category.id}
+                className="bg-[#FDFDFD] rounded-[5px] shadow-[0px_4px_28px_-2px_rgba(0,0,0,0.08)] p-[9px] pb-[17px]"
+              >
+                <h3 className="font-semibold text-[14px] mb-[25px] font-poppins text-[#1E1E1E]">{category.name}</h3>
+
+                <div className="flex flex-wrap gap-4">
+                  <div className="flex gap-[16px] mb-[17px]">
+                    {category.subcategories.slice(0, 3).map((subcategory) => (
+                      <Link
+                        href={`/category/${category.id}/${subcategory.id}`}
+                        key={subcategory.id}
+                        className="flex flex-col items-center"
+                      >
+                        <div className="w-[96.67px] h-[80px] border border-[rgba(0,0,0,0.21)] rounded-[4px] mb-[8px]">
+                          <Image
+                            src={subcategory.image || "/placeholder.svg"}
+                            alt={subcategory.name}
+                            className="w-full h-full object-cover rounded-[4px]"
+                            height={80}
+                            width={96.67}
+                          />
+                        </div>
+                        <span className="text-[12px] text-[rgba(30,30,30,0.89)] font-light font-poppins">
+                          {subcategory.name}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-[16px]">
+                    {category.subcategories.slice(3, 6).map((subcategory) => (
+                      <Link
+                        href={`/category-page/${subcategory.id}`}
+                        key={subcategory.id}
+                        className="flex flex-col items-center"
+                      >
+                        <div className="w-[96.67px] h-[80px] border border-[rgba(0,0,0,0.21)] rounded-[4px] mb-[8px]">
+                          <Image
+                            src={subcategory.image || "/placeholder.svg"}
+                            alt={subcategory.name}
+                            className="w-full h-full object-cover rounded-[4px]"
+                            height={80}
+                            width={96.67}
+                          />
+                        </div>
+                        <span className="text-[12px] text-[rgba(30,30,30,0.89)] font-light font-poppins">
+                          {subcategory.name}
+                        </span>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <NavbarWrapper />
+
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-8 flex gap-2 text-sm text-gray-500">
+          <Link href="/" className="hover:text-gray-700">
+            Home
+          </Link>
+          <span>/</span>
+          <span className="text-gray-700">Categories</span>
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {categories.map((category) => (
+            <div key={category.id} className="rounded-lg bg-white p-6 shadow-md">
+              <h3 className="mb-4 text-lg font-semibold">{category.name}</h3>
+              <ul className="space-y-2">
+                {category.subcategories.map((subcategory) => (
+                  <li key={subcategory.id}>
+                    <Link
+                      href={`/category-page/${subcategory.id}`}
+                      className="flex items-center gap-2 rounded-md py-1 transition-colors hover:text-blue-600"
+                    >
+                      <span>{subcategory.name}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
       </div>
     </div>
-  );
+  )
 }
+

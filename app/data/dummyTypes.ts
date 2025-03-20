@@ -1,12 +1,29 @@
 export type productData = {
-  id: number;
-  name: string;
-  originalPrice: string;
-  currentPrice: string;
-  isShippedFromAbroad: boolean;
-  colorVariants?: string[];
-  imgSrc: string;
+  id: string
+  name: string
+  currentPrice: number
+  originalPrice: number
+  imgSrc?: string
+  category: string
+  isShippedFromAbroad: boolean
+  colorVariants: string[]
+  rating: number
+  isNew: boolean
+  isFeatured: boolean
+  stockQuantity: number
+  vendor: string
+  description: string
+  variant: string
+  tags: string[]
+  createdAt: string
+  updatedAt: string
+  visibility: boolean
+  status: boolean
 };
+
+
+
+
 
 export type categoryData = {
   id: number;

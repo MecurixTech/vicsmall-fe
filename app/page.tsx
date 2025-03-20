@@ -1,21 +1,18 @@
 "use client"
 
-import Banner from "./components/home/banner";
-import Link from "next/link";
-import { ArrowForwardOutlined } from "@mui/icons-material";
-import Slider from "./components/home/slider";
-import CountdownTimer from "./components/home/countdown-timer";
-import { categories, products, vendorDetails } from "./data/dummyData";
-import ProductCard from "./components/product-card/product-card";
-import CategoryCard from "./components/home/category-card";
-import VendorCard from "./components/home/vendors";
-import Footer from "./components/footer";
-import Stacks from "./components/home/stacks";
-import RecommendSection from "./components/product-card/recommended-card";
-import DescriptionSection from "./components/home/description";
-import { useEffect, useState } from "react";
-import NavbarWrapper from "./components/Navbarwrapper";
+import Banner from "./components/home/banner"
+import Link from "next/link"
+import { ArrowForwardOutlined } from "@mui/icons-material"
+import CountdownTimer from "./components/home/countdown-timer"
+import { categories, vendorDetails } from "./data/dummyData"
+import CategoryCard from "./components/home/category-card"
+import VendorCard from "./components/home/vendors"
+import Footer from "./components/footer"
+import DescriptionSection from "./components/home/description"
+import { useEffect, useState } from "react"
+import NavbarWrapper from "./components/Navbarwrapper"
 import { isUserLoggedIn, getUserData } from "@/utils/auth-helpers"
+import CategorySection from "./components/home/category-section"
 
 interface UserData {
   firstName: string
@@ -27,13 +24,9 @@ const Home = () => {
   const [userData, setUserData] = useState(null)
 
   useEffect(() => {
-  
-
     const checkAuth = () => {
-    
       const loggedIn = isUserLoggedIn()
       const user = getUserData()
-
 
       setIsLoggedIn(loggedIn)
       setUserData(user)
@@ -53,12 +46,10 @@ const Home = () => {
 
   return (
     <>
-     <NavbarWrapper />
+      <NavbarWrapper />
       <Banner />
       <section className="mx-auto my-12 block w-[90%] sm:hidden">
-        <h2 className="mb-12 text-center text-xl font-medium text-black">
-          Explore our Top Categories
-        </h2>
+        <h2 className="mb-12 text-center text-xl font-medium text-black">Explore our Top Categories</h2>
 
         <div className="grid grid-cols-3 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {categories.map((category) => (
@@ -81,19 +72,14 @@ const Home = () => {
             </h2>
 
             <p className="mt-4 max-w-[500px] text-[16px] font-normal leading-[23px] text-neutral-light-gray lg:text-[18px]">
-              Use coupon code <span className="font-bold">#VICSMALLSHIP</span>{" "}
-              to get up to 90% off!!
+              Use coupon code <span className="font-bold">#VICSMALLSHIP</span> to get up to 90% off!!
             </p>
           </div>
 
           <CountdownTimer hours={3} minutes={36} seconds={14} />
         </div>
 
-        <div className="scrollbar-hide relative z-10 mb-11 mt-5 flex gap-6 overflow-x-auto px-4 lg:px-8">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        <CategorySection title="Flash Sales" category="Flash Sale" viewMoreLink="/flash-sales" />
       </section>
       <div className="block sm:hidden">
         <Banner />
@@ -113,88 +99,48 @@ const Home = () => {
             </h2>
 
             <p className="mt-4 max-w-[500px] text-[16px] font-normal leading-[23px] text-neutral-light-gray lg:text-[18px]">
-              Use coupon code <span className="font-bold">#VICSMALLSHIP</span>{" "}
-              to get up to 90% off!!
+              Use coupon code <span className="font-bold">#VICSMALLSHIP</span> to get up to 90% off!!
             </p>
           </div>
 
           <CountdownTimer hours={3} minutes={36} seconds={14} />
         </div>
 
-        <div className="scrollbar-hide relative z-10 mb-11 mt-5 flex gap-6 overflow-x-auto px-4 lg:px-8">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        <CategorySection title="Flash Sales" category="Flash Sale" viewMoreLink="/flash-sales" />
       </section>
 
-      <section className="mx-auto my-14 w-[95%]">
-        <div className="flex items-center justify-between">
-          <h3 className="mb-4">Male Shirts</h3>
-          <Link
-            href="/male-shirts"
-            className="flex items-center gap-1 font-medium text-neutral-dark-blue"
-          >
-            <span>View more</span>
-            <ArrowForwardOutlined fontSize="inherit" />
-          </Link>
-        </div>
-        <div className="hidden sm:block">
-          <Slider />
-        </div>
-        <div className="block sm:hidden">
-          <Stacks />
-        </div>
-      </section>
+      {/* Male Shirts Section */}
+      <CategorySection title="Electronics" category="Electronics" viewMoreLink="category-page/electronics" />
 
-      <section className="mx-auto my-14 w-[95%]">
-        <div className="flex items-center justify-between">
-          <h3 className="mb-4">Watches</h3>
-          <Link
-            href="/watches"
-            className="flex items-center gap-1 font-medium text-neutral-dark-blue"
-          >
-            <span>View more</span>
-            <ArrowForwardOutlined fontSize="inherit" />
-          </Link>
-        </div>
-        <Slider />
-      </section>
+      {/* Watches Section */}
+      <CategorySection title="Watches" category="Watches" viewMoreLink="/watches" />
 
+      {/* For the Ladies Section */}
       <section className="my-12 w-full overflow-hidden bg-[#1E1E1E] py-16">
-        <h2 className="mb-12 text-center text-neutral-light-gray">
-          For the Ladies
-        </h2>
+        <h2 className="mb-12 text-center text-neutral-light-gray">For the Ladies</h2>
         <div>
-          <div className="hidden sm:block">
-            <div className="scrollbar-hide relative z-10 mb-11 mt-5 flex gap-6 overflow-x-auto px-4 lg:px-8">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </div>
-
-          <div className="block sm:hidden">
-            <Stacks />
-          </div>
-          <div className="justify-items-center">
-            <button className="mt-6 flex items-center rounded-[8px] border border-white px-8 py-3 text-[16px] font-medium text-white transition-all hover:bg-opacity-90 sm:text-[18px]">
+          <CategorySection
+            title="For the Ladies"
+            category="Female Wears"
+            viewMoreLink="/female-wears"
+            darkMode={true}
+          />
+          <div className="flex justify-center">
+            <Link
+              href="/female-wears"
+              className="mt-6 flex items-center rounded-[8px] border border-white px-8 py-3 text-[16px] font-medium text-white transition-all hover:bg-opacity-90 sm:text-[18px]"
+            >
               View more{"  "}
               <ArrowForwardOutlined fontSize="inherit" />
-            </button>
+            </Link>
           </div>
         </div>
       </section>
 
       <section className="mx-auto my-12 block w-[90%] sm:hidden">
         <div className="flex justify-between">
-          <h2 className="mb-12 text-left text-xl font-medium text-black">
-            Vendors
-          </h2>
-          <Link
-            href="/vendors"
-            className="items-right justify-end gap-1 text-right font-medium text-neutral-dark-blue"
-          >
+          <h2 className="mb-12 text-left text-xl font-medium text-black">Vendors</h2>
+          <Link href="/vendors" className="items-right justify-end gap-1 text-right font-medium text-neutral-dark-blue">
             <span>View more</span>
             <ArrowForwardOutlined fontSize="inherit" />
           </Link>
@@ -207,48 +153,20 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="mx-auto my-14 w-[95%]">
-        <div className="flex items-center justify-between">
-          <h3 className="mb-4">Male Shoes</h3>
-          <Link
-            href="/mens-shoes"
-            className="flex items-center gap-1 font-medium text-neutral-dark-blue"
-          >
-            <span>View more</span>
-            <ArrowForwardOutlined fontSize="inherit" />
-          </Link>
-        </div>
-        <div className="hidden sm:block">
-          <Slider />
-        </div>
-        <div className="block sm:hidden">
-          <Stacks />
-        </div>
-      </section>
+      {/* Male Shoes Section */}
+      <CategorySection title="Male Shoes" category="Shoes" viewMoreLink="/mens-shoes" />
 
-      <section className="mx-auto my-14 hidden w-[95%] sm:block">
-        <h3 className="mb-4">Recommended items</h3>
-        <div className="grid grid-cols-3 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </section>
-      <section className="mx-auto my-14 block w-[95%] sm:hidden">
-        <h3 className="mb-4">Recommended items</h3>
-        <div className="grid grid-cols-3 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((product) => (
-            <RecommendSection key={product.id} product={product} />
-          ))}
-        </div>
-      </section>
+      {/* Recommended Items Section */}
+      <CategorySection title="Recommended items" category="Recommended" viewMoreLink="/recommended" />
+
       <div className="block sm:hidden">
         <DescriptionSection />
       </div>
 
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
+

@@ -62,13 +62,13 @@ const ChangePasswordForm = () => {
       {({ isSubmitting }) => (
         <Form>
           <div className="mb-4">
-            <label htmlFor="current_password" className="mb-2">Current password</label>
+            <label htmlFor="current_password" className="mb-2">Current password (leave blank to leave unchanged)</label>
             <Field type="password" name="current_password" className="w-full" />
             <ErrorMessage name="current_password" component="div" className="text-red-500" />
           </div>
 
           <div className="mb-4">
-            <label htmlFor="new_password" className="mb-2">New password</label>
+            <label htmlFor="new_password" className="mb-2">New password (leave blank to leave unchanged)</label>
             <Field type="password" name="new_password" className="w-full" />
             <ErrorMessage name="new_password" component="div" className="text-red-500" />
           </div>
@@ -84,7 +84,7 @@ const ChangePasswordForm = () => {
             disabled={isSubmitting}
             className="button button-accent ml-auto block w-full px-4 py-2"
           >
-            {isSubmitting ? "Changing..." : "Change password"}
+            {isSubmitting ? "Saving..." : "Save changes"}
           </button>
         </Form>
       )}

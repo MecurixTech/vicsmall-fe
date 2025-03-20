@@ -3,14 +3,46 @@
 import { cookies } from "next/headers"
 import type { PreferenceResult } from "@/types/preferences"
 
+const mapInterestToBackendValue = (interest: string): string => {
+  const mapping: Record<string, string> = {
+    Hoodies: "Hoodies",
+    "T-shirts": "T-Shirt",
+    Trousers: "Trouser",
+    "Male wears": "Male Wears",
+    Suits: "Suit",
+    "Female wears": "Female Wears",
+    Watches: "Watches",
+    Accessories: "Accessories",
+    Bangles: "Bangles",
+    Earrings: "Hair Rings",
+    Shoes: "Shoes",
+    Caps: "Caps",
+  }
+
+  return mapping[interest] || interest
+}
+
 export async function savePreferences(categories: string[]): Promise<PreferenceResult> {
   try {
+
+    const mappedCategories = categories.map(mapInterestToBackendValue)
+
     const payload = {
-      selected_categories: categories,
+      selected_categories: mappedCategories,
     }
 
-    const accessToken = (await cookies()).get("access_token")?.value;
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/customer-preference/`, {
+    const cookieStore = await cookies()
+    const accessToken = cookieStore.get("access_token")?.value
+
+    if (!accessToken) {
+      console.error("No access token found")
+      return {
+        success: false,
+        error: "Authentication required",
+      }
+    }
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/customer-preference`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -20,8 +52,10 @@ export async function savePreferences(categories: string[]): Promise<PreferenceR
       cache: "no-store",
     })
 
+    const data = await response.json()
+  
+
     if (!response.ok) {
-      const data = await response.json()
       return {
         success: false,
         error: data.Message || "Failed to save preferences",
@@ -30,7 +64,7 @@ export async function savePreferences(categories: string[]): Promise<PreferenceR
 
     return { success: true }
   } catch (error) {
-    
+    console.error("Error saving preferences:", error)
     return {
       success: false,
       error: "An unexpected error occurred while saving preferences",

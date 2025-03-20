@@ -4,11 +4,8 @@ import { cookies } from "next/headers"
 import type { LoginResult } from "@/types/auth"
 
 export async function loginUser(values: { email: string; password: string }): Promise<LoginResult> {
-  
-
   try {
-    
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login-customer/`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login-customer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,10 +15,8 @@ export async function loginUser(values: { email: string; password: string }): Pr
     })
 
     const data = await response.json()
-   
 
     if (!response.ok) {
-     
       return {
         success: false,
         error: data.Message || "Login failed. Please try again.",
@@ -29,10 +24,8 @@ export async function loginUser(values: { email: string; password: string }): Pr
     }
 
     if (data.Success && data.Data) {
-   
       const cookieStore = await cookies()
 
-      
       cookieStore.set("access_token", data.Data.access, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
@@ -50,9 +43,10 @@ export async function loginUser(values: { email: string; password: string }): Pr
       cookieStore.set("auth_status", "logged_in", {
         httpOnly: false,
         secure: process.env.NODE_ENV === "production",
-        maxAge: 60 * 30, 
+        maxAge: 60 * 30,
         path: "/",
       })
+
       const userData = {
         firstName: data.Data.user.full_name.split(" ")[0],
         fullName: data.Data.user.full_name,
@@ -72,6 +66,7 @@ export async function loginUser(values: { email: string; password: string }): Pr
       error: "Login failed: No authentication token received",
     }
   } catch (error) {
+    console.error("Login error:", error)
     return {
       success: false,
       error: "An unexpected error occurred. Please try again later.",
@@ -79,8 +74,12 @@ export async function loginUser(values: { email: string; password: string }): Pr
   }
 }
 
-export async function checkAuthStatus(): Promise<{ isLoggedIn: boolean }> {
+export async function loginAfterSignup(email: string, password: string): Promise<LoginResult> {
 
+  return loginUser({ email, password })
+}
+
+export async function checkAuthStatus(): Promise<{ isLoggedIn: boolean }> {
   const cookieStore = await cookies()
   const accessToken = cookieStore.get("access_token")
 
@@ -90,7 +89,6 @@ export async function checkAuthStatus(): Promise<{ isLoggedIn: boolean }> {
 }
 
 export async function logoutUser(): Promise<{ success: boolean }> {
-
   const cookieStore = await cookies()
 
   cookieStore.set("access_token", "", {

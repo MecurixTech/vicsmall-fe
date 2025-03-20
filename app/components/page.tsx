@@ -29,11 +29,11 @@ const ComponentsPage = () => {
     <main className="mb-24 p-4">
       <CountdownTimer hours={3} minutes={36} seconds={14} />
       <Banner />
-      <section className="grid grid-cols-5 gap-4">
+      {/* <section className="grid grid-cols-5 gap-4">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
-      </section>
+      </section> */}
 
       <section className="grid grid-cols-4 gap-4">
         {categories.map((category) => (
@@ -68,13 +68,13 @@ const ComponentsPage = () => {
         <p className="text-center text-gray-500">Your cart is empty.</p>
       )}
 
-      <InfoTabs />
+      {/* <InfoTabs /> */}
 
       <hr className="mb-8" />
 
       <div className="flex items-start justify-between gap-4">
         {/* <ProductGallery /> */}
-        <ProductSettings />
+        {/* <ProductSettings /> */}
       </div>
     </main>
   );

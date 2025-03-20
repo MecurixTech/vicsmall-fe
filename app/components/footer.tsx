@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="bg-neutral-dark-blue px-8 pt-8 pb-4 text-sm text-neutral-light-gray">
+    <footer className="bg-neutral-dark-blue px-8 pt-8  sm:pb-4 pb-[110px] text-sm text-neutral-light-gray">
       <div className="flex flex-wrap items-center justify-center gap-8">
         <Image
           src="./vicsmall-logo.svg"

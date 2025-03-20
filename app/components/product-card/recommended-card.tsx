@@ -9,7 +9,7 @@ const RecommendSection = ({ product }: { product: productData }) => {
       <div className="col-span-1 min-w-20 w-[105px] h-[175px] rounded-xl bg-white p-2">
         <div className="relative w-full">
           <Image
-            src={product.imgSrc}
+            src="https://is7tai1wim.ufs.sh/f/QVO6Qx1nmSgLZmWv7R2vxIKbf5HP786CAD3UTizeLcunXgQ1"
             alt={product.name}
             height={100}
             width={100}

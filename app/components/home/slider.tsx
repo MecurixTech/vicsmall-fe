@@ -1,29 +1,42 @@
-"use client";
-import React, { useRef } from "react";
+"use client"
+import { useRef } from "react"
 
-import {
-  ArrowBackIosOutlined,
-  ArrowForwardIosOutlined,
-} from "@mui/icons-material";
-import ProductCard from "../product-card/product-card";
-import { products } from "@/app/data/dummyData";
+import { ArrowBackIosOutlined, ArrowForwardIosOutlined } from "@mui/icons-material"
+import ProductCard from "../product-card/product-card"
+import type { productData } from "@/app/data/dummyTypes"
+import { ShoppingBag } from "lucide-react"
 
-const Slider = () => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+interface SliderProps {
+  products: productData[]
+}
+
+const Slider = ({ products }: SliderProps) => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
-      const scrollAmount = 300;
+      const scrollAmount = 300
       scrollContainerRef.current.scrollBy({
         left: direction === "right" ? scrollAmount : -scrollAmount,
         behavior: "smooth",
-      });
+      })
     }
-  };
+  }
 
+  if (!products || products.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-12 bg-gray-50 rounded-lg">
+        <ShoppingBag className="h-12 w-12 text-gray-300 mb-4" />
+        <p className="text-gray-500 font-medium">No products available</p>
+        <p className="text-gray-400 text-sm mt-1">Check back later for new items</p>
+      </div>
+    )
+  }
   const cards = products.map((product) => (
-    <ProductCard key={product.id} product={product} />
-  ));
+    <div key={product.id}>
+      <ProductCard product={product} />
+    </div>
+  ))
 
   return (
     <div className="relative mb-12">
@@ -35,10 +48,7 @@ const Slider = () => {
         >
           <ArrowBackIosOutlined />
         </button>
-        <div
-          ref={scrollContainerRef}
-          className="scrollbar-hide flex w-full gap-4 overflow-x-auto px-8 py-4"
-        >
+        <div ref={scrollContainerRef} className="scrollbar-hide flex w-full gap-4 overflow-x-auto px-8 py-4">
           {cards}
         </div>
 
@@ -53,7 +63,8 @@ const Slider = () => {
         <div className="pointer-events-none absolute bottom-0 right-0 top-0 w-12 bg-gradient-to-l from-neutral-light-gray to-transparent"></div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Slider;
+export default Slider
+

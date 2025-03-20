@@ -2,6 +2,8 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Ubuntu } from "next/font/google"
 import "./globals.css"
+import { Providers } from "./providers"
+import { Toaster } from "react-hot-toast"
 
 const ubuntu = Ubuntu({
   subsets: ["latin"],
@@ -22,7 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={ubuntu.className}>
+      <Providers>
+        
         <main>{children}</main>
+        <Toaster />
+        </Providers>
       </body>
     </html>
   )

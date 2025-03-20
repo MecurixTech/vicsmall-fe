@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Sidebar from "../components/account/sidebar";
 import Tabs from "../components/account/tabs";
+import NavbarWrapper from "../components/Navbarwrapper";
 
 export const metadata: Metadata = {
   title: "User Account | Vicsmall",
@@ -13,17 +14,21 @@ export default function AccountLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="px-8">
+    <>
+    <NavbarWrapper pageType="conditionalnavbar" />
+    <div className="">
       <p className="mb-4 hidden text-3xl font-bold text-gray-800 md:block">
         Account
       </p>
       <div className="flex flex-col items-start gap-6 md:flex-row">
         <Sidebar />
-        <Tabs />
-        <div className="w-full flex-[9] rounded-xl bg-white p-8 shadow-sm">
+        {/* <Tabs /> */}
+        <div className="w-full flex-[9] rounded-xl  p-8 shadow-sm">
           {children}
         </div>
       </div>
     </div>
+    </>
+    
   );
 }

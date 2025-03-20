@@ -10,10 +10,10 @@ const Page = () => {
   return (
     <div>
       <div className="flex items-start justify-between gap-4">
-        <ProductSettings />
+        {/* <ProductSettings /> */}
       </div>
 
-      <InfoTabs />
+      {/* <InfoTabs /> */}
 
       <hr className="mb-8" />
 

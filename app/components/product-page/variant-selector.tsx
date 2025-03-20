@@ -1,9 +1,30 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react"
 
-const VariantSelector = () => {
-  const [variant, setVariant] = useState<number>(10);
+interface VariantSelectorProps {
+  variant?: string
+}
+
+const VariantSelector = ({ variant: initialVariant }: VariantSelectorProps = {}) => {
+
+  const getInitialVariant = () => {
+    if (!initialVariant) return 10
+    const parsedVariant = Number.parseInt(initialVariant, 10)
+    return !isNaN(parsedVariant) ? parsedVariant : 10
+  }
+
+  const [variant, setVariant] = useState<number>(getInitialVariant())
+
+  useEffect(() => {
+    if (initialVariant) {
+      const parsedVariant = Number.parseInt(initialVariant, 10)
+      if (!isNaN(parsedVariant)) {
+        setVariant(parsedVariant)
+      }
+    }
+  }, [initialVariant])
+
   return (
     <div className="flex items-center gap-4">
       <span className="font-medium text-gray-800">Select variant:</span>
@@ -40,7 +61,8 @@ const VariantSelector = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default VariantSelector;
+export default VariantSelector
+
