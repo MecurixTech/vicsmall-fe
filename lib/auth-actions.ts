@@ -3,14 +3,58 @@
 import { cookies } from "next/headers"
 import type { LoginResult } from "@/types/auth"
 
-export async function loginUser(values: { email: string; password: string }): Promise<LoginResult> {
+async function verifyRecaptcha(token: string): Promise<boolean> {
   try {
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY
+
+    if (!secretKey) {
+      console.error("RECAPTCHA_SECRET_KEY is not defined")
+      return false
+    }
+
+    const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: `secret=${secretKey}&response=${token}`,
+    })
+
+    const data = await response.json()
+    return data.success
+  } catch (error) {
+    console.error("reCAPTCHA verification error:", error)
+    return false
+  }
+}
+
+export async function loginUser(values: {
+  email: string
+  password: string
+  recaptchaToken?: string
+}): Promise<LoginResult> {
+  try {
+    
+    if (values.recaptchaToken) {
+      const isRecaptchaValid = await verifyRecaptcha(values.recaptchaToken)
+
+      if (!isRecaptchaValid) {
+        return {
+          success: false,
+          error: "recaptcha verification failed",
+        }
+      }
+    }
+
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login-customer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify({
+        email: values.email,
+        password: values.password,
+      }),
       cache: "no-store",
     })
 
@@ -75,7 +119,7 @@ export async function loginUser(values: { email: string; password: string }): Pr
 }
 
 export async function loginAfterSignup(email: string, password: string): Promise<LoginResult> {
-
+ 
   return loginUser({ email, password })
 }
 

@@ -21,6 +21,7 @@ const FormWrapper = () => {
     phone_number: "",
     password: "",
     confirm_password: "",
+    recaptchaToken: "",
   })
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const router = useRouter()
@@ -55,6 +56,7 @@ const FormWrapper = () => {
         country_code: formData.country_code,
         phone_number: formData.phone_number,
         password: formData.password,
+        recaptchaToken: formData.recaptchaToken || "",
       })
 
       if (signupResult.success) {
@@ -63,9 +65,8 @@ const FormWrapper = () => {
         const loginResult = await loginAfterSignup(formData.email, formData.password)
 
         if (loginResult.success) {
-  
           await new Promise((resolve) => setTimeout(resolve, 500))
-          toast.success("You've been logged in automatically")
+
           setCurrentStep(2)
         } else {
           console.error("Login after signup failed:", loginResult.error)
@@ -73,7 +74,9 @@ const FormWrapper = () => {
           router.push("/login")
         }
       } else {
-        if (signupResult.error?.includes("custom user with this email address already exists")) {
+        if (signupResult.error?.includes("recaptcha")) {
+          toast.error("reCAPTCHA verification failed. Please try again.")
+        } else if (signupResult.error?.includes("custom user with this email address already exists")) {
           toast.error("This email is already registered. Please use a different email or try logging in.")
         } else if (signupResult.error) {
           toast.error(signupResult.error)
@@ -90,11 +93,8 @@ const FormWrapper = () => {
   }
 
   const handlePreferences = async (categories: string[]) => {
-  
     setSelectedPreferences(categories)
     setCurrentStep(3)
-
-    toast.success("Your preferences have been saved successfully!")
   }
 
   const handleNextStep = (newData: FormData, final = false) => {

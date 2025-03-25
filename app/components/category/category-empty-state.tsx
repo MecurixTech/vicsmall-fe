@@ -1,55 +1,90 @@
 "use client"
 
-import { ShoppingBag, RefreshCw, Search } from "lucide-react"
+import { motion } from "framer-motion"
+import { ShoppingBag, ArrowLeft, RefreshCw } from "lucide-react"
 import Link from "next/link"
 
 interface CategoryEmptyStateProps {
-  title?: string
-  description?: string
-  showHomeButton?: boolean
-  showRefreshButton?: boolean
-  refreshAction?: () => void
+  title: string
+  description: string
+  showRefresh?: boolean
+  onRefresh?: () => void
 }
 
 export default function CategoryEmptyState({
-  title = "No products found",
-  description = "We couldn't find any products matching your criteria.",
-  showHomeButton = true,
-  showRefreshButton = true,
-  refreshAction = () => window.location.reload(),
+  title,
+  description,
+  showRefresh = false,
+  onRefresh,
 }: CategoryEmptyStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-lg bg-white p-12 text-center shadow-md">
-      <div className="mb-6 rounded-full bg-gray-100 p-6">
-        <ShoppingBag className="h-12 w-12 text-gray-400" />
-      </div>
+    <motion.div
+      className="flex flex-col items-center justify-center py-16 text-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      <motion.div
+        className="mb-6 rounded-full bg-gray-100 p-8"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 20,
+          delay: 0.1,
+        }}
+      >
+        <ShoppingBag className="h-16 w-16 text-gray-400" />
+      </motion.div>
 
-      <h3 className="mb-3 text-xl font-semibold text-gray-800">{title}</h3>
+      <motion.h2
+        className="mb-3 text-2xl font-bold"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        {title}
+      </motion.h2>
 
-      <p className="mb-8 max-w-md text-gray-600">{description}</p>
+      <motion.p
+        className="mb-8 max-w-md text-gray-500"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+      >
+        {description}
+      </motion.p>
 
-      <div className="flex flex-wrap justify-center gap-4">
-        {showHomeButton && (
+      <motion.div
+        className="flex flex-wrap gap-4 justify-center"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+      >
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Link
             href="/"
-            className="flex items-center gap-2 rounded-md bg-white border border-gray-300 px-6 py-3 font-medium text-gray-700 transition-colors hover:bg-gray-50"
+            className="flex items-center gap-2 rounded-md bg-[#030359] px-6 py-3 font-semibold text-white shadow-md"
           >
-            <Search className="h-5 w-5" />
-            <span>Browse other categories</span>
+            <ArrowLeft className="h-4 w-4" />
+            <span>Continue Shopping</span>
           </Link>
-        )}
+        </motion.div>
 
-        {showRefreshButton && (
-          <button
-            onClick={refreshAction}
-            className="flex items-center gap-2 rounded-md bg-[#FF8C48] px-6 py-3 font-medium text-white transition-colors hover:bg-[#e67e3e]"
+        {showRefresh && onRefresh && (
+          <motion.button
+            onClick={onRefresh}
+            className="flex items-center gap-2 rounded-md border border-gray-300 px-6 py-3 font-semibold shadow-sm"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <RefreshCw className="h-5 w-5" />
-            <span>Refresh</span>
-          </button>
+            <RefreshCw className="h-4 w-4" />
+            <span>Refresh Results</span>
+          </motion.button>
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }
 

@@ -4,6 +4,7 @@ import { Ubuntu } from "next/font/google"
 import "./globals.css"
 import { Providers } from "./providers"
 import { Toaster } from "react-hot-toast"
+import PageTransition from "./components/page-transition"
 
 const ubuntu = Ubuntu({
   subsets: ["latin"],
@@ -25,9 +26,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={ubuntu.className}>
       <Providers>
-        
+      <PageTransition>
         <main>{children}</main>
         <Toaster />
+        </PageTransition>
         </Providers>
       </body>
     </html>

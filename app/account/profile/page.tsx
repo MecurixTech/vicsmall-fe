@@ -30,7 +30,7 @@ const ProfilePage = () => {
           toast.error(response.error || "Failed to load profile")
         }
       } catch (err) {
-        console.error("Error fetching profile:", err)
+        // console.error("Error fetching profile:", err)
         setError("An unexpected error occurred")
         toast.error("An unexpected error occurred")
       } finally {
@@ -84,7 +84,7 @@ const ProfilePage = () => {
         toast.error(response.error || "Failed to update profile")
       }
     } catch (err) {
-      console.error("Error updating profile:", err)
+      // console.error("Error updating profile:", err)
       toast.error("An unexpected error occurred")
     } finally {
       setSubmitting(false)

@@ -273,7 +273,7 @@ const NavbarWrapper = ({ pageType = "default" }: NavbarWrapperProps) => {
                             >
                               My Account
                             </Link>
-                            <Link href="/orders" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <Link href="/account/orders" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                               Orders
                             </Link>
                             <button

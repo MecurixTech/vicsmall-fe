@@ -18,6 +18,8 @@ import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import type { FormData } from "@/types/auth"
 import toast from "react-hot-toast"
+import Recaptcha from "../../recaptcha"
+
 
 const stepOneValidationSchema = Yup.object({
   email: Yup.string().email("Invalid email address").required("Your email is required"),
@@ -71,6 +73,8 @@ const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
   const [isShowingConfirmPassword, setIsShowingConfirmPassword] = useState(false)
   const [password, setPassword] = useState("")
   const [passwordStrength, setPasswordStrength] = useState(0)
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null)
+  const [recaptchaError, setRecaptchaError] = useState<string | null>(null)
 
   const passwordRequirements: PasswordRequirement[] = [
     {
@@ -111,7 +115,11 @@ const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
   }, [password])
 
   const handleSubmit = (values: FormData) => {
-   
+    if (!recaptchaToken) {
+      setRecaptchaError("Please complete the reCAPTCHA verification")
+      return
+    }
+
     const allRequirementsMet = passwordRequirements.every((req) => req.validator(values.password))
 
     if (!allRequirementsMet) {
@@ -119,7 +127,17 @@ const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
       return
     }
 
-    next(values, true)
+    next({ ...values, recaptchaToken }, true)
+  }
+
+  const handleRecaptchaVerify = (token: string) => {
+    setRecaptchaToken(token)
+    setRecaptchaError(null)
+  }
+
+  const handleRecaptchaExpire = () => {
+    setRecaptchaToken(null)
+    setRecaptchaError("reCAPTCHA verification expired. Please verify again.")
   }
 
   const getStrengthColor = () => {
@@ -363,10 +381,23 @@ const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
               )}
             </motion.div>
 
+            {/* reCAPTCHA Component */}
+            <Recaptcha onVerify={handleRecaptchaVerify} onExpire={handleRecaptchaExpire} />
+
+            {recaptchaError && (
+              <motion.div
+                className="text-sm text-red-600"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+              >
+                {recaptchaError}
+              </motion.div>
+            )}
+
             <motion.button
               type="submit"
               className="button button-accent flex w-full items-center justify-center gap-1 py-3 mt-8"
-              disabled={isSubmitting}
+              disabled={isSubmitting || !recaptchaToken}
               variants={buttonVariants}
               initial="idle"
               whileHover="hover"
@@ -398,7 +429,7 @@ const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
       </Formik>
 
       <p className="text-center">
-        Already have an account?{" "}
+        Already have an account?
         <Link href="/login" className="font-bold text-blue-800">
           Sign in
         </Link>

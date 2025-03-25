@@ -16,7 +16,7 @@ const Footer = () => {
         <Link href="/contact-us">Contact us</Link>
         <div className="hidden sm:block">
           <Link href="/vouchers">Vouchers</Link>
-          <Link href="/delivery-refunds-returns">
+          <Link href="/refund-and-returns-policy">
             Delivery, refunds and returns
           </Link>
         </div>

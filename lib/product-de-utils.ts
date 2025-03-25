@@ -21,7 +21,7 @@ export async function getRelatedProducts(
   category: string,
   limit = 4,
 ): Promise<productData[]> {
-  // This is a placeholder implementation
+  
 
   return []
 }

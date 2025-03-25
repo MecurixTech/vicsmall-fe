@@ -1,14 +1,16 @@
-"use client";
+"use client"
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import Link from "next/link";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import * as Yup from "yup";
-import { loginUser } from "@/lib/auth-actions";
-import { motion, AnimatePresence } from "framer-motion";
-import toast, { Toaster } from "react-hot-toast";
-import { refreshAuthState } from "@/utils/auth-helpers";
+import { Formik, Form, Field, ErrorMessage } from "formik"
+import Link from "next/link"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import * as Yup from "yup"
+import { loginUser } from "@/lib/auth-actions"
+import { motion, AnimatePresence } from "framer-motion"
+import toast, { Toaster } from "react-hot-toast"
+import { refreshAuthState } from "@/utils/auth-helpers"
+import Recaptcha from "../components/recaptcha"
+
 
 const formItemVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -21,70 +23,88 @@ const formItemVariants = {
       ease: "easeOut",
     },
   }),
-};
+}
 
 const buttonVariants = {
   idle: { scale: 1 },
   hover: { scale: 1.02, transition: { duration: 0.3 } },
   tap: { scale: 0.98, transition: { duration: 0.3 } },
-};
+}
 
 export default function LoginForm() {
-  const [isShowingPassword, setIsShowingPassword] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const router = useRouter();
+  const [isShowingPassword, setIsShowingPassword] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null)
+  const [recaptchaError, setRecaptchaError] = useState<string | null>(null)
+  const router = useRouter()
 
   const handleSubmit = async (
     values: { email: string; password: string },
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void },
   ) => {
-    setIsLoading(true);
+    if (!recaptchaToken) {
+      setRecaptchaError("Please complete the reCAPTCHA verification")
+      setSubmitting(false)
+      return
+    }
+
+    setIsLoading(true)
 
     try {
-      const result = await loginUser(values);
+     
+      const result = await loginUser({
+        ...values,
+        recaptchaToken,
+      })
 
       if (result.success && result.userData) {
-        localStorage.setItem("user_data", JSON.stringify(result.userData));
-        toast.success("You've been logged in successfully!");
-        refreshAuthState();
-        router.push("/");
+        localStorage.setItem("user_data", JSON.stringify(result.userData))
+        toast.success("You've been logged in successfully!")
+        refreshAuthState()
+        router.push("/")
       } else {
-        if (result.error?.includes("credentials")) {
-          toast.error(
-            "Invalid email or password. Please check your credentials and try again.",
-          );
+        if (result.error?.includes("recaptcha")) {
+          setRecaptchaError("reCAPTCHA verification failed. Please try again.")
+         
+          if (window.grecaptcha) {
+            window.grecaptcha.reset()
+          }
+          setRecaptchaToken(null)
+        } else if (result.error?.includes("credentials")) {
+          toast.error("Invalid email or password. Please check your credentials and try again.")
         } else if (result.error?.includes("account")) {
-          toast.error(
-            "Your account has been deactivated. Please contact support for assistance.",
-          );
+          toast.error("Your account has been deactivated. Please contact support for assistance.")
         } else {
-          toast.error(
-            result.error ||
-              "Login failed. Please check your information and try again.",
-          );
+          toast.error(result.error || "Login failed. Please check your information and try again.")
         }
       }
     } catch (error) {
-      toast.error(
-        "An unexpected error occurred. Our team has been notified. Please try again later.",
-      );
+      toast.error("An unexpected error occurred. Our team has been notified. Please try again later.")
     } finally {
-      setSubmitting(false);
-      setIsLoading(false);
+      setSubmitting(false)
+      setIsLoading(false)
     }
-  };
+  }
+
+  const handleRecaptchaVerify = (token: string) => {
+    setRecaptchaToken(token)
+    setRecaptchaError(null)
+  }
+
+  const handleRecaptchaExpire = () => {
+    setRecaptchaToken(null)
+    setRecaptchaError("reCAPTCHA verification expired. Please verify again.")
+  }
 
   const initialValues = {
     email: "",
     password: "",
-  };
+  }
 
   const validationSchema = Yup.object({
-    email: Yup.string()
-      .email("Invalid email address")
-      .required("Email is required"),
+    email: Yup.string().email("Invalid email address").required("Email is required"),
     password: Yup.string().required("Password is required"),
-  });
+  })
 
   return (
     <>
@@ -135,19 +155,10 @@ export default function LoginForm() {
           Welcome back to Vicsmall
         </motion.h1>
 
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
           {({ isSubmitting }) => (
             <Form className="space-y-4">
-              <motion.div
-                custom={0}
-                initial="hidden"
-                animate="visible"
-                variants={formItemVariants}
-              >
+              <motion.div custom={0} initial="hidden" animate="visible" variants={formItemVariants}>
                 <label htmlFor="email" className="mb-2 block font-medium">
                   Email
                 </label>
@@ -172,12 +183,7 @@ export default function LoginForm() {
                 </ErrorMessage>
               </motion.div>
 
-              <motion.div
-                custom={1}
-                initial="hidden"
-                animate="visible"
-                variants={formItemVariants}
-              >
+              <motion.div custom={1} initial="hidden" animate="visible" variants={formItemVariants}>
                 <label htmlFor="password" className="mb-2 block font-medium">
                   Password
                 </label>
@@ -255,19 +261,29 @@ export default function LoginForm() {
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 }}
                 >
-                  <Link
-                    href="/forgot-password"
-                    className="text-sm text-blue-600 hover:underline"
-                  >
+                  <Link href="/forgot-password" className="text-sm text-blue-600 hover:underline">
                     Forgot password?
                   </Link>
                 </motion.div>
               </motion.div>
 
+              {/* reCAPTCHA Component */}
+              <Recaptcha onVerify={handleRecaptchaVerify} onExpire={handleRecaptchaExpire} />
+
+              {recaptchaError && (
+                <motion.div
+                  className="text-sm text-red-600"
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                >
+                  {recaptchaError}
+                </motion.div>
+              )}
+
               <motion.button
                 type="submit"
                 className="button-accent w-full rounded px-4 py-3 text-white transition duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-50"
-                disabled={isSubmitting || isLoading}
+                disabled={isSubmitting || isLoading || !recaptchaToken}
                 variants={buttonVariants}
                 initial="idle"
                 whileHover="hover"
@@ -320,9 +336,8 @@ export default function LoginForm() {
           <motion.button
             className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-gray-300 py-3 transition duration-200 hover:bg-gray-50"
             onClick={() => {
-              toast.success("Redirecting to Google login...");
-              window.location.href =
-                "https://accounts.google.com/o/oauth2/v2/auth";
+              toast.success("Redirecting to Google login...")
+              window.location.href = "https://accounts.google.com/o/oauth2/v2/auth"
             }}
             disabled={isLoading}
             whileHover={{ scale: 1.02 }}
@@ -351,19 +366,14 @@ export default function LoginForm() {
           <motion.button
             className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-gray-300 py-3 transition duration-200 hover:bg-gray-50"
             onClick={() => {
-              toast.success("Redirecting to Facebook login...");
-              window.location.href =
-                "https://www.facebook.com/v13.0/dialog/oauth";
+              toast.success("Redirecting to Facebook login...")
+              window.location.href = "https://www.facebook.com/v13.0/dialog/oauth"
             }}
             disabled={isLoading}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 320 512"
-              className="h-5 w-5 text-blue-600"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" className="h-5 w-5 text-blue-600">
               <path
                 fill="currentColor"
                 d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
@@ -380,14 +390,12 @@ export default function LoginForm() {
           transition={{ duration: 0.5, delay: 0.6 }}
         >
           Don&apos;t have an account?{" "}
-          <Link
-            href="/signup"
-            className="font-medium text-[#2E2EDE] hover:underline"
-          >
+          <Link href="/signup" className="font-medium text-[#2E2EDE] hover:underline">
             Sign up
           </Link>
         </motion.p>
       </motion.main>
     </>
-  );
+  )
 }
+

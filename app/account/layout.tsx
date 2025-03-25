@@ -16,7 +16,7 @@ export default function AccountLayout({
   return (
     <>
     <NavbarWrapper pageType="conditionalnavbar" />
-    <div className="">
+    <div className="mx-4">
       <p className="mb-4 hidden text-3xl font-bold text-gray-800 md:block">
         Account
       </p>

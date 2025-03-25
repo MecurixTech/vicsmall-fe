@@ -93,7 +93,7 @@ const ProductSettings = ({ product }: ProductSettingsProps) => {
     setIsAdding(true);
     try {
       await addToCart(product.id, quantity);
-      toast.success("Product added to cart");
+      // toast.success("Product added to cart");
     } catch (error) {
       console.error("Error adding to cart:", error);
       toast.error("Failed to add item to cart");

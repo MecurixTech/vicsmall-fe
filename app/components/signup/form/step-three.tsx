@@ -31,7 +31,7 @@ export default function StepThree({ preferences }: StepThreeProps) {
         setIsLoggedIn(false);
         setUserData(null);
         setIsProfileMenuOpen(false);
-        toast.success("You've been logged out successfully!");
+        
         window.location.href = "/login";
       } else {
         toast.error("Failed to log out. Please try again.");

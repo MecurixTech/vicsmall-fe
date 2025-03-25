@@ -72,7 +72,7 @@ export const SavedProductsProvider = ({
         error,
       );
       if (!silent) {
-        toast.error("Error loading your saved products");
+        console.error("Error loading your saved products");
       }
     } finally {
       if (!silent) {
