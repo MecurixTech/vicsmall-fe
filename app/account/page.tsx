@@ -31,6 +31,7 @@ const router = useRouter()
       <div className="">
         <div className="space-y-4">
           {/* Profile Card */}
+          <Link href="/account/profile">
           <div className="bg-white rounded-xl p-5 border border-[rgba(0,0,0,0.08)]">
   <div className="flex justify-between items-center">
     <div className="flex items-center gap-3">
@@ -51,14 +52,14 @@ const router = useRouter()
     </span>
   </div>
 </div>
-
+</Link>
           {[
             { icon: DashboardIcon, text: 'Dashboard', link: '/account/dashboard' },
             { icon: LocationIcon, text: 'Addresses', link: '/account/addresses' },
             { icon: WalletIcon, text: 'Payment Methods', link: '/account/payment-methods' },
             { icon: OrdersIcon, text: 'Orders', link: '/account/orders' },
             { icon: VouchersIcon, text: 'Vouchers', link: '/account/vouchers' },
-            { icon: PartpaymentsIcon, text: 'Part Payment', link: '/account/part-payment' },
+            { icon: PartpaymentsIcon, text: 'Part Payment', link: '/account/part-payments' },
             { icon: SettingsIcon, text: 'Settings', link: '/account/settings' },
           ].map((item, index) => (
             <Link key={index} href={item.link}>

@@ -139,7 +139,7 @@ export default function MobileProductCard({ product, showHeart = false }: Produc
             ₦ {product.price.toLocaleString()}
           </motion.span>
           <motion.span
-            className="text-[14px] leading-[20px] text-[#CD011C] line-through font-ubuntu"
+            className="text-[14px] leading-[20px] text-[#CD011C] line-through font-ubuntu "
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}

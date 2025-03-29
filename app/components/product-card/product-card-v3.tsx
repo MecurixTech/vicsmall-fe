@@ -45,7 +45,7 @@ const ProductCardv3 = ({ product }: { product: productData }) => {
 
           <div className="p-1">
             <p className="truncate text-xs font-medium">{product.name}</p>
-            <div className="flex items-center justify-between mt-1">
+            <div className=" items-center justify-between mt-1">
               <p className="font-bold text-xs text-gray-800">₦{product.currentPrice?.toLocaleString()}</p>
               {product.originalPrice && (
                 <p className="text-red-500 line-through text-xs">₦{product.originalPrice?.toLocaleString()}</p>
