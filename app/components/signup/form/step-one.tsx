@@ -261,7 +261,7 @@ const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
                 <motion.button
                   type="button"
                   onClick={() => setIsShowingPassword((prev) => !prev)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2"
+                  className="absolute right-4 top-2 -translate-y-1/2"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >
@@ -363,7 +363,7 @@ const StepOne: React.FC<StepOneProps> = ({ data, next }) => {
                 <motion.button
                   type="button"
                   onClick={() => setIsShowingConfirmPassword((prev) => !prev)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2"
+                  className="absolute right-4 top-2 -translate-y-1/2"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >
