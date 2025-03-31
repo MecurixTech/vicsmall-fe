@@ -192,7 +192,7 @@ const ProfilePage = () => {
               </div>
             </div>
 
-            <div className="mt-8">
+            <div className="mt-8 mb-20">
               <button
                 type="submit"
                 disabled={isSubmitting}
