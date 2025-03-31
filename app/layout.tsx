@@ -5,6 +5,7 @@ import "./globals.css"
 import { Providers } from "./providers"
 import { Toaster } from "react-hot-toast"
 import PageTransition from "./components/page-transition"
+import { TourProviderWrapper } from "./components/tour/tour-provider"
 
 const ubuntu = Ubuntu({
   subsets: ["latin"],
@@ -27,8 +28,10 @@ export default function RootLayout({
       <body className={ubuntu.className}>
       <Providers>
       <PageTransition>
+      <TourProviderWrapper>
         <main>{children}</main>
         <Toaster />
+        </TourProviderWrapper>
         </PageTransition>
         </Providers>
       </body>

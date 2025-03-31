@@ -39,7 +39,7 @@ export default function EmptyAddresses({ onAddNew }: EmptyAddressesProps) {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        You haven't added any addresses yet. Add an address to make checkout faster.
+        You havent added any addresses yet. Add an address to make checkout faster.
       </motion.p>
 
       <motion.button

@@ -1,0 +1,109 @@
+.tour-button {
+    transition: all 0.3s ease;
+  }
+  
+  .tour-button:hover {
+    background-color: #ff7a30;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255, 140, 72, 0.4);
+  }
+  
+  .tour-button:active {
+    transform: translateY(0);
+  }
+  
+  .tour-button-back:hover {
+    background-color: #f5f5f5;
+    border-color: #ccc;
+  }
+  
+  .tour-button-skip:hover {
+    color: #555;
+  }
+  
+  .tour-button-close:hover {
+    color: #ff7a30;
+  }
+  
+  /* Tooltip animations */
+  .react-joyride__tooltip {
+    animation: fadeInScale 0.5s ease forwards;
+  }
+  
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Spotlight animations */
+  .react-joyride__spotlight {
+    animation: spotlightPulse 2s infinite alternate;
+  }
+  
+  @keyframes spotlightPulse {
+    0% {
+      box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.75);
+    }
+    100% {
+      box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.8);
+    }
+  }
+  
+  /* Beacon animations */
+  .react-joyride__beacon {
+    animation: beaconPulse 1.5s infinite;
+  }
+  
+  @keyframes beaconPulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: scale(1.2);
+      opacity: 0.8;
+    }
+  }
+  
+  /* Button hover effects */
+  [data-rj-element="button-next"] {
+    transition: all 0.3s ease !important;
+  }
+  
+  [data-rj-element="button-next"]:hover {
+    background-color: #ff7a30 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 12px rgba(255, 140, 72, 0.4) !important;
+  }
+  
+  [data-rj-element="button-next"]:active {
+    transform: translateY(0) !important;
+  }
+  
+  [data-rj-element="button-back"] {
+    transition: all 0.3s ease !important;
+  }
+  
+  [data-rj-element="button-back"]:hover {
+    background-color: #f5f5f5 !important;
+    border-color: #ccc !important;
+  }
+  
+  [data-rj-element="button-skip"] {
+    transition: color 0.3s ease !important;
+  }
+  
+  [data-rj-element="button-skip"]:hover {
+    color: #555 !important;
+  }
+  
+  

@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   AddOutlined,
@@ -15,37 +15,37 @@ import {
   StraightenOutlined,
   Twitter,
   YouTube,
-} from "@mui/icons-material";
-import StarRating from "../star-rating";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import ColorSelector from "./color-selector";
-import VariantSelector from "./variant-selector";
-import { useState, useEffect } from "react";
-import ProductGallery from "./product-gallery";
-import { motion } from "framer-motion";
-import { useCart } from "@/context/cart-context";
-import { useSavedProducts } from "@/context/saved-products-context";
-import { Loader2 } from "lucide-react";
-import { toast } from "react-hot-toast";
-import type { ProductDetails } from "@/lib/product-details-actions";
+} from "@mui/icons-material"
+import StarRating from "../star-rating"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import ColorSelector from "./color-selector"
+import VariantSelector from "./variant-selector"
+import { useState, useEffect } from "react"
+import ProductGallery from "./product-gallery"
+import { motion } from "framer-motion"
+import { useCart } from "@/context/cart-context"
+import { useSavedProducts } from "@/context/saved-products-context"
+import { Loader2 } from "lucide-react"
+import { toast } from "react-hot-toast"
+import type { ProductDetails } from "@/lib/product-details-actions"
 
 const fadeIn = {
   initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
+}
 
 const hoverButton = {
   hover: { scale: 1.05, transition: { duration: 0.3 } },
-};
+}
 
 interface ProductSettingsProps {
-  product: ProductDetails;
+  product: ProductDetails
 }
 
 const ProductSettings = ({ product }: ProductSettingsProps) => {
-  const router = useRouter();
-  const { addToCart, isLoading: cartIsLoading, items } = useCart();
+  const router = useRouter()
+  const { addToCart, isLoading: cartIsLoading, items } = useCart()
   const {
     isProductSaved,
     saveProduct,
@@ -53,66 +53,64 @@ const ProductSettings = ({ product }: ProductSettingsProps) => {
     getSavedProductId,
     savedProducts,
     isLoading: savedProductsLoading,
-  } = useSavedProducts();
+  } = useSavedProducts()
 
-  const [quantity, setQuantity] = useState(1);
-  const [selectedColor, setSelectedColor] = useState<
-    "black" | "red" | "orange" | "gray" | null
-  >(null);
-  const [isFavorite, setIsFavorite] = useState(false);
-  const [isAdding, setIsAdding] = useState(false);
-  const [isBuying, setIsBuying] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
+  const [quantity, setQuantity] = useState(1)
+  const [selectedColor, setSelectedColor] = useState<"black" | "red" | "orange" | "gray" | null>(null)
+  const [isFavorite, setIsFavorite] = useState(false)
+  const [isAdding, setIsAdding] = useState(false)
+  const [isBuying, setIsBuying] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
 
   useEffect(() => {
-    setIsFavorite(isProductSaved(product.id));
-  }, [isProductSaved, product.id, savedProducts]);
+    setIsFavorite(isProductSaved(product.id))
+  }, [isProductSaved, product.id, savedProducts])
 
   const handleColorSelect = (color: "black" | "red" | "orange" | "gray") => {
-    setSelectedColor(color);
-  };
+    setSelectedColor(color)
+  }
 
-  const price = product.currentPrice;
-  const originalPrice = product.originalPrice;
-  const totalPrice = price * quantity;
-  const hasDiscount = originalPrice > price;
+  const price = product.currentPrice
+  const originalPrice = product.originalPrice
+  const totalPrice = price * quantity
+  const hasDiscount = originalPrice > price
 
-  const handleIncrease = () => setQuantity((prev) => prev + 1);
-  const handleDecrease = () => quantity > 1 && setQuantity((prev) => prev - 1);
+  const handleIncrease = () => setQuantity((prev) => prev + 1)
+  const handleDecrease = () => quantity > 1 && setQuantity((prev) => prev - 1)
 
   const handleAddToCart = async () => {
-    if (isAdding || cartIsLoading) return;
+    if (isAdding || cartIsLoading) return
 
-    const isInCart = items.some((item) => item.product_id === product.id);
+    const isInCart = items.some((item) => item.product_id === product.id)
 
     if (isInCart) {
-      toast.error("This item is already in your cart");
-      return;
+      toast.error("This item is already in your cart")
+      return
     }
 
-    setIsAdding(true);
+    setIsAdding(true)
     try {
-      await addToCart(product.id, quantity);
+      await addToCart(product.id, quantity)
       // toast.success("Product added to cart");
     } catch (error) {
-      console.error("Error adding to cart:", error);
-      toast.error("Failed to add item to cart");
+      console.error("Error adding to cart:", error)
+      toast.error("Failed to add item to cart")
     } finally {
       setTimeout(() => {
-        setIsAdding(false);
-      }, 500);
+        setIsAdding(false)
+      }, 500)
     }
-  };
+  }
 
   const handleBuyNow = async () => {
-    if (isBuying || cartIsLoading) return;
+    if (isBuying || cartIsLoading) return
 
-    setIsBuying(true);
+    setIsBuying(true)
     try {
-      const result = await addToCart(product.id, quantity);
+      const result = await addToCart(product.id, quantity)
 
       if (!result.success) {
-        throw new Error(result.error || "Failed to add item to cart");
+        throw new Error(result.error || "Failed to add item to cart")
       }
       const checkoutData = {
         items: [
@@ -136,58 +134,52 @@ const ProductSettings = ({ product }: ProductSettingsProps) => {
         paymentMode: "full",
         partPayment: 0,
         partPaymentPercentage: 0,
-      };
+      }
 
-      sessionStorage.setItem("checkoutData", JSON.stringify(checkoutData));
+      sessionStorage.setItem("checkoutData", JSON.stringify(checkoutData))
 
-      router.push("/checkout");
+      router.push("/checkout")
     } catch (error) {
-      console.error("Error processing buy now:", error);
-      toast.error("Failed to process your order");
+      console.error("Error processing buy now:", error)
+      toast.error("Failed to process your order")
     } finally {
-      setIsBuying(false);
+      setIsBuying(false)
     }
-  };
+  }
   const toggleFavorite = async () => {
-    if (isSaving || savedProductsLoading) return;
+    if (isSaving || savedProductsLoading) return
 
-    setIsSaving(true);
-    const newFavoriteState = !isFavorite;
-    setIsFavorite(newFavoriteState);
+    setIsSaving(true)
+    const newFavoriteState = !isFavorite
+    setIsFavorite(newFavoriteState)
 
     try {
       if (newFavoriteState) {
-        await saveProduct(product.id);
+        await saveProduct(product.id)
       } else {
-        const savedProductId = getSavedProductId(product.id);
+        const savedProductId = getSavedProductId(product.id)
         if (savedProductId) {
-          await removeSavedProduct(savedProductId);
+          await removeSavedProduct(savedProductId)
         } else {
-          console.error(
-            `[ProductSettings] Cannot find saved product ID for product: ${product.id}`,
-          );
-          throw new Error("Cannot find saved product ID");
+          console.error(`[ProductSettings] Cannot find saved product ID for product: ${product.id}`)
+          throw new Error("Cannot find saved product ID")
         }
       }
 
-      toast.success(
-        newFavoriteState
-          ? "Product saved to favorites"
-          : "Product removed from favorites",
-      );
+      toast.success(newFavoriteState ? "Product saved to favorites" : "Product removed from favorites")
     } catch (error) {
-      console.error("Error toggling favorite:", error);
+      console.error("Error toggling favorite:", error)
 
-      setIsFavorite(!newFavoriteState);
-      toast.error("Failed to update saved status");
+      setIsFavorite(!newFavoriteState)
+      toast.error("Failed to update saved status")
     } finally {
-      setIsSaving(false);
+      setIsSaving(false)
     }
-  };
+  }
   useEffect(() => {
-    const saved = isProductSaved(product.id);
-    setIsFavorite(saved);
-  }, [product.id, isProductSaved, savedProducts, savedProductsLoading]);
+    const saved = isProductSaved(product.id)
+    setIsFavorite(saved)
+  }, [product.id, isProductSaved, savedProducts, savedProductsLoading])
 
   return (
     <motion.div
@@ -196,26 +188,16 @@ const ProductSettings = ({ product }: ProductSettingsProps) => {
       animate="animate"
     >
       <motion.div className="w-full md:w-1/2" variants={fadeIn}>
-        <ProductGallery
-          selectedColor={selectedColor}
-          productImages={product.imgSrc}
-        />
+        <ProductGallery selectedColor={selectedColor} productId={product.id} productImages={product.imgSrc} />
       </motion.div>
 
-      <motion.div
-        className="flex-1 rounded-xl bg-white p-4 shadow-lg"
-        variants={fadeIn}
-      >
+      <motion.div className="flex-1 rounded-xl bg-white p-4 shadow-lg" variants={fadeIn}>
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
           <motion.div
             className="flex items-center gap-2 rounded-full bg-accent-900 px-4 py-2 text-sm font-medium text-neutral-dark-blue"
             whileHover={{ scale: 1.05 }}
           >
-            <span>
-              {product.isShippedFromAbroad
-                ? "Shipped from abroad"
-                : "Local shipping"}
-            </span>
+            <span>{product.isShippedFromAbroad ? "Shipped from abroad" : "Local shipping"}</span>
             <FlightTakeoffOutlined fontSize="inherit" />
           </motion.div>
           <motion.button
@@ -223,9 +205,7 @@ const ProductSettings = ({ product }: ProductSettingsProps) => {
             whileTap={{ scale: 0.9 }}
             onClick={toggleFavorite}
             disabled={isSaving || savedProductsLoading}
-            aria-label={
-              isFavorite ? "Remove from favorites" : "Add to favorites"
-            }
+            aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
             className={`p-1 transition-all duration-300 ${isFavorite ? "text-red-500" : "text-gray-700"} ${isSaving || savedProductsLoading ? "opacity-50" : ""}`}
           >
             {isSaving || savedProductsLoading ? (
@@ -238,17 +218,12 @@ const ProductSettings = ({ product }: ProductSettingsProps) => {
           </motion.button>
         </div>
 
-        <motion.h1
-          className="mb-2 text-xl font-bold sm:text-2xl md:text-3xl"
-          whileHover={{ scale: 1.02 }}
-        >
+        <motion.h1 className="mb-2 text-xl font-bold sm:text-2xl md:text-3xl" whileHover={{ scale: 1.02 }}>
           {product.name}
         </motion.h1>
         <div className="mb-2 flex flex-wrap items-center gap-2 text-sm">
           <StarRating rating={product.rating || 3} size="inherit" />
-          <span className="text-gray-400">
-            {product.rating || 3}.0 (Based on 250 ratings)
-          </span>
+          <span className="text-gray-400">{product.rating || 3}.0 (Based on 250 ratings)</span>
           <span>|</span>
           <span>45 items sold</span>
         </div>
@@ -332,16 +307,11 @@ const ProductSettings = ({ product }: ProductSettingsProps) => {
 
         <hr className="my-2" />
         <p className="mb-2 text-sm">
-          Estimated delivery on{" "}
-          {new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString()}
+          Estimated delivery on {new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString()}
         </p>
         <div className="mb-4 flex flex-wrap items-center gap-4 text-2xl font-semibold">
           <p className="text-gray-800">&#8358;{totalPrice.toLocaleString()}</p>
-          {hasDiscount && (
-            <p className="text-lg text-gray-400 line-through">
-              &#8358;{originalPrice.toLocaleString()}
-            </p>
-          )}
+          {hasDiscount && <p className="text-lg text-gray-400 line-through">&#8358;{originalPrice.toLocaleString()}</p>}
         </div>
         <div className="mb-4 flex w-max items-center gap-2 rounded-xl border border-gray-500 p-2">
           <motion.button
@@ -379,11 +349,7 @@ const ProductSettings = ({ product }: ProductSettingsProps) => {
                   disabled={isBuying || cartIsLoading}
                   className="flex w-full items-center justify-center rounded-md bg-[#FF8C48] py-3 text-center font-semibold text-white shadow-md transition-all duration-300 hover:bg-orange-500"
                 >
-                  {isBuying ? (
-                    <Loader2 className="h-5 w-5 animate-spin" />
-                  ) : (
-                    "Buy Now"
-                  )}
+                  {isBuying ? <Loader2 className="h-5 w-5 animate-spin" /> : "Buy Now"}
                 </button>
               </motion.div>
               <motion.div
@@ -397,11 +363,7 @@ const ProductSettings = ({ product }: ProductSettingsProps) => {
                   disabled={isAdding || cartIsLoading}
                   className="flex w-full items-center justify-center rounded-md bg-[#030359] py-3 text-center font-semibold text-white shadow-md transition-all duration-300"
                 >
-                  {isAdding ? (
-                    <Loader2 className="h-5 w-5 animate-spin" />
-                  ) : (
-                    "Add to Cart"
-                  )}
+                  {isAdding ? <Loader2 className="h-5 w-5 animate-spin" /> : "Add to Cart"}
                 </button>
               </motion.div>
               <motion.div
@@ -432,11 +394,7 @@ const ProductSettings = ({ product }: ProductSettingsProps) => {
                 disabled={isBuying || cartIsLoading}
                 className="flex w-full items-center justify-center rounded-md bg-[#FF8C48] py-3 text-center font-semibold text-white shadow-md transition-all duration-300 hover:bg-orange-500"
               >
-                {isBuying ? (
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                ) : (
-                  "Buy Now"
-                )}
+                {isBuying ? <Loader2 className="h-5 w-5 animate-spin" /> : "Buy Now"}
               </button>
             </motion.div>
             <motion.div
@@ -450,11 +408,7 @@ const ProductSettings = ({ product }: ProductSettingsProps) => {
                 disabled={isAdding || cartIsLoading}
                 className="flex w-full items-center justify-center rounded-md bg-[#030359] py-3 text-center font-semibold text-white shadow-md transition-all duration-300"
               >
-                {isAdding ? (
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                ) : (
-                  "Add to Cart"
-                )}
+                {isAdding ? <Loader2 className="h-5 w-5 animate-spin" /> : "Add to Cart"}
               </button>
             </motion.div>
             <motion.div
@@ -474,7 +428,8 @@ const ProductSettings = ({ product }: ProductSettingsProps) => {
         </section>
       </motion.div>
     </motion.div>
-  );
-};
+  )
+}
 
-export default ProductSettings;
+export default ProductSettings
+

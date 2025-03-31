@@ -196,7 +196,7 @@ export default function CheckoutPage() {
               {addresses.length === 0 ? (
                 <div className="text-center py-8">
                   <MapPin className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-                  <p className="text-gray-500 mb-4">You don't have any saved addresses</p>
+                  <p className="text-gray-500 mb-4">You dont have any saved addresses</p>
                   <Link
                     href="/addresses"
                     className="inline-flex items-center justify-center rounded-md bg-orange-500 px-4 py-2 text-sm font-medium text-white hover:bg-orange-600"
@@ -399,7 +399,7 @@ export default function CheckoutPage() {
                     {paymentMethods.length === 0 ? (
                       <div className="text-center py-8">
                         <CreditCard className="h-12 w-12 mx-auto text-gray-400 mb-4" />
-                        <p className="text-gray-500 mb-4">You don't have any saved payment methods</p>
+                        <p className="text-gray-500 mb-4">You dont have any saved payment methods</p>
                         <Link
                           href="/payment-methods"
                           className="inline-flex items-center justify-center rounded-md bg-orange-500 px-4 py-2 text-sm font-medium text-white hover:bg-orange-600"

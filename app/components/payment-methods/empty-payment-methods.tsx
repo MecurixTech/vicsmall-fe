@@ -39,7 +39,7 @@ export default function EmptyPaymentMethods({ onAddNew }: EmptyPaymentMethodsPro
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        You haven't added any payment methods yet. Add a payment method to make checkout faster.
+        You havent added any payment methods yet. Add a payment method to make checkout faster.
       </motion.p>
 
       <motion.button

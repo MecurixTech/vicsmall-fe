@@ -1,13 +1,17 @@
-import { type NextRequest, NextResponse } from "next/server"
-import { updateAddress, deleteAddress } from "@/lib/addresses"
+import { type NextRequest, NextResponse } from "next/server";
+import { updateAddress, deleteAddress } from "@/lib/addresses";
 
-export async function PATCH(request: NextRequest, { params }: { params: { addressId: string } }) {
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ addressId: string }> }
+) {
   try {
-    const addressId = params.addressId
-    const body = await request.json()
+    
+    const { addressId } = await params;
+    const body = await request.json();
 
     if (!addressId) {
-      return NextResponse.json({ error: "Address ID is required" }, { status: 400 })
+      return NextResponse.json({ error: "Address ID is required" }, { status: 400 });
     }
 
     const result = await updateAddress(addressId, {
@@ -20,37 +24,50 @@ export async function PATCH(request: NextRequest, { params }: { params: { addres
       zip_code: body.zip_code,
       country: body.country,
       is_default: body.is_default,
-    })
+    });
 
     if (!result.success) {
-      return NextResponse.json({ error: result.error || "Failed to update address" }, { status: 400 })
+      return NextResponse.json(
+        { error: result.error || "Failed to update address" },
+        { status: 400 }
+      );
     }
 
-    return NextResponse.json({ data: result.data })
+    return NextResponse.json({ data: result.data });
   } catch (error) {
-    // console.error("[API] Error in update address API route:", error)
-    return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 })
+    return NextResponse.json(
+      { error: "An unexpected error occurred" },
+      { status: 500 }
+    );
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { addressId: string } }) {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ addressId: string }> }
+) {
   try {
-    const addressId = params.addressId
+   
+    const { addressId } = await params;
 
     if (!addressId) {
-      return NextResponse.json({ error: "Address ID is required" }, { status: 400 })
+      return NextResponse.json({ error: "Address ID is required" }, { status: 400 });
     }
 
-    const result = await deleteAddress(addressId)
+    const result = await deleteAddress(addressId);
 
     if (!result.success) {
-      return NextResponse.json({ error: result.error || "Failed to delete address" }, { status: 400 })
+      return NextResponse.json(
+        { error: result.error || "Failed to delete address" },
+        { status: 400 }
+      );
     }
 
-    return NextResponse.json({ message: "Address deleted successfully" })
+    return NextResponse.json({ message: "Address deleted successfully" });
   } catch (error) {
-    // console.error("[API] Error in delete address API route:", error)
-    return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 })
+    return NextResponse.json(
+      { error: "An unexpected error occurred" },
+      { status: 500 }
+    );
   }
 }
-

@@ -49,7 +49,7 @@ export default function Recaptcha({
             "expired-callback": onExpire,
           })
         } catch (error) {
-          console.error("Error rendering reCAPTCHA:", error)
+          // console.error("Error rendering reCAPTCHA:", error)
         }
       }
     }

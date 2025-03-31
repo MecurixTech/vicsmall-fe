@@ -6,18 +6,29 @@ import NavbarWrapper from "../components/Navbarwrapper"
 import { getCategories, type Category } from "@/lib/api"
 import Image from "next/image"
 
-
 import { motion } from "framer-motion"
 import toast from "react-hot-toast"
 import { ErrorBoundary } from "../components/error-boundary"
 import { staggerContainer, staggerItem } from "@/lib/animation-utils"
 import { handleError } from "@/utils/error-handler"
+import { Pagination } from "../components/pagination"
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState<Category[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
   const [error, setError] = useState<Error | null>(null)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [itemsPerPage, setItemsPerPage] = useState(isMobile ? 3 : 8)
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+   
+    window.scrollTo({
+      top: (document.querySelector(".categories-section")?.getBoundingClientRect().top ?? 0) + window.scrollY - 100,
+      behavior: "smooth",
+    })
+  }
 
   useEffect(() => {
     const checkMobile = () => {
@@ -48,6 +59,16 @@ export default function CategoriesPage() {
       window.removeEventListener("resize", checkMobile)
     }
   }, [])
+
+  useEffect(() => {
+    setItemsPerPage(isMobile ? 3 : 8)
+    setCurrentPage(1)
+  }, [isMobile])
+
+  const indexOfLastItem = currentPage * itemsPerPage
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage
+  const currentCategories = categories.slice(indexOfFirstItem, indexOfLastItem)
+  const totalPages = Math.ceil(categories.length / itemsPerPage)
 
   if (isLoading && isMobile) {
     return (
@@ -147,64 +168,75 @@ export default function CategoriesPage() {
                 </div>
               </ErrorBoundary>
             ) : (
-              categories.map((category) => (
-                <motion.div
-                  key={category.id}
-                  
-                  className="bg-[#FDFDFD] rounded-[5px] shadow-[0px_4px_28px_-2px_rgba(0,0,0,0.08)] p-[9px] pb-[17px]"
-                  whileHover={{ y: -5 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
-                  <h3 className="font-semibold text-[14px] mb-[25px] font-poppins text-[#1E1E1E]">{category.name}</h3>
+              <>
+                <div className="categories-section">
+                  {currentCategories.map((category) => (
+                    <motion.div
+                      key={category.id}
+                      className="bg-[#FDFDFD] rounded-[5px] shadow-[0px_4px_28px_-2px_rgba(0,0,0,0.08)] p-[9px] pb-[17px]"
+                      whileHover={{ y: -5 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    >
+                      <h3 className="font-semibold text-[14px] mb-[25px] font-poppins text-[#1E1E1E]">
+                        {category.name}
+                      </h3>
 
-                  <div className="flex flex-wrap gap-4">
-                    <div className="flex gap-[16px] mb-[17px]">
-                      {category.subcategories.slice(0, 3).map((subcategory) => (
-                        <motion.div key={subcategory.id} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                          <Link
-                            href={`/category/${category.id}/${subcategory.id}`}
-                            className="flex flex-col items-center"
-                          >
-                            <div className="w-[96.67px] h-[80px] border border-[rgba(0,0,0,0.21)] rounded-[4px] mb-[8px] overflow-hidden">
-                              <Image
-                                src={subcategory.image || "/placeholder.svg"}
-                                alt={subcategory.name}
-                                className="w-full h-full object-cover rounded-[4px] transition-transform duration-300 hover:scale-110"
-                                height={80}
-                                width={96.67}
-                              />
-                            </div>
-                            <span className="text-[12px] text-[rgba(30,30,30,0.89)] font-light font-poppins">
-                              {subcategory.name}
-                            </span>
-                          </Link>
-                        </motion.div>
-                      ))}
-                    </div>
+                      <div className="flex flex-wrap gap-4">
+                        <div className="flex gap-[16px] mb-[17px]">
+                          {category.subcategories.slice(0, 3).map((subcategory) => (
+                            <motion.div key={subcategory.id} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                              <Link
+                                href={`/category/${category.id}/${subcategory.id}`}
+                                className="flex flex-col items-center"
+                              >
+                                <div className="w-[96.67px] h-[80px] border border-[rgba(0,0,0,0.21)] rounded-[4px] mb-[8px] overflow-hidden">
+                                  <Image
+                                    src={subcategory.image || "/placeholder.svg"}
+                                    alt={subcategory.name}
+                                    className="w-full h-full object-cover rounded-[4px] transition-transform duration-300 hover:scale-110"
+                                    height={80}
+                                    width={96.67}
+                                  />
+                                </div>
+                                <span className="text-[12px] text-[rgba(30,30,30,0.89)] font-light font-poppins">
+                                  {subcategory.name}
+                                </span>
+                              </Link>
+                            </motion.div>
+                          ))}
+                        </div>
 
-                    <div className="flex gap-[16px]">
-                      {category.subcategories.slice(3, 6).map((subcategory) => (
-                        <motion.div key={subcategory.id} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                          <Link href={`/category-page/${subcategory.id}`} className="flex flex-col items-center">
-                            <div className="w-[96.67px] h-[80px] border border-[rgba(0,0,0,0.21)] rounded-[4px] mb-[8px] overflow-hidden">
-                              <Image
-                                src={subcategory.image || "/placeholder.svg"}
-                                alt={subcategory.name}
-                                className="w-full h-full object-cover rounded-[4px] transition-transform duration-300 hover:scale-110"
-                                height={80}
-                                width={96.67}
-                              />
-                            </div>
-                            <span className="text-[12px] text-[rgba(30,30,30,0.89)] font-light font-poppins">
-                              {subcategory.name}
-                            </span>
-                          </Link>
-                        </motion.div>
-                      ))}
-                    </div>
+                        <div className="flex gap-[16px]">
+                          {category.subcategories.slice(3, 6).map((subcategory) => (
+                            <motion.div key={subcategory.id} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                              <Link href={`/category-page/${subcategory.id}`} className="flex flex-col items-center">
+                                <div className="w-[96.67px] h-[80px] border border-[rgba(0,0,0,0.21)] rounded-[4px] mb-[8px] overflow-hidden">
+                                  <Image
+                                    src={subcategory.image || "/placeholder.svg"}
+                                    alt={subcategory.name}
+                                    className="w-full h-full object-cover rounded-[4px] transition-transform duration-300 hover:scale-110"
+                                    height={80}
+                                    width={96.67}
+                                  />
+                                </div>
+                                <span className="text-[12px] text-[rgba(30,30,30,0.89)] font-light font-poppins">
+                                  {subcategory.name}
+                                </span>
+                              </Link>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {totalPages > 1 && (
+                  <div className="mt-8 mb-4">
+                    <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
                   </div>
-                </motion.div>
-              ))
+                )}
+              </>
             )}
           </motion.div>
         </motion.div>
@@ -243,36 +275,46 @@ export default function CategoriesPage() {
               </div>
             </ErrorBoundary>
           ) : (
-            categories.map((category) => (
-              <motion.div
-                key={category.id}
-                variants={staggerItem}
-                className="rounded-lg bg-white p-6 shadow-md"
-                whileHover={{
-                  y: -5,
-                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-                }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                <h3 className="mb-4 text-lg font-semibold">{category.name}</h3>
-                <ul className="space-y-2">
-                  {category.subcategories.map((subcategory) => (
-                    <motion.li
-                      key={subcategory.id}
-                      whileHover={{ x: 5 }}
-                      transition={{ type: "spring", stiffness: 500, damping: 20 }}
-                    >
-                      <Link
-                        href={`/category-page/${subcategory.id}`}
-                        className="flex items-center gap-2 rounded-md py-1 transition-colors hover:text-orange-600"
-                      >
-                        <span>{subcategory.name}</span>
-                      </Link>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))
+            <>
+              <div className="categories-section grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {currentCategories.map((category) => (
+                  <motion.div
+                    key={category.id}
+                    variants={staggerItem}
+                    className="rounded-lg bg-white p-6 shadow-md"
+                    whileHover={{
+                      y: -5,
+                      boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                    }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  >
+                    <h3 className="mb-4 text-lg font-semibold">{category.name}</h3>
+                    <ul className="space-y-2">
+                      {category.subcategories.map((subcategory) => (
+                        <motion.li
+                          key={subcategory.id}
+                          whileHover={{ x: 5 }}
+                          transition={{ type: "spring", stiffness: 500, damping: 20 }}
+                        >
+                          <Link
+                            href={`/category-page/${subcategory.id}`}
+                            className="flex items-center gap-2 rounded-md py-1 transition-colors hover:text-orange-600"
+                          >
+                            <span>{subcategory.name}</span>
+                          </Link>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                ))}
+              </div>
+
+              {totalPages > 1 && (
+                <div className="mt-12 mb-8 flex justify-center w-full">
+                  <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+                </div>
+              )}
+            </>
           )}
         </motion.div>
       </motion.div>

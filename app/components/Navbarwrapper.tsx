@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect, useRef } from "react"
 import { FlagIcon, type FlagIconCode } from "react-flag-kit"
 import Image from "next/image"
@@ -12,6 +11,7 @@ import { isUserLoggedIn, getUserData, logoutUser } from "@/utils/auth-helpers"
 import { useRouter, usePathname } from "next/navigation"
 import { getCategories } from "@/lib/product-actions"
 import { useCart } from "@/context/cart-context"
+import { TourButton } from "./tour/tour-button"
 
 interface UserData {
   firstName: string
@@ -63,7 +63,7 @@ const NavbarWrapper = ({ pageType = "default" }: NavbarWrapperProps) => {
     { code: "GB", name: "Pound Sterling", currency: "GBP" },
   ]
 
-  const excludedPages = ["conditionalnavbar"];
+  const excludedPages = ["conditionalnavbar"]
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -72,14 +72,10 @@ const NavbarWrapper = ({ pageType = "default" }: NavbarWrapperProps) => {
         const response = await getCategories()
 
         if (response.success && response.data.length > 0) {
-
-          const categoryNames = response.data.map(cat => cat.name)
+          const categoryNames = response.data.map((cat) => cat.name)
           setCategories(categoryNames)
-
         } else {
-
           setCategories(navLinks)
-
         }
       } catch (error) {
         console.error("[Navbar] Error fetching categories:", error)
@@ -174,7 +170,6 @@ const NavbarWrapper = ({ pageType = "default" }: NavbarWrapperProps) => {
     router.push(`/category-page/${encodeURIComponent(category)}`)
   }
 
-
   return (
     <>
       <nav className="sticky top-0 z-50 mb-4 w-full">
@@ -191,7 +186,7 @@ const NavbarWrapper = ({ pageType = "default" }: NavbarWrapperProps) => {
                 >
                   <Menu className="h-6 w-6" />
                 </button>
-                <Link href="/" className="text-xl font-semibold text-gray-800 hover:text-gray-900">
+                <Link href="/" className="logo text-xl font-semibold text-gray-800 hover:text-gray-900">
                   <Image
                     className="hidden sm:block"
                     src="/vicsmall-logo.svg"
@@ -205,7 +200,7 @@ const NavbarWrapper = ({ pageType = "default" }: NavbarWrapperProps) => {
 
               {/* Desktop search bar - in the same row */}
               <div className="mx-4 hidden flex-1 justify-center md:flex">
-                <div className="relative flex w-full max-w-md">
+                <div className="search-bar relative flex w-full max-w-md">
                   <input
                     type="text"
                     placeholder="Search for your dream Dress"
@@ -217,6 +212,9 @@ const NavbarWrapper = ({ pageType = "default" }: NavbarWrapperProps) => {
 
               {/* Right side icons */}
               <div className="flex items-center space-x-4">
+                {/* Tour Button - Only visible on desktop */}
+                <TourButton variant="icon" className="hidden md:flex" />
+
                 {/* Country selector - desktop */}
                 <div className="relative hidden gap-4 sm:flex" ref={desktopFlagRef}>
                   <button
@@ -266,14 +264,17 @@ const NavbarWrapper = ({ pageType = "default" }: NavbarWrapperProps) => {
                           <ChevronDown className="h-5 w-5 text-[#002A48]" />
                         </button>
                         {isProfileMenuOpen && (
-                          <div className="absolute right-0 mt-2 w-48 rounded-md border border-gray-300 bg-white shadow-lg z-50">
+                          <div className="cart-dropdown absolute right-0 mt-2 w-48 rounded-md border border-gray-300 bg-white shadow-lg z-50">
                             <Link
                               href="/account/profile"
-                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                              className="account-link block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
                               My Account
                             </Link>
-                            <Link href="/account/orders" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <Link
+                              href="/account/orders"
+                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            >
                               Orders
                             </Link>
                             <button
@@ -287,7 +288,7 @@ const NavbarWrapper = ({ pageType = "default" }: NavbarWrapperProps) => {
                       </div>
 
                       <Link href="/cart">
-                        <button className="flex items-center gap-2 rounded-[60px] bg-[#FF8C48] px-4 py-3 text-white">
+                        <button className="cart-button flex items-center gap-2 rounded-[60px] bg-[#FF8C48] px-4 py-3 text-white">
                           <ShoppingCart className="h-5 w-5" />
                           <span className="font-ubuntu text-lg font-medium">Cart</span>
                           <div className="flex h-5 w-5 items-center justify-center rounded-full bg-white">
@@ -295,7 +296,7 @@ const NavbarWrapper = ({ pageType = "default" }: NavbarWrapperProps) => {
                           </div>
                         </button>
                       </Link>
-                      <Link href="/saved">
+                      <Link href="/saved" className="wishlist-button">
                         <Heart className="h-6 w-6 text-[#1E1E1E]" />
                       </Link>
 
@@ -391,8 +392,8 @@ const NavbarWrapper = ({ pageType = "default" }: NavbarWrapperProps) => {
                   </button>
 
                   {/* User profile - hide on contact-us page */}
-                  {!excludedPages.includes(pageType) && (
-                    isLoggedIn && userData ? (
+                  {!excludedPages.includes(pageType) &&
+                    (isLoggedIn && userData ? (
                       <Link href="/account/profile" className="flex items-center space-x-2 rounded-md px-3 py-2">
                         <div className="h-8 w-8 overflow-hidden rounded-full">
                           <Image
@@ -408,8 +409,7 @@ const NavbarWrapper = ({ pageType = "default" }: NavbarWrapperProps) => {
                       <Link href="/login" className="flex items-center space-x-2 rounded-md px-3 py-2 text-[#FF8C48]">
                         Login
                       </Link>
-                    )
-                  )}
+                    ))}
                 </div>
               </div>
             </div>
@@ -464,8 +464,11 @@ const NavbarWrapper = ({ pageType = "default" }: NavbarWrapperProps) => {
                           setMobileSelectedCountry(country.code)
                           setIsMenuOpen(false)
                         }}
-                        className={`flex w-full items-center gap-4 rounded-md px-6 py-3 ${mobileSelectedCountry === country.code ? "bg-[#FF8C48] text-white" : "bg-[#F9F9F9] text-gray-900"
-                          } whitespace-nowrap`}
+                        className={`flex w-full items-center gap-4 rounded-md px-6 py-3 ${
+                          mobileSelectedCountry === country.code
+                            ? "bg-[#FF8C48] text-white"
+                            : "bg-[#F9F9F9] text-gray-900"
+                        } whitespace-nowrap`}
                       >
                         <div className="flex h-9 items-center">
                           <FlagIcon code={country.code} />
@@ -511,28 +514,26 @@ const NavbarWrapper = ({ pageType = "default" }: NavbarWrapperProps) => {
 
       {/* Categories Scroller - Made sticky for both mobile and desktop */}
       {!excludedPages.includes(pageType) && (
-        <div className="sticky top-[64px] md:top-16 z-40 w-full bg-black">
+        <div className="categories-scroller sticky top-[64px] md:top-16 z-40 w-full bg-black">
           <div className="scrollbar-hide flex items-center justify-start gap-6 overflow-x-auto whitespace-nowrap px-4 py-2 text-sm text-neutral-light-gray lg:justify-center">
-            {isLoadingCategories ? (
-
-              Array(6).fill(null).map((_, index) => (
-                <div key={index} className="h-4 w-16 bg-gray-700 rounded animate-pulse"></div>
-              ))
-            ) : (
-              categories.map((category, index) => (
-                <Link
-                  key={index}
-                  href={`/category-page/${encodeURIComponent(category)}`}
-                  className="text-white hover:text-gray-300"
-                  onClick={(e) => handleCategoryClick(category, e)}
-                >
-                  {category}
-                </Link>
-              ))
-            )}
+            {isLoadingCategories
+              ? Array(6)
+                  .fill(null)
+                  .map((_, index) => <div key={index} className="h-4 w-16 bg-gray-700 rounded animate-pulse"></div>)
+              : categories.map((category, index) => (
+                  <Link
+                    key={index}
+                    href={`/category-page/${encodeURIComponent(category)}`}
+                    className="text-white hover:text-gray-300"
+                    onClick={(e) => handleCategoryClick(category, e)}
+                  >
+                    {category}
+                  </Link>
+                ))}
           </div>
         </div>
       )}
+
 
       {/* Mobile bottom navigation bar */}
       <div className="fixed bottom-0 left-0 right-0 z-40 flex h-[94px] w-full mx-auto items-center justify-around bg-white shadow-[0px_-2px_20px_3px_rgba(0,0,0,0.11)] backdrop-blur-md sm:hidden">
@@ -602,12 +603,12 @@ const NavbarWrapper = ({ pageType = "default" }: NavbarWrapperProps) => {
         </Link>
 
         <Link href="/contact-us" className="flex flex-col items-center gap-2">
-
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9.95 16C10.3 16 10.596 15.879 10.838 15.637C11.08 15.395 11.2007 15.0993 11.2 14.75C11.2 14.4 11.0793 14.104 10.838 13.862C10.5967 13.62 10.3007 13.4993 9.95 13.5C9.6 13.5 9.30433 13.621 9.063 13.863C8.82167 14.105 8.70067 14.4007 8.7 14.75C8.7 15.1 8.821 15.396 9.063 15.638C9.305 15.88 9.60067 16.0007 9.95 16ZM9.05 12.15H10.9C10.9 11.6 10.9627 11.1667 11.088 10.85C11.2133 10.5333 11.5673 10.1 12.15 9.55C12.5833 9.11667 12.925 8.704 13.175 8.312C13.425 7.92 13.55 7.44933 13.55 6.9C13.55 5.96667 13.2083 5.25 12.525 4.75C11.8417 4.25 11.0333 4 10.1 4C9.15 4 8.37933 4.25 7.788 4.75C7.19667 5.25 6.784 5.85 6.55 6.55L8.2 7.2C8.28333 6.9 8.471 6.575 8.763 6.225C9.055 5.875 9.50067 5.7 10.1 5.7C10.6333 5.7 11.0333 5.846 11.3 6.138C11.5667 6.43 11.7 6.75067 11.7 7.1C11.7 7.43333 11.6 7.746 11.4 8.038C11.2 8.33 10.95 8.60067 10.65 8.85C9.91667 9.5 9.46667 9.99167 9.3 10.325C9.13333 10.6583 9.05 11.2667 9.05 12.15ZM10 20C8.61667 20 7.31667 19.7377 6.1 19.213C4.88333 18.6883 3.825 17.9757 2.925 17.075C2.025 16.175 1.31267 15.1167 0.788 13.9C0.263333 12.6833 0.000666667 11.3833 0 10C0 8.61667 0.262667 7.31667 0.788 6.1C1.31333 4.88333 2.02567 3.825 2.925 2.925C3.825 2.025 4.88333 1.31267 6.1 0.788C7.31667 0.263333 8.61667 0.000666667 10 0C11.3833 0 12.6833 0.262667 13.9 0.788C15.1167 1.31333 16.175 2.02567 17.075 2.925C17.975 3.825 18.6877 4.88333 19.213 6.1C19.7383 7.31667 20.0007 8.61667 20 10C20 11.3833 19.7373 12.6833 19.212 13.9C18.6867 15.1167 17.9743 16.175 17.075 17.075C16.175 17.975 15.1167 18.6877 13.9 19.213C12.6833 19.7383 11.3833 20.0007 10 20ZM10 18C12.2333 18 14.125 17.225 15.675 15.675C17.225 14.125 18 12.2333 18 10C18 7.76667 17.225 5.875 15.675 4.325C14.125 2.775 12.2333 2 10 2C7.76667 2 5.875 2.775 4.325 4.325C2.775 5.875 2 7.76667 2 10C2 12.2333 2.775 14.125 4.325 15.675C5.875 17.225 7.76667 18 10 18Z"
-              fill={pathname === "/contact-us" ? "#030359" : "#B3B3B3"} />
+            <path
+              d="M9.95 16C10.3 16 10.596 15.879 10.838 15.637C11.08 15.395 11.2007 15.0993 11.2 14.75C11.2 14.4 11.0793 14.104 10.838 13.862C10.5967 13.62 10.3007 13.4993 9.95 13.5C9.6 13.5 9.30433 13.621 9.063 13.863C8.82167 14.105 8.70067 14.4007 8.7 14.75C8.7 15.1 8.821 15.396 9.063 15.638C9.305 15.88 9.60067 16.0007 9.95 16ZM9.05 12.15H10.9C10.9 11.6 10.9627 11.1667 11.088 10.85C11.2133 10.5333 11.5673 10.1 12.15 9.55C12.5833 9.11667 12.925 8.704 13.175 8.312C13.425 7.92 13.55 7.44933 13.55 6.9C13.55 5.96667 13.2083 5.25 12.525 4.75C11.8417 4.25 11.0333 4 10.1 4C9.15 4 8.37933 4.25 7.788 4.75C7.19667 5.25 6.784 5.85 6.55 6.55L8.2 7.2C8.28333 6.9 8.471 6.575 8.763 6.225C9.055 5.875 9.50067 5.7 10.1 5.7C10.6333 5.7 11.0333 5.846 11.3 6.138C11.5667 6.43 11.7 6.75067 11.7 7.1C11.7 7.43333 11.6 7.746 11.4 8.038C11.2 8.33 10.95 8.60067 10.65 8.85C9.91667 9.5 9.46667 9.99167 9.3 10.325C9.13333 10.6583 9.05 11.2667 9.05 12.15ZM10 20C8.61667 20 7.31667 19.7377 6.1 19.213C4.88333 18.6883 3.825 17.9757 2.925 17.075C2.025 16.175 1.31267 15.1167 0.788 13.9C0.263333 12.6833 0.000666667 11.3833 0 10C0 8.61667 0.262667 7.31667 0.788 6.1C1.31333 4.88333 2.02567 3.825 2.925 2.925C3.825 2.025 4.88333 1.31267 6.1 0.788C7.31667 0.263333 8.61667 0.000666667 10 0C11.3833 0 12.6833 0.262667 13.9 0.788C15.1167 1.31333 16.175 2.02567 17.075 2.925C17.975 3.825 18.6877 4.88333 19.213 6.1C19.7383 7.31667 20.0007 8.61667 20 10C20 11.3833 19.7373 12.6833 19.212 13.9C18.6867 15.1167 17.9743 16.175 17.075 17.075C16.175 17.975 15.1167 18.6877 13.9 19.213C12.6833 19.7383 11.3833 20.0007 10 20ZM10 18C12.2333 18 14.125 17.225 15.675 15.675C17.225 14.125 18 12.2333 18 10C18 7.76667 17.225 5.875 15.675 4.325C14.125 2.775 12.2333 2 10 2C7.76667 2 5.875 2.775 4.325 4.325C2.775 5.875 2 7.76667 2 10C2 12.2333 2.775 14.125 4.325 15.675C5.875 17.225 7.76667 18 10 18Z"
+              fill={pathname === "/contact-us" ? "#030359" : "#B3B3B3"}
+            />
           </svg>
-
           <span
             className={`font-ubuntu text-[11px] font-bold ${pathname === "/contact-us" ? "text-[#030359]" : "text-[#B3B3B3]"}`}
           >

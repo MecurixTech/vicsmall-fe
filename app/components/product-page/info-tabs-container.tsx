@@ -5,8 +5,8 @@ import Overview from "./overview"
 import Reviews from "./reviews-tab/reviews"
 import Vendor from "./vendor"
 import Shipping from "./shipping"
-import { reviews, vendorDetails } from "@/app/data/dummyData"
 import type { productData } from "@/app/data/dummyTypes"
+import { vendorDetails } from "@/app/data/dummyData"
 
 interface InfoTabsProps {
   product: productData
@@ -32,7 +32,7 @@ const InfoTabs = ({ product }: InfoTabsProps) => {
             activeTab === "reviews" ? "bg-white font-medium text-gray-600" : "bg-neutral-light-gray text-gray-400"
           } border px-4 py-2 transition-all duration-200`}
         >
-          Reviews ({reviews.length})
+          Reviews
         </button>
         <button
           onClick={() => setActiveTab("vendor")}
@@ -54,7 +54,7 @@ const InfoTabs = ({ product }: InfoTabsProps) => {
 
       <div className="px-4">
         {activeTab === "overview" && <Overview description={product.description} />}
-        {activeTab === "reviews" && <Reviews />}
+        {activeTab === "reviews" && <Reviews productId={product.id} />}
         {activeTab === "vendor" && <Vendor vendor={vendorDetails[0]} />}
         {activeTab === "shipping" && <Shipping />}
       </div>

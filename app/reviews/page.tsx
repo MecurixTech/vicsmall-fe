@@ -1,17 +1,16 @@
-"use client";
-
-import React from "react";
-import Reviews from "../components/product-page/reviews-tab/reviews";
-import { ArrowLeft } from "@mui/icons-material";
+"use client"
+import Reviews from "../components/product-page/reviews-tab/reviews"
+import { ArrowLeft } from "@mui/icons-material"
+import { useSearchParams } from "next/navigation"
 
 const ReviewSection = () => {
+  const searchParams = useSearchParams()
+  const productId = searchParams.get("productId") || ""
+
   return (
     <div className="pt-4">
       <div className="sticky top-0 z-10 mb-4 flex items-center gap-2 bg-slate-100 px-4">
-        <button
-          onClick={() => window.history.back()}
-          className="text-gray-600 hover:text-gray-900"
-        >
+        <button onClick={() => window.history.back()} className="text-gray-600 hover:text-gray-900">
           <ArrowLeft className="text-4xl" />
         </button>
 
@@ -21,10 +20,11 @@ const ReviewSection = () => {
       </div>
 
       <div className="px-4">
-        <Reviews />
+        <Reviews productId={productId} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ReviewSection;
+export default ReviewSection
+

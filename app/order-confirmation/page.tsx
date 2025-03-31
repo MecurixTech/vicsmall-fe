@@ -119,7 +119,7 @@ export default function OrderConfirmationPage() {
             </motion.div>
             <h1 className="mb-2 text-3xl font-bold text-gray-900">Order Confirmed!</h1>
             <p className="text-gray-600">
-              Thank you for your order. We've received your {paymentType === "card" ? "payment" : "order"} and will
+              Thank you for your order. We`&apos;`ve received your {paymentType === "card" ? "payment" : "order"} and will
               process it shortly.
             </p>
           </div>
