@@ -12,7 +12,7 @@ const EmptyReviews = ({ productId }: EmptyReviewsProps) => {
       </div>
       <h3 className="mb-2 text-xl font-semibold text-gray-800">No Reviews Yet</h3>
       <p className="mb-6 max-w-md text-gray-600">
-        This product doesn't have any reviews yet.
+        This product doesn&apos;t have any reviews yet.
       </p>
       {/* <Link href={`/write-review?productId=${productId}`}>
         <button className="rounded-lg bg-accent-900 px-6 py-3 font-medium text-white transition-colors hover:bg-accent-800">

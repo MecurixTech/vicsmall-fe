@@ -12,7 +12,7 @@ const Footer = () => {
           width={64}
           className=" hidden sm:block"
         />
-        <Link href="/my-account">My account</Link>
+        <Link href="/account/dashboard">My account</Link>
         <Link href="/contact-us">Contact us</Link>
         <div className="hidden sm:block">
           <Link href="/vouchers">Vouchers</Link>
@@ -22,8 +22,8 @@ const Footer = () => {
         </div>
 
         <Link href="/terms-of-service">Terms of service</Link>
-        <Link href="/track-order">Track your order</Link>
-        <Link href="/faqs">FAQs</Link>
+        <Link href="/account/orders">Track your order</Link>
+        <Link href="/faq">FAQs</Link>
       </div>
       <hr className=" block sm:hidden my-4" />
       <p className="text-center text-gray-500">Vicsmall &copy;2024</p>

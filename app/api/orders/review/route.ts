@@ -4,7 +4,6 @@ import { submitOrderReview } from "@/lib/order-service"
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    // console.log("[API] Submitting review:", body)
 
     if (!body.product || body.rating === undefined || !body.review) {
       return NextResponse.json({ error: "Product ID, rating, and review are required" }, { status: 400 })
@@ -15,7 +14,6 @@ export async function POST(request: NextRequest) {
       rating: body.rating,
       review: body.review,
     })
-    // console.log("[API] Submit review result:", result)
 
     if (!result.success) {
       return NextResponse.json({ error: result.error || "Failed to submit review" }, { status: 400 })
@@ -23,7 +21,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ message: result.message || "Review submitted successfully" })
   } catch (error) {
-    // console.error("[API] Error in submit review API route:", error)
     return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 })
   }
 }

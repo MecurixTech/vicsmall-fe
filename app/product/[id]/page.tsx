@@ -55,8 +55,8 @@ export default function ProductDetailPage() {
         <NavbarWrapper />
         <div className="container mx-auto px-4 py-8">
           <div className="flex justify-center items-center h-[50vh]">
-            <Loader2 className="h-8 w-8 animate-spin text-gray-500" />
-            <span className="ml-2 text-lg">Loading product details...</span>
+            <Loader2 className="h-8 w-8 animate-spin text-orange-500" />
+            <span className="ml-2 text-lg">Loading product details</span>
           </div>
         </div>
       </>

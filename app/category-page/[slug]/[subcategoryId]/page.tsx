@@ -69,8 +69,8 @@ export default function SubcategoryPage() {
         <NavbarWrapper />
         <div className="flex h-[50vh] items-center justify-center">
           <div className="text-center">
-            <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-[#030359]"></div>
-            <p className="text-gray-600">Loading products...</p>
+            <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-orange-500"></div>
+            <p className="text-gray-600">Loading products</p>
           </div>
         </div>
       </div>

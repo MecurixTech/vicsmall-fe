@@ -155,7 +155,7 @@ export default function SavedProductsPage() {
             </p>
             <button
               onClick={() => refreshSavedProducts()}
-              className="inline-block rounded-md bg-blue-500 px-6 py-3 text-white transition-colors hover:bg-blue-600"
+              className="inline-block rounded-md bg-orange-500 px-6 py-3 text-white transition-colors hover:bg-orange-600"
             >
               Try Again
             </button>

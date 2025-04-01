@@ -18,7 +18,7 @@ export interface OrderItem {
     price: number
     product_name: string
     product_image: string
-    product_id?: string 
+    product_id?: string
   }>
   product_details?: {
     id: string
@@ -129,7 +129,7 @@ export async function getOrderHistory(): Promise<OrderHistoryResponse> {
         console.log("[OrderService] Empty order detected, returning empty array")
         return {
           success: true,
-          data: [], 
+          data: [],
         }
       }
 
@@ -165,7 +165,6 @@ export async function getOrderHistory(): Promise<OrderHistoryResponse> {
       }
     }
 
-    
     orders = orders.map((order) => {
       if (order.items && order.items.length > 0) {
         const firstItem = order.items[0]
@@ -316,7 +315,6 @@ export async function submitOrderReview(reviewData: {
 
     if (!response.ok) {
       try {
-       
         const errorData = JSON.parse(responseText)
 
         if (errorData.Message && typeof errorData.Message === "object") {
